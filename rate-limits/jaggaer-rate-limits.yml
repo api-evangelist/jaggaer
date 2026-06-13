@@ -1,0 +1,58 @@
+name: JAGGAER API Rate Limits
+description: >
+  JAGGAER ASO APIs enforce customer-specific rate limits across the three
+  primary API services. Rate limits are configured per customer account
+  and enforced at the API gateway level. Exceeded limits return HTTP 429
+  Too Many Requests responses. Asynchronous endpoints use pre-signed S3
+  download URLs that expire after 300 seconds. Specific numeric thresholds
+  are negotiated at the enterprise contract level and not published publicly.
+specificationVersion: '0.1'
+url: https://asodocs.jaggaer.com/
+rateLimits:
+  - name: Quay Optimization API Daily Limit
+    description: >
+      Customer-specific daily limit on the number of optimization jobs that
+      can be submitted via the Quay API POST /submitJob endpoint. Exceeding
+      this limit returns HTTP 429. The threshold is configured per customer
+      at the enterprise contract level.
+    api: JAGGAER ASO Quay Optimization API
+    endpoint: POST /submitJob
+    limitType: daily
+    enforcement: HTTP 429 Too Many Requests
+    documentationUrl: https://asodocs.jaggaer.com/quay.html
+
+  - name: Quay Optimization API Absolute Limit
+    description: >
+      Customer-specific absolute (cumulative) cap on total optimization jobs
+      submitted via the Quay API. This is a hard ceiling that, once reached,
+      prevents additional job submissions until the limit is reset or the
+      contract is updated. Returns HTTP 429 when exceeded.
+    api: JAGGAER ASO Quay Optimization API
+    endpoint: POST /submitJob
+    limitType: absolute
+    enforcement: HTTP 429 Too Many Requests
+    documentationUrl: https://asodocs.jaggaer.com/quay.html
+
+  - name: Asynchronous Download URL Expiration
+    description: >
+      Pre-signed S3 download URLs returned by asynchronous endpoints across
+      the CHES and EES APIs expire 300 seconds after generation. Accessing
+      an expired URL returns HTTP 403 Forbidden. Clients must poll the
+      asyncStatus endpoint and download results promptly.
+    api: JAGGAER ASO Customer Host Entity Service API
+    endpoint: GET /asyncStatus/{encoded-async-pid}
+    limitType: time-to-live
+    ttlSeconds: 300
+    enforcement: HTTP 403 Forbidden on expired URLs
+    documentationUrl: https://asodocs.jaggaer.com/ches.html
+
+  - name: Authentication Token Validity
+    description: >
+      OAuth 2.0 client credentials bearer tokens are long-lived system-to-system
+      tokens. Expired or invalid tokens return HTTP 403 Forbidden. API key
+      headers (X-API-Key) are also required alongside bearer tokens for CHES
+      and EES API endpoints; invalid keys return HTTP 403.
+    api: All JAGGAER ASO APIs
+    limitType: authentication
+    enforcement: HTTP 403 Forbidden
+    documentationUrl: https://asodocs.jaggaer.com/

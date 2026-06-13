@@ -1,0 +1,80 @@
+name: JAGGAER Plans and Pricing
+description: >
+  JAGGAER ONE uses a subscription-based enterprise pricing model with modular
+  tiers based on selected procurement modules. Pricing is customized per
+  organization based on spend volume, number of users, suppliers managed, and
+  modules deployed. JAGGAER does not publish public list pricing; all plans
+  require direct engagement with their sales team for a custom quote.
+specificationVersion: '0.1'
+url: https://www.jaggaer.com/contact
+plans:
+  - name: Source-to-Contract
+    description: >
+      Covers spend analytics, category management, strategic sourcing (eRFx,
+      reverse auctions), and contract lifecycle management. Includes
+      JAGGAER AI (JAI) capabilities for sourcing automation and contract
+      intelligence.
+    url: https://www.jaggaer.com/solutions
+    pricingModel: subscription
+    pricingPage: https://www.jaggaer.com/contact
+    billingCycle: annual
+    features:
+      - Spend Analytics
+      - Category Management
+      - eRFx and Reverse Auctions
+      - Contract Lifecycle Management
+      - JAGGAER AI (JAI) sourcing automation
+      - Advanced Sourcing Optimizer (ASO) API access
+
+  - name: Procure-to-Pay
+    description: >
+      Covers guided eProcurement buying, catalog management, purchase order
+      automation, invoicing, accounts payable, and payment processing.
+      Integrates with 40+ ERP systems including SAP, Oracle, Workday, and
+      Microsoft Dynamics.
+    url: https://www.jaggaer.com/solutions
+    pricingModel: subscription
+    pricingPage: https://www.jaggaer.com/contact
+    billingCycle: annual
+    features:
+      - Guided Buying and eProcurement
+      - Catalog Management
+      - Purchase Order Automation
+      - Invoice Processing
+      - Autonomous AP
+      - ERP Integration (40+ systems)
+
+  - name: Supplier Intelligence
+    description: >
+      Covers supplier onboarding, supplier information management, supplier
+      performance tracking, risk assessment, and ESG compliance monitoring.
+      Connects to 13M+ suppliers via the JAGGAER supplier network.
+    url: https://www.jaggaer.com/solutions
+    pricingModel: subscription
+    pricingPage: https://www.jaggaer.com/contact
+    billingCycle: annual
+    features:
+      - Supplier Onboarding and Registration
+      - Supplier Information Management
+      - Performance Scorecards
+      - Risk and ESG Monitoring
+      - 13M+ Supplier Network Access
+
+  - name: JAGGAER ONE (Full Platform)
+    description: >
+      Complete source-to-pay platform combining all modules: sourcing,
+      contracts, eProcurement, invoicing, supplier intelligence, and the
+      Catalyze integration layer. Includes full API access across all
+      ASO API services and JAGGAER Link for connecting to 1,000+ systems.
+    url: https://www.jaggaer.com/solutions
+    pricingModel: subscription
+    pricingPage: https://www.jaggaer.com/contact
+    billingCycle: annual
+    features:
+      - All Source-to-Contract modules
+      - All Procure-to-Pay modules
+      - All Supplier Intelligence modules
+      - JAGGAER AI (JAI) full suite
+      - JAGGAER Link (1,000+ system connectors)
+      - Full ASO API access (CHES, EES, Quay)
+      - Dedicated implementation support

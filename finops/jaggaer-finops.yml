@@ -1,0 +1,102 @@
+name: JAGGAER FinOps Framework
+description: >
+  FinOps cost management guidance for JAGGAER ONE API consumption. JAGGAER
+  uses an enterprise subscription model where costs are driven by selected
+  modules, user counts, supplier volumes, and integration complexity.
+  API consumption costs are embedded within platform subscription tiers
+  rather than charged per-call. FinOps optimization focuses on module
+  rightsizing, user license management, and integration efficiency.
+specificationVersion: '1.0'
+url: https://www.jaggaer.com/contact
+framework: FinOps Framework 1.0
+alignment: FOCUS
+currency: USD
+billingModel: subscription-enterprise
+costDrivers:
+  - name: Module Subscriptions
+    description: >
+      Primary cost driver. Each JAGGAER ONE module (sourcing, contracts,
+      eProcurement, invoicing, supplier intelligence) carries a separate
+      subscription fee. Organizations pay only for modules deployed,
+      making rightsizing essential for cost optimization.
+    category: LicenseFee
+    optimizationStrategy: >
+      Audit module usage quarterly. Decommission underutilized modules.
+      Consolidate overlapping capabilities into fewer JAGGAER modules
+      before renewing contracts.
+
+  - name: User Licenses
+    description: >
+      Named or concurrent user licenses are a key cost component.
+      Inactive or overprovision of user accounts drives unnecessary
+      spend. License counts should be reviewed at each renewal cycle.
+    category: LicenseFee
+    optimizationStrategy: >
+      Run utilization reports to identify inactive user accounts.
+      Reclaim licenses from departed employees promptly. Distinguish
+      between named and concurrent license models to select the most
+      cost-effective option for usage patterns.
+
+  - name: Supplier Network Volume
+    description: >
+      Costs may scale with the number of managed suppliers and the
+      volume of supplier transactions processed through the JAGGAER
+      supplier network (13M+ suppliers globally). High-volume supplier
+      onboarding campaigns can trigger tier upgrades.
+    category: UsageFee
+    optimizationStrategy: >
+      Prioritize onboarding strategic and high-spend suppliers first.
+      Archive dormant supplier records to keep active counts within
+      contracted tier limits.
+
+  - name: ASO Optimization Job Volume
+    description: >
+      The Quay API enforces daily and absolute job limits for sourcing
+      optimization runs. Excessive or test optimization jobs consume
+      contracted capacity. Production optimization should be batched
+      and scheduled efficiently.
+    category: UsageFee
+    optimizationStrategy: >
+      Separate production and test/sandbox environments. Implement
+      job scheduling to distribute optimization runs and avoid
+      hitting daily limits during peak sourcing cycles.
+
+  - name: ERP Integration Connectors
+    description: >
+      JAGGAER Link connectors to ERP and third-party systems (SAP,
+      Oracle, Workday, etc.) may carry per-connector fees or be
+      bundled within platform tiers. Custom integrations via
+      Public APIs may require additional professional services.
+    category: IntegrationFee
+    optimizationStrategy: >
+      Use pre-built certified connectors (e.g., SAP S/4HANA add-ons)
+      over custom API integrations where possible to reduce
+      implementation and maintenance costs. Audit inactive connectors
+      at renewal.
+
+  - name: Implementation and Professional Services
+    description: >
+      JAGGAER implementations typically involve professional services
+      for configuration, data migration, and ERP integration. These
+      one-time costs can be significant but are separate from
+      recurring subscription fees.
+    category: ServiceFee
+    optimizationStrategy: >
+      Phase implementations to spread professional services costs
+      across budget cycles. Invest in internal JAGGAER admin
+      training to reduce ongoing dependency on paid professional
+      services for configuration changes.
+
+reporting:
+  - name: Module Utilization Report
+    description: Review active vs contracted module usage per renewal cycle
+    frequency: quarterly
+  - name: User License Audit
+    description: Identify and reclaim inactive named user licenses
+    frequency: monthly
+  - name: Optimization Job Consumption
+    description: Monitor Quay API daily and absolute job limit consumption
+    frequency: weekly
+  - name: Integration Health Review
+    description: Audit active ERP connectors and decommission unused integrations
+    frequency: semi-annual
