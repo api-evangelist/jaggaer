@@ -46,6 +46,8 @@ apis:
     properties:
       - type: Documentation
         url: https://asodocs.jaggaer.com/ches.html
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-ches-openapi.yml
 
   - name: JAGGAER ASO Event Entity Service API
     description: >
@@ -68,6 +70,8 @@ apis:
     properties:
       - type: Documentation
         url: https://asodocs.jaggaer.com/ees.html
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-ees-openapi.yml
 
   - name: JAGGAER ASO Quay Optimization API
     description: >
@@ -87,6 +91,8 @@ apis:
     properties:
       - type: Documentation
         url: https://asodocs.jaggaer.com/quay.html
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-quay-openapi.yml
 
 common:
   - type: Website

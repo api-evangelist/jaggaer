@@ -1,0 +1,295 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "jaggaer": "https://www.jaggaer.com/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+
+    "CustomerHost": {
+      "@id": "jaggaer:CustomerHost",
+      "@type": "owl:Class",
+      "schema:description": "A customer-specific tenant instance within the JAGGAER ASO platform."
+    },
+    "customerHostId": {
+      "@id": "jaggaer:customerHostId",
+      "@type": "xsd:integer"
+    },
+    "fqdn": {
+      "@id": "jaggaer:fqdn",
+      "@type": "xsd:string"
+    },
+
+    "SourcingEvent": {
+      "@id": "jaggaer:SourcingEvent",
+      "@type": "owl:Class",
+      "schema:description": "A structured procurement activity (RFQ, RFP, auction) within the ASO platform."
+    },
+    "eventId": {
+      "@id": "jaggaer:eventId",
+      "@type": "xsd:integer"
+    },
+    "eventName": {
+      "@id": "jaggaer:eventName",
+      "@type": "xsd:string"
+    },
+    "eventDescription": {
+      "@id": "jaggaer:eventDescription",
+      "@type": "xsd:string"
+    },
+    "eventStatus": {
+      "@id": "jaggaer:eventStatus",
+      "@type": "xsd:string"
+    },
+
+    "Template": {
+      "@id": "jaggaer:Template",
+      "@type": "owl:Class",
+      "schema:description": "A reusable sourcing event configuration within the ASO platform."
+    },
+    "templateId": {
+      "@id": "jaggaer:templateId",
+      "@type": "xsd:integer"
+    },
+    "templateName": {
+      "@id": "jaggaer:templateName",
+      "@type": "xsd:string"
+    },
+
+    "TemplateType": {
+      "@id": "jaggaer:TemplateType",
+      "@type": "owl:Class",
+      "schema:description": "Classification for sourcing event templates within ASO."
+    },
+    "templateTypeId": {
+      "@id": "jaggaer:templateTypeId",
+      "@type": "xsd:integer"
+    },
+    "templateTypeName": {
+      "@id": "jaggaer:templateTypeName",
+      "@type": "xsd:string"
+    },
+
+    "Subcategory": {
+      "@id": "jaggaer:Subcategory",
+      "@type": "owl:Class",
+      "schema:description": "A classification associated with a template type for categorizing sourcing events."
+    },
+    "subcategoryId": {
+      "@id": "jaggaer:subcategoryId",
+      "@type": "xsd:integer"
+    },
+    "subcategoryName": {
+      "@id": "jaggaer:subcategoryName",
+      "@type": "xsd:string"
+    },
+
+    "User": {
+      "@id": "jaggaer:User",
+      "@type": "owl:Class",
+      "schema:sameAs": "schema:Person",
+      "schema:description": "A user within a JAGGAER ASO customer host."
+    },
+    "userId": {
+      "@id": "jaggaer:userId",
+      "@type": "xsd:integer"
+    },
+    "username": {
+      "@id": "jaggaer:username",
+      "@type": "xsd:string"
+    },
+
+    "Supplier": {
+      "@id": "jaggaer:Supplier",
+      "@type": "owl:Class",
+      "schema:sameAs": "schema:Organization",
+      "schema:description": "A vendor or service provider participating in a JAGGAER sourcing event."
+    },
+    "supplierId": {
+      "@id": "jaggaer:supplierId",
+      "@type": "xsd:integer"
+    },
+    "supplierName": {
+      "@id": "jaggaer:supplierName",
+      "@type": "xsd:string"
+    },
+
+    "Contact": {
+      "@id": "jaggaer:Contact",
+      "@type": "owl:Class",
+      "schema:sameAs": "schema:ContactPoint",
+      "schema:description": "A supplier contact person within a JAGGAER sourcing event."
+    },
+    "contactId": {
+      "@id": "jaggaer:contactId",
+      "@type": "xsd:integer"
+    },
+
+    "Item": {
+      "@id": "jaggaer:Item",
+      "@type": "owl:Class",
+      "schema:sameAs": "schema:Product",
+      "schema:description": "A line item in a JAGGAER sourcing event representing a good or service."
+    },
+    "itemId": {
+      "@id": "jaggaer:itemId",
+      "@type": "xsd:integer"
+    },
+    "itemName": {
+      "@id": "jaggaer:itemName",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "jaggaer:quantity",
+      "@type": "xsd:decimal"
+    },
+    "unitOfMeasure": {
+      "@id": "jaggaer:unitOfMeasure",
+      "@type": "xsd:string"
+    },
+
+    "Attribute": {
+      "@id": "jaggaer:Attribute",
+      "@type": "owl:Class",
+      "schema:description": "A custom data field attached to a JAGGAER sourcing event."
+    },
+    "attributeId": {
+      "@id": "jaggaer:attributeId",
+      "@type": "xsd:integer"
+    },
+    "attributeName": {
+      "@id": "jaggaer:attributeName",
+      "@type": "xsd:string"
+    },
+    "attributeType": {
+      "@id": "jaggaer:attributeType",
+      "@type": "xsd:string"
+    },
+
+    "Rate": {
+      "@id": "jaggaer:Rate",
+      "@type": "owl:Class",
+      "schema:description": "A location-specific pricing element within a JAGGAER sourcing event."
+    },
+    "rateId": {
+      "@id": "jaggaer:rateId",
+      "@type": "xsd:integer"
+    },
+    "rateName": {
+      "@id": "jaggaer:rateName",
+      "@type": "xsd:string"
+    },
+    "locationName": {
+      "@id": "jaggaer:locationName",
+      "@type": "xsd:string"
+    },
+
+    "AwardScenario": {
+      "@id": "jaggaer:AwardScenario",
+      "@type": "owl:Class",
+      "schema:description": "A modeled procurement award outcome for a JAGGAER sourcing event."
+    },
+    "scenarioId": {
+      "@id": "jaggaer:scenarioId",
+      "@type": "xsd:integer"
+    },
+    "scenarioName": {
+      "@id": "jaggaer:scenarioName",
+      "@type": "xsd:string"
+    },
+    "isPreferred": {
+      "@id": "jaggaer:isPreferred",
+      "@type": "xsd:boolean"
+    },
+
+    "Bid": {
+      "@id": "jaggaer:Bid",
+      "@type": "owl:Class",
+      "schema:description": "A supplier's submitted response to a JAGGAER sourcing event."
+    },
+    "bidRound": {
+      "@id": "jaggaer:bidRound",
+      "@type": "xsd:integer"
+    },
+
+    "OptimizationJob": {
+      "@id": "jaggaer:OptimizationJob",
+      "@type": "owl:Class",
+      "schema:description": "A computational task submitted to the JAGGAER Quay optimization service."
+    },
+    "jobId": {
+      "@id": "jaggaer:jobId",
+      "@type": "xsd:integer"
+    },
+    "consumer": {
+      "@id": "jaggaer:consumer",
+      "@type": "xsd:string"
+    },
+    "customerId": {
+      "@id": "jaggaer:customerId",
+      "@type": "xsd:integer"
+    },
+    "customerName": {
+      "@id": "jaggaer:customerName",
+      "@type": "xsd:string"
+    },
+    "inputFilename": {
+      "@id": "jaggaer:inputFilename",
+      "@type": "xsd:string"
+    },
+    "jobType": {
+      "@id": "jaggaer:jobType",
+      "@type": "xsd:string"
+    },
+    "optSetType": {
+      "@id": "jaggaer:optSetType",
+      "@type": "xsd:string"
+    },
+    "submitTime": {
+      "@id": "jaggaer:submitTime",
+      "@type": "xsd:long"
+    },
+    "inprocAtSubmit": {
+      "@id": "jaggaer:inprocAtSubmit",
+      "@type": "xsd:integer"
+    },
+    "runClient": {
+      "@id": "jaggaer:runClient",
+      "@type": "xsd:string"
+    },
+    "workingDirectory": {
+      "@id": "jaggaer:workingDirectory",
+      "@type": "xsd:string"
+    },
+    "processStartTime": {
+      "@id": "jaggaer:processStartTime",
+      "@type": "xsd:long"
+    },
+    "processStopTime": {
+      "@id": "jaggaer:processStopTime",
+      "@type": "xsd:long"
+    },
+    "cpuTime": {
+      "@id": "jaggaer:cpuTime",
+      "@type": "xsd:integer"
+    },
+
+    "AsyncProcess": {
+      "@id": "jaggaer:AsyncProcess",
+      "@type": "owl:Class",
+      "schema:description": "An asynchronous operation in the JAGGAER ASO API."
+    },
+    "encodedAsyncPid": {
+      "@id": "jaggaer:encodedAsyncPid",
+      "@type": "xsd:string"
+    },
+    "downloadUrl": {
+      "@id": "jaggaer:downloadUrl",
+      "@type": "xsd:anyURI"
+    },
+    "uploadUrl": {
+      "@id": "jaggaer:uploadUrl",
+      "@type": "xsd:anyURI"
+    }
+  }
+}

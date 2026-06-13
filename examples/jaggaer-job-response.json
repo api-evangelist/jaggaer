@@ -1,0 +1,18 @@
+{
+  "jobId": 414,
+  "consumer": "JCS",
+  "customerId": 999,
+  "customerName": "QA",
+  "eventId": 999999,
+  "inputFilename": "/dgsq/drm/JCS_Input/tester.txt.gz",
+  "status": "Completed",
+  "jobType": "Short",
+  "optSetType": "Long",
+  "submitTime": 1584979461000,
+  "inprocAtSubmit": 0,
+  "runClient": "clearbox-01.exp.dev.combinenet.com",
+  "workingDirectory": "/dgsq/drm/QUAY_Service/2020/2/23/414",
+  "processStartTime": 1584979460846,
+  "processStopTime": 1584979462117,
+  "cpuTime": 1271
+}

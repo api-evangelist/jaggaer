@@ -1,0 +1,515 @@
+openapi: 3.0.3
+info:
+  title: JAGGAER ASO Customer Host Entity Service API
+  description: >
+    The Customer Host Entity Service (CHES) API provides system-to-system REST
+    endpoints for managing customer hosts, users, events, and templates within
+    the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation
+    and retrieval of sourcing events, template management, user administration,
+    and location-based rate structure queries using OAuth 2.0 bearer tokens
+    combined with API key authentication.
+  version: v26.0.0.4
+  contact:
+    name: JAGGAER Support
+    url: https://www.jaggaer.com/support
+  x-api-id: jaggaer-aso-ches
+servers:
+  - url: https://ches.aso-api.jaggaer.com
+    description: JAGGAER ASO CHES Production Server
+tags:
+  - name: Async
+    description: Asynchronous process status operations
+  - name: Customer Hosts
+    description: Customer host management operations
+  - name: Events
+    description: Sourcing event operations
+  - name: Locations
+    description: Location and rate structure operations
+  - name: Templates
+    description: Template management operations
+  - name: Users
+    description: User administration operations
+security:
+  - bearerAuth: []
+    apiKeyHeader: []
+paths:
+  /asyncStatus/{encoded-async-pid}:
+    get:
+      operationId: getAsyncStatus
+      summary: Async Status
+      description: >
+        Returns the status of the asynchronous process associated with the
+        specified process ID. Used to poll for completion of asynchronous
+        operations such as event creation.
+      tags:
+        - Async
+      parameters:
+        - name: encoded-async-pid
+          in: path
+          required: true
+          description: Base64-encoded asynchronous process identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >
+            Success; returns the status and status-specific data for the
+            asynchronous file process, including a pre-signed download URL
+            when the process has completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncStatusResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chost/{customer-host-id}/fqdn:
+    get:
+      operationId: getCustomerHostFqdn
+      summary: Customer Host FQDN
+      description: >
+        Retrieves the fully qualified domain name (FQDN) associated with the
+        specified customer host.
+      tags:
+        - Customer Hosts
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+      responses:
+        '200':
+          description: Success; returns the FQDN for the customer host.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FqdnResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chost/{customer-host-id}/user/{user-id}/template/{template-id}/apiEvent:
+    post:
+      operationId: createEventFromTemplate
+      summary: Event from Template by User
+      description: >
+        Creates a new sourcing event synchronously from the specified template
+        for the given user under the customer host. Returns the created event
+        details upon success.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+        - $ref: '#/components/parameters/userId'
+        - $ref: '#/components/parameters/templateId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCreateRequest'
+      responses:
+        '200':
+          description: Success; event created from template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /chost/{customer-host-id}/user/{user-id}/template/{template-id}/apiEvent/async:
+    post:
+      operationId: createEventFromTemplateAsync
+      summary: Event from Template by User (Asynchronous)
+      description: >
+        Initiates an asynchronous creation of a sourcing event from the
+        specified template for the given user. Returns a process ID that
+        can be used to poll /asyncStatus/{encoded-async-pid} for completion.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+        - $ref: '#/components/parameters/userId'
+        - $ref: '#/components/parameters/templateId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCreateRequest'
+      responses:
+        '202':
+          description: >
+            Accepted; returns an encoded async process ID for polling via
+            /asyncStatus/{encoded-async-pid}.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncAcceptedResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /chost/{customer-host-id}/user/{user-id}/apiEvents:
+    get:
+      operationId: getEventsByUser
+      summary: Events by User
+      description: >
+        Retrieves all sourcing events accessible to the specified user under
+        the given customer host.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: Success; returns a list of events for the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chost/{customer-host-id}/apiLocationNames:
+    get:
+      operationId: getLocationNames
+      summary: Rate Location Names
+      description: >
+        Retrieves location names used in rate structures for the specified
+        customer host.
+      tags:
+        - Locations
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+      responses:
+        '200':
+          description: Success; returns the list of rate location names.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationNamesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chost/{customer-host-id}/templateType/{template-type-id}/apiSubcategories:
+    get:
+      operationId: getSubcategoriesByTemplateType
+      summary: Subcategories by Template Type
+      description: >
+        Retrieves available subcategories associated with the specified template
+        type under the given customer host.
+      tags:
+        - Templates
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+        - name: template-type-id
+          in: path
+          required: true
+          description: Identifier for the template type.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success; returns subcategories for the template type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubcategoriesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chost/{customer-host-id}/user/{user-id}/apiTemplates:
+    get:
+      operationId: getTemplatesByUser
+      summary: Templates by User
+      description: >
+        Retrieves all templates accessible to the specified user under the
+        given customer host.
+      tags:
+        - Templates
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: Success; returns a list of templates for the user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chost/{customer-host-id}/apiTemplateTypes:
+    get:
+      operationId: getTemplateTypes
+      summary: Template Types
+      description: >
+        Retrieves all available template types for the specified customer host.
+      tags:
+        - Templates
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+      responses:
+        '200':
+          description: Success; returns a list of template types.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateTypeListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chost/{customer-host-id}/apiUser/{user-id}:
+    get:
+      operationId: getUser
+      summary: User
+      description: >
+        Retrieves details of the specified user under the given customer host.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: Success; returns user details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /chost/{customer-host-id}/apiUsers:
+    get:
+      operationId: getUsers
+      summary: Users
+      description: >
+        Retrieves all users associated with the specified customer host.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/customerHostId'
+      responses:
+        '200':
+          description: Success; returns a list of users for the customer host.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for authentication.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key passed as a request header.
+  parameters:
+    customerHostId:
+      name: customer-host-id
+      in: path
+      required: true
+      description: Identifier for the customer host in the ASO platform.
+      schema:
+        type: integer
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: Identifier for the user.
+      schema:
+        type: integer
+    templateId:
+      name: template-id
+      in: path
+      required: true
+      description: Identifier for the sourcing event template.
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: >
+        Authentication failed. Ensure a valid OAuth 2.0 bearer token and
+        API key are provided.
+    NotFound:
+      description: The requested resource was not found.
+    UnprocessableEntity:
+      description: >
+        The request was syntactically valid but could not be processed due
+        to validation errors.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    AsyncStatusResponse:
+      type: object
+      description: Status response for an asynchronous process.
+      properties:
+        status:
+          type: string
+          description: Current status of the asynchronous process.
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - COMPLETED
+            - FAILED
+        downloadUrl:
+          type: string
+          format: uri
+          description: >
+            Pre-signed URL for downloading the result when the process has
+            completed.
+        errorMessage:
+          type: string
+          description: Error message if the process failed.
+    AsyncAcceptedResponse:
+      type: object
+      description: Response returned when an asynchronous operation is accepted.
+      properties:
+        encodedAsyncPid:
+          type: string
+          description: Base64-encoded process ID used to poll for status.
+    FqdnResponse:
+      type: object
+      description: Fully qualified domain name for a customer host.
+      properties:
+        fqdn:
+          type: string
+          description: The fully qualified domain name of the customer host.
+    EventCreateRequest:
+      type: object
+      description: Request body for creating a sourcing event from a template.
+      properties:
+        eventName:
+          type: string
+          description: Name for the new sourcing event. (Max length 100)
+          maxLength: 100
+        eventDescription:
+          type: string
+          description: Optional description for the event.
+    EventResponse:
+      type: object
+      description: Sourcing event details.
+      properties:
+        eventId:
+          type: integer
+          description: Unique identifier for the sourcing event.
+        eventName:
+          type: string
+          description: Name of the sourcing event.
+        status:
+          type: string
+          description: Current status of the event.
+    EventListResponse:
+      type: object
+      description: List of sourcing events.
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventResponse'
+    LocationNamesResponse:
+      type: object
+      description: List of rate location names.
+      properties:
+        locationNames:
+          type: array
+          items:
+            type: string
+    SubcategoriesResponse:
+      type: object
+      description: List of subcategories for a template type.
+      properties:
+        subcategories:
+          type: array
+          items:
+            type: object
+            properties:
+              subcategoryId:
+                type: integer
+              subcategoryName:
+                type: string
+    TemplateListResponse:
+      type: object
+      description: List of templates available to a user.
+      properties:
+        templates:
+          type: array
+          items:
+            type: object
+            properties:
+              templateId:
+                type: integer
+              templateName:
+                type: string
+              templateTypeId:
+                type: integer
+    TemplateTypeListResponse:
+      type: object
+      description: List of template types.
+      properties:
+        templateTypes:
+          type: array
+          items:
+            type: object
+            properties:
+              templateTypeId:
+                type: integer
+              templateTypeName:
+                type: string
+    UserResponse:
+      type: object
+      description: User details.
+      properties:
+        userId:
+          type: integer
+          description: Unique identifier for the user.
+        username:
+          type: string
+          description: Username for the user.
+        email:
+          type: string
+          format: email
+          description: Email address of the user.
+    UserListResponse:
+      type: object
+      description: List of users for a customer host.
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponse'
+    ErrorResponse:
+      type: object
+      description: Error response with validation details.
+      properties:
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string

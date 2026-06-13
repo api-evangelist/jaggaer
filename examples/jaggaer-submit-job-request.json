@@ -1,0 +1,7 @@
+{
+  "consumer": "JCS",
+  "customerId": 999,
+  "customerName": "QA",
+  "eventId": 999999,
+  "inputFilename": "/dgsq/drm/JCS_Input/tester.txt.gz"
+}

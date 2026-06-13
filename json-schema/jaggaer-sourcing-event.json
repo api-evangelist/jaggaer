@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jaggaer/main/json-schema/jaggaer-sourcing-event.json",
+  "title": "JAGGAER Sourcing Event",
+  "description": "Schema for a JAGGAER ASO sourcing event, representing a structured procurement activity such as an RFQ, RFP, or reverse auction created within the Advanced Sourcing Optimizer platform.",
+  "type": "object",
+  "required": [
+    "eventId",
+    "eventName"
+  ],
+  "properties": {
+    "eventId": {
+      "type": "integer",
+      "description": "Unique identifier for the sourcing event within the ASO platform.",
+      "example": 999999
+    },
+    "eventName": {
+      "type": "string",
+      "description": "Name of the sourcing event. Maximum 100 characters.",
+      "maxLength": 100,
+      "example": "Q3 2026 Packaging Materials RFQ"
+    },
+    "eventDescription": {
+      "type": "string",
+      "description": "Optional description providing additional context for the sourcing event.",
+      "example": "Request for quotation for packaging materials needed in Q3 2026."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current lifecycle status of the sourcing event.",
+      "example": "Active"
+    },
+    "templateId": {
+      "type": "integer",
+      "description": "Identifier of the template used to create this event.",
+      "example": 12
+    },
+    "customerHostId": {
+      "type": "integer",
+      "description": "Identifier of the customer host that owns this event.",
+      "example": 101
+    },
+    "createdByUserId": {
+      "type": "integer",
+      "description": "Identifier of the user who created this event.",
+      "example": 55
+    },
+    "suppliers": {
+      "type": "array",
+      "description": "Suppliers invited to participate in this sourcing event.",
+      "items": {
+        "$ref": "#/$defs/Supplier"
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "Line items to be sourced in this event.",
+      "items": {
+        "$ref": "#/$defs/Item"
+      }
+    },
+    "attributes": {
+      "type": "array",
+      "description": "Custom attributes attached to this sourcing event.",
+      "items": {
+        "$ref": "#/$defs/Attribute"
+      }
+    }
+  },
+  "$defs": {
+    "Supplier": {
+      "type": "object",
+      "description": "A supplier participating in a sourcing event.",
+      "properties": {
+        "supplierId": {
+          "type": "integer",
+          "description": "Unique identifier for the supplier."
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "Name of the supplier organization."
+        },
+        "status": {
+          "type": "string",
+          "description": "Participation status of the supplier in the event."
+        }
+      }
+    },
+    "Item": {
+      "type": "object",
+      "description": "A line item within a sourcing event.",
+      "properties": {
+        "itemId": {
+          "type": "integer",
+          "description": "Unique identifier for the line item."
+        },
+        "itemName": {
+          "type": "string",
+          "description": "Name of the good or service being sourced."
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Requested quantity.",
+          "minimum": 0
+        },
+        "unitOfMeasure": {
+          "type": "string",
+          "description": "Unit of measure for the quantity (e.g., EA, LB, BOX)."
+        }
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "description": "A custom attribute field on a sourcing event.",
+      "properties": {
+        "attributeId": {
+          "type": "integer",
+          "description": "Unique identifier for the attribute."
+        },
+        "attributeName": {
+          "type": "string",
+          "description": "Name of the attribute."
+        },
+        "attributeType": {
+          "type": "string",
+          "description": "Data type classification of the attribute."
+        },
+        "value": {
+          "type": "string",
+          "description": "Current value of the attribute."
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "eventId": 999999,
+      "eventName": "Q3 2026 Packaging Materials RFQ",
+      "eventDescription": "Request for quotation for packaging materials needed in Q3 2026.",
+      "status": "Active",
+      "templateId": 12,
+      "customerHostId": 101,
+      "createdByUserId": 55,
+      "suppliers": [
+        {
+          "supplierId": 201,
+          "supplierName": "Acme Packaging Co.",
+          "status": "Invited"
+        }
+      ],
+      "items": [
+        {
+          "itemId": 1,
+          "itemName": "Corrugated Box 12x12x12",
+          "quantity": 5000,
+          "unitOfMeasure": "EA"
+        }
+      ],
+      "attributes": [
+        {
+          "attributeId": 1,
+          "attributeName": "Region",
+          "attributeType": "Text",
+          "value": "North America"
+        }
+      ]
+    }
+  ]
+}

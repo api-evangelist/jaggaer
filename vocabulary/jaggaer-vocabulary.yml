@@ -1,0 +1,154 @@
+vocabulary:
+  name: JAGGAER ASO API Vocabulary
+  description: >
+    Domain vocabulary for the JAGGAER Advanced Sourcing Optimizer (ASO) APIs,
+    covering procurement, sourcing, supplier management, and optimization
+    terminology used across the CHES, EES, and Quay service APIs.
+  version: '1.0'
+  terms:
+    - term: CustomerHost
+      definition: >
+        A customer-specific tenant instance within the JAGGAER ASO platform.
+        Each customer host has a unique identifier and FQDN and serves as the
+        top-level organizational unit for users, templates, and events.
+      synonyms:
+        - chost
+        - customer tenant
+    - term: SourcingEvent
+      definition: >
+        A structured procurement activity (e.g., RFQ, RFP, reverse auction)
+        created within the ASO platform from a template. Events contain
+        suppliers, items, rates, attributes, bids, contacts, and scenarios.
+      synonyms:
+        - event
+        - apiEvent
+        - RFQ
+        - RFP
+        - auction
+    - term: Template
+      definition: >
+        A reusable sourcing event configuration within ASO that defines the
+        structure, attributes, and settings for new events. Templates are
+        organized by template type and subcategory.
+      synonyms:
+        - apiTemplate
+        - event template
+    - term: TemplateType
+      definition: >
+        A classification for sourcing event templates, grouping similar types
+        of procurement activities together. Used to filter available templates
+        and subcategories.
+    - term: Subcategory
+      definition: >
+        A classification associated with a template type that enables further
+        categorization of sourcing events, typically corresponding to commodity
+        or service categories.
+    - term: Attribute
+      definition: >
+        A custom data field attached to a sourcing event that captures
+        additional structured information beyond standard event fields. Can
+        be typed, named, and valued per event.
+      synonyms:
+        - apiAttribute
+        - custom field
+    - term: Bid
+      definition: >
+        A supplier's submitted response to a sourcing event, containing pricing
+        and other competitive information for event line items. Retrieved
+        asynchronously due to potentially large dataset sizes.
+      synonyms:
+        - apiBid
+        - quote
+        - supplier response
+    - term: BidRound
+      definition: >
+        An iteration of bidding within a sourcing event. Events may have
+        multiple bid rounds to enable progressive price discovery or
+        negotiation.
+    - term: AwardScenario
+      definition: >
+        A modeled outcome representing how sourcing event business would be
+        allocated among suppliers given specific constraints and objectives.
+        The preferred scenario is the one selected for award.
+      synonyms:
+        - apiAward
+        - scenario
+        - award
+    - term: Item
+      definition: >
+        A line item within a sourcing event representing a specific good or
+        service to be sourced, with associated quantity, unit of measure, and
+        other attributes.
+      synonyms:
+        - apiItem
+        - line item
+    - term: Rate
+      definition: >
+        A location-specific pricing structure element within a sourcing event
+        used to model transportation costs or location-based pricing in
+        optimization scenarios.
+      synonyms:
+        - apiRate
+    - term: Contact
+      definition: >
+        A person associated with a supplier within a sourcing event, typically
+        the supplier's point of contact for procurement activities.
+      synonyms:
+        - apiContact
+        - supplier contact
+    - term: Supplier
+      definition: >
+        A vendor or service provider invited to participate in a sourcing event.
+        Suppliers submit bids and interact with buyers through the ASO platform.
+        JAGGAER connects 13 million suppliers globally.
+      synonyms:
+        - apiSupplier
+        - vendor
+        - bidder
+    - term: OptimizationJob
+      definition: >
+        A computational task submitted to the Quay service that runs the ASO
+        sourcing optimization algorithm against an event's bid data and
+        constraints to generate award scenarios.
+      synonyms:
+        - job
+        - Quay job
+    - term: Consumer
+      definition: >
+        The system or application that submits optimization jobs to the Quay
+        service. Valid consumers are ASO, JCS, and USDA.
+    - term: AsyncProcess
+      definition: >
+        A long-running API operation that returns immediately with a process
+        identifier (encoded-async-pid) rather than waiting for completion.
+        The caller polls /asyncStatus to retrieve results when ready.
+      synonyms:
+        - asynchronous operation
+        - async
+        - encodedAsyncPid
+    - term: UploadUrl
+      definition: >
+        A time-limited, pre-signed URL provided by the EES API that allows
+        direct upload of entity data files to the ASO platform storage.
+    - term: FQDN
+      definition: >
+        Fully Qualified Domain Name; the complete domain name for a customer
+        host instance within the ASO platform.
+    - term: LocationName
+      definition: >
+        A named geographic or logical location used in rate structures within
+        sourcing events to model transportation or location-based pricing.
+    - term: ApiKey
+      definition: >
+        A credential passed as an HTTP request header (X-Api-Key) required for
+        authentication to JAGGAER ASO APIs alongside an OAuth 2.0 bearer token.
+    - term: BearerToken
+      definition: >
+        An OAuth 2.0 access token required for authentication to JAGGAER ASO
+        CHES and EES APIs, passed as an HTTP Authorization header.
+    - term: RateLimit
+      definition: >
+        Customer-specific daily or absolute constraints on the number of
+        optimization jobs that may be submitted to the Quay service. Exceeded
+        limits return HTTP 429 with EXCEEDED_DAILY_LIMIT or
+        EXCEEDED_ABSOLUTE_LIMIT status codes.

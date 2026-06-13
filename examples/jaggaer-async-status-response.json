@@ -1,0 +1,4 @@
+{
+  "status": "COMPLETED",
+  "downloadUrl": "https://s3.amazonaws.com/aso-results/events/999999/bids/download?X-Amz-Signature=abc123&X-Amz-Expires=3600"
+}
