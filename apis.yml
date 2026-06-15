@@ -1,16 +1,16 @@
 aid: jaggaer
 name: JAGGAER
-description: >
-  JAGGAER is an AI-powered procurement and supplier management platform serving
-  1,400+ enterprises worldwide, managing $2.9 trillion in annual spend and
-  connecting 13 million suppliers globally. The platform provides REST APIs
-  for sourcing optimization, contract management, supplier information
-  management, purchasing, and spend analytics. JAGGAER's Advanced Sourcing
-  Optimizer (ASO) APIs enable system-to-system integration using OAuth 2.0
-  bearer tokens and API keys to automate procurement workflows across
-  source-to-pay and procure-to-pay use cases. The platform integrates with
-  40+ ERP systems including SAP, Oracle, Workday, and Microsoft Dynamics,
-  supporting bidirectional communications for enterprise procurement automation.
+description: 'JAGGAER is an AI-powered procurement and supplier management platform
+  serving 1,400+ enterprises worldwide, managing $2.9 trillion in annual spend and
+  connecting 13 million suppliers globally. The platform provides REST APIs for sourcing
+  optimization, contract management, supplier information management, purchasing,
+  and spend analytics. JAGGAER''s Advanced Sourcing Optimizer (ASO) APIs enable system-to-system
+  integration using OAuth 2.0 bearer tokens and API keys to automate procurement workflows
+  across source-to-pay and procure-to-pay use cases. The platform integrates with
+  40+ ERP systems including SAP, Oracle, Workday, and Microsoft Dynamics, supporting
+  bidirectional communications for enterprise procurement automation.
+
+  '
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/apis.yml
@@ -18,105 +18,105 @@ created: '2026-06-13'
 modified: '2026-06-13'
 specificationVersion: '0.19'
 tags:
-  - Procurement
-  - Sourcing
-  - Supplier Management
-  - Contracts
-  - Spend Analytics
-  - eProcurement
-  - Source-to-Pay
-  - Procure-to-Pay
+- Procurement
+- Sourcing
+- Supplier Management
+- Contracts
+- Spend Analytics
+- eProcurement
+- Source-to-Pay
+- Procure-to-Pay
 apis:
-  - name: JAGGAER ASO Customer Host Entity Service API
-    description: >
-      The Customer Host Entity Service (CHES) API provides system-to-system
-      REST endpoints for managing customer hosts, users, events, and templates
-      within the JAGGAER Advanced Sourcing Optimizer platform. It enables
-      creation and retrieval of sourcing events, template management, user
-      administration, and location-based rate structure queries using OAuth 2.0
-      bearer tokens combined with API key authentication.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://asodocs.jaggaer.com/ches.html
-    baseURL: https://ches.aso-api.jaggaer.com/
-    tags:
-      - Sourcing
-      - Events
-      - Templates
-      - Users
-    properties:
-      - type: Documentation
-        url: https://asodocs.jaggaer.com/ches.html
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-ches-openapi.yml
+- name: JAGGAER ASO Customer Host Entity Service API
+  description: 'The Customer Host Entity Service (CHES) API provides system-to-system
+    REST endpoints for managing customer hosts, users, events, and templates within
+    the JAGGAER Advanced Sourcing Optimizer platform. It enables creation and retrieval
+    of sourcing events, template management, user administration, and location-based
+    rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.
 
-  - name: JAGGAER ASO Event Entity Service API
-    description: >
-      The Event Entity Service (EES) API provides REST endpoints for managing
-      sourcing events within the JAGGAER Advanced Sourcing Optimizer, including
-      event attributes, bids, and award scenarios. It supports asynchronous
-      operations for retrieving large datasets such as bid submissions and award
-      results, with pre-signed download URLs for completed asynchronous
-      processes. Authentication requires both OAuth 2.0 bearer tokens and API
-      key headers.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://asodocs.jaggaer.com/ees.html
-    baseURL: https://ees.aso-api.jaggaer.com/
-    tags:
-      - Sourcing
-      - Events
-      - Bids
-      - Awards
-      - Attributes
-    properties:
-      - type: Documentation
-        url: https://asodocs.jaggaer.com/ees.html
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-ees-openapi.yml
-
-  - name: JAGGAER ASO Quay Optimization API
-    description: >
-      The Quay API provides REST endpoints for submitting, managing, and
-      tracking optimization jobs within the JAGGAER Advanced Sourcing
-      Optimizer platform. It supports job submission for sourcing optimization
-      scenarios, job cancellation, and status monitoring with customer-specific
-      daily and absolute rate limits enforced via HTTP 429 responses.
-      Authentication is performed using API key headers for all operations.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://asodocs.jaggaer.com/quay.html
-    baseURL: https://quay.aso-api.jaggaer.com/
-    tags:
-      - Optimization
-      - Sourcing
-      - Jobs
-    properties:
-      - type: Documentation
-        url: https://asodocs.jaggaer.com/quay.html
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-quay-openapi.yml
-
-common:
-  - type: Website
-    url: https://www.jaggaer.com/
+    '
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://asodocs.jaggaer.com/ches.html
+  baseURL: https://ches.aso-api.jaggaer.com/
+  tags:
+  - Sourcing
+  - Events
+  - Templates
+  - Users
+  properties:
   - type: Documentation
-    url: https://asodocs.jaggaer.com/
-  - type: GitHubOrg
-    url: https://github.com/Jaggaer-Direct
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/jaggaer/
-  - type: Blog
-    url: https://www.jaggaer.com/blog
-  - type: X
-    url: https://x.com/jaggaerpro
-  - type: Support
-    url: https://www.jaggaer.com/support
-  - type: Integrations
-    url: https://www.jaggaer.com/solutions/integrations
-  - type: Plans
-    url: plans/jaggaer-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/jaggaer-rate-limits.yml
-  - type: FinOps
-    url: finops/jaggaer-finops.yml
+    url: https://asodocs.jaggaer.com/ches.html
+  - type: OpenAPI
+    url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-ches-openapi.yml
+  - url: graphql/jaggaer-graphql.md
+    type: GraphQL
+- name: JAGGAER ASO Event Entity Service API
+  description: 'The Event Entity Service (EES) API provides REST endpoints for managing
+    sourcing events within the JAGGAER Advanced Sourcing Optimizer, including event
+    attributes, bids, and award scenarios. It supports asynchronous operations for
+    retrieving large datasets such as bid submissions and award results, with pre-signed
+    download URLs for completed asynchronous processes. Authentication requires both
+    OAuth 2.0 bearer tokens and API key headers.
+
+    '
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://asodocs.jaggaer.com/ees.html
+  baseURL: https://ees.aso-api.jaggaer.com/
+  tags:
+  - Sourcing
+  - Events
+  - Bids
+  - Awards
+  - Attributes
+  properties:
+  - type: Documentation
+    url: https://asodocs.jaggaer.com/ees.html
+  - type: OpenAPI
+    url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-ees-openapi.yml
+- name: JAGGAER ASO Quay Optimization API
+  description: 'The Quay API provides REST endpoints for submitting, managing, and
+    tracking optimization jobs within the JAGGAER Advanced Sourcing Optimizer platform.
+    It supports job submission for sourcing optimization scenarios, job cancellation,
+    and status monitoring with customer-specific daily and absolute rate limits enforced
+    via HTTP 429 responses. Authentication is performed using API key headers for
+    all operations.
+
+    '
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://asodocs.jaggaer.com/quay.html
+  baseURL: https://quay.aso-api.jaggaer.com/
+  tags:
+  - Optimization
+  - Sourcing
+  - Jobs
+  properties:
+  - type: Documentation
+    url: https://asodocs.jaggaer.com/quay.html
+  - type: OpenAPI
+    url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-quay-openapi.yml
+common:
+- type: Website
+  url: https://www.jaggaer.com/
+- type: Documentation
+  url: https://asodocs.jaggaer.com/
+- type: GitHubOrg
+  url: https://github.com/Jaggaer-Direct
+- type: LinkedIn
+  url: https://www.linkedin.com/company/jaggaer/
+- type: Blog
+  url: https://www.jaggaer.com/blog
+- type: X
+  url: https://x.com/jaggaerpro
+- type: Support
+  url: https://www.jaggaer.com/support
+- type: Integrations
+  url: https://www.jaggaer.com/solutions/integrations
+- type: Plans
+  url: plans/jaggaer-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/jaggaer-rate-limits.yml
+- type: FinOps
+  url: finops/jaggaer-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

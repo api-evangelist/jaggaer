@@ -1,0 +1,1258 @@
+"""
+JAGGAER GraphQL Schema
+Conceptual schema derived from the JAGGAER REST API covering procurement,
+sourcing, contract management, supplier management, and accounts payable.
+"""
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar Date
+scalar Decimal
+scalar JSON
+scalar Upload
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum EventStatus {
+  DRAFT
+  OPEN
+  CLOSED
+  AWARDED
+  CANCELLED
+  PENDING_APPROVAL
+  APPROVED
+  ARCHIVED
+}
+
+enum EventType {
+  RFI
+  RFP
+  RFQ
+  AUCTION
+  REVERSE_AUCTION
+  SEALED_BID
+  MULTI_ROUND
+}
+
+enum BidStatus {
+  DRAFT
+  SUBMITTED
+  ACKNOWLEDGED
+  REVISED
+  WITHDRAWN
+  AWARDED
+  NOT_AWARDED
+}
+
+enum SupplierStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+  SUSPENDED
+  BLOCKED
+  INVITED
+  ONBOARDING
+}
+
+enum ContractStatus {
+  DRAFT
+  PENDING_APPROVAL
+  ACTIVE
+  EXPIRING_SOON
+  EXPIRED
+  TERMINATED
+  RENEWED
+}
+
+enum PurchaseOrderStatus {
+  DRAFT
+  PENDING_APPROVAL
+  APPROVED
+  SENT
+  ACKNOWLEDGED
+  PARTIALLY_RECEIVED
+  RECEIVED
+  INVOICED
+  CLOSED
+  CANCELLED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SUBMITTED
+  PENDING_APPROVAL
+  APPROVED
+  REJECTED
+  PAID
+  PARTIALLY_PAID
+  CANCELLED
+  ON_HOLD
+}
+
+enum CatalogItemStatus {
+  ACTIVE
+  INACTIVE
+  PENDING_APPROVAL
+  DISCONTINUED
+  DRAFT
+}
+
+enum Currency {
+  USD
+  EUR
+  GBP
+  JPY
+  CAD
+  AUD
+  CHF
+  CNY
+  INR
+  BRL
+  MXN
+  SEK
+  NOK
+  DKK
+  SGD
+}
+
+enum UserRole {
+  ADMIN
+  BUYER
+  APPROVER
+  VIEWER
+  SUPPLIER
+  CATEGORY_MANAGER
+  CONTRACT_MANAGER
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  RECALLED
+  ESCALATED
+}
+
+enum LineItemType {
+  GOODS
+  SERVICES
+  TRAVEL
+  BLANKET
+  MISCELLANEOUS
+}
+
+enum AwardScenarioStatus {
+  DRAFT
+  CALCULATED
+  APPROVED
+  IMPLEMENTED
+}
+
+enum OptimizationJobStatus {
+  QUEUED
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum NotificationChannel {
+  EMAIL
+  IN_APP
+  SMS
+  WEBHOOK
+}
+
+# ─── Core Supporting Types ───────────────────────────────────────────────────
+
+type Address {
+  street1: String
+  street2: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
+  countryCode: String
+}
+
+type Money {
+  amount: Decimal!
+  currency: Currency!
+}
+
+type ContactInfo {
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+  title: String
+}
+
+type Attachment {
+  id: ID!
+  fileName: String!
+  fileSize: Int
+  mimeType: String
+  url: String
+  uploadedAt: DateTime
+  uploadedBy: User
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+type AuditLog {
+  id: ID!
+  action: String!
+  entityType: String!
+  entityId: ID!
+  performedBy: User
+  performedAt: DateTime!
+  previousValue: JSON
+  newValue: JSON
+  ipAddress: String
+}
+
+type ApprovalWorkflow {
+  id: ID!
+  name: String!
+  steps: [ApprovalStep!]!
+  currentStep: ApprovalStep
+  status: ApprovalStatus!
+  initiatedAt: DateTime
+  completedAt: DateTime
+}
+
+type ApprovalStep {
+  id: ID!
+  stepNumber: Int!
+  approver: User!
+  status: ApprovalStatus!
+  comments: String
+  decidedAt: DateTime
+}
+
+type Category {
+  id: ID!
+  code: String!
+  name: String!
+  description: String
+  parentCategory: Category
+  childCategories: [Category!]
+  level: Int!
+  unspscCode: String
+}
+
+type Tag {
+  id: ID!
+  name: String!
+  color: String
+}
+
+type CustomField {
+  id: ID!
+  name: String!
+  fieldType: String!
+  value: String
+  required: Boolean!
+}
+
+# ─── User & Organization Types ───────────────────────────────────────────────
+
+type Organization {
+  id: ID!
+  name: String!
+  code: String
+  type: String
+  address: Address
+  contactInfo: ContactInfo
+  taxId: String
+  duns: String
+  active: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  firstName: String
+  lastName: String
+  fullName: String
+  role: UserRole!
+  organization: Organization
+  department: String
+  costCenter: String
+  active: Boolean!
+  lastLoginAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  permissions: [String!]
+}
+
+# ─── Supplier Types ──────────────────────────────────────────────────────────
+
+type Supplier {
+  id: ID!
+  code: String!
+  name: String!
+  legalName: String
+  status: SupplierStatus!
+  address: Address
+  contactInfo: ContactInfo
+  categories: [Category!]
+  taxId: String
+  duns: String
+  website: String
+  diversity: SupplierDiversity
+  certifications: [SupplierCertification!]
+  scorecard: SupplierScorecard
+  contracts: [Contract!]
+  purchaseOrders: [PurchaseOrder!]
+  invoices: [Invoice!]
+  qualificationStatus: String
+  riskRating: String
+  preferredStatus: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  customFields: [CustomField!]
+}
+
+type SupplierDiversity {
+  isMinorityOwned: Boolean
+  isWomanOwned: Boolean
+  isVeteranOwned: Boolean
+  isDisabilityOwned: Boolean
+  isSmallBusiness: Boolean
+  certificationDetails: String
+}
+
+type SupplierCertification {
+  id: ID!
+  type: String!
+  certificationNumber: String
+  issuingBody: String
+  issueDate: Date
+  expiryDate: Date
+  status: String!
+  documents: [Attachment!]
+}
+
+type SupplierScorecard {
+  supplierId: ID!
+  overallScore: Decimal
+  qualityScore: Decimal
+  deliveryScore: Decimal
+  serviceScore: Decimal
+  complianceScore: Decimal
+  lastEvaluatedAt: DateTime
+  evaluations: [SupplierEvaluation!]
+}
+
+type SupplierEvaluation {
+  id: ID!
+  evaluatorId: ID!
+  evaluator: User
+  score: Decimal!
+  comments: String
+  evaluatedAt: DateTime!
+  period: String
+}
+
+type SupplierConnection {
+  edges: [SupplierEdge!]!
+  pageInfo: PageInfo!
+}
+
+type SupplierEdge {
+  cursor: String!
+  node: Supplier!
+}
+
+# ─── Sourcing / RFx Event Types ─────────────────────────────────────────────
+
+type SourcingEvent {
+  id: ID!
+  eventNumber: String!
+  title: String!
+  description: String
+  type: EventType!
+  status: EventStatus!
+  category: Category
+  owner: User!
+  startDate: DateTime
+  endDate: DateTime
+  awardDate: DateTime
+  suppliers: [SourcingEventSupplier!]
+  lots: [Lot!]
+  attributes: [EventAttribute!]
+  attachments: [Attachment!]
+  approvalWorkflow: ApprovalWorkflow
+  awardScenarios: [AwardScenario!]
+  totalEstimatedValue: Money
+  currency: Currency!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  tags: [Tag!]
+  customFields: [CustomField!]
+}
+
+type SourcingEventSupplier {
+  supplier: Supplier!
+  invitedAt: DateTime
+  respondedAt: DateTime
+  bid: Bid
+  status: String!
+}
+
+type Lot {
+  id: ID!
+  lotNumber: Int!
+  title: String!
+  description: String
+  lineItems: [LineItem!]
+  estimatedValue: Money
+  awardedTo: Supplier
+}
+
+type EventAttribute {
+  id: ID!
+  name: String!
+  description: String
+  attributeType: String!
+  required: Boolean!
+  options: [String!]
+  weight: Decimal
+  displayOrder: Int!
+}
+
+type Bid {
+  id: ID!
+  event: SourcingEvent!
+  supplier: Supplier!
+  status: BidStatus!
+  submittedAt: DateTime
+  totalValue: Money
+  lineItems: [BidLineItem!]
+  attachments: [Attachment!]
+  responses: [BidResponse!]
+  notes: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type BidLineItem {
+  id: ID!
+  lineItem: LineItem!
+  unitPrice: Money
+  quantity: Decimal
+  totalPrice: Money
+  leadTimeDays: Int
+  notes: String
+}
+
+type BidResponse {
+  attribute: EventAttribute!
+  responseValue: String
+  score: Decimal
+}
+
+type AwardScenario {
+  id: ID!
+  name: String!
+  status: AwardScenarioStatus!
+  description: String
+  totalAwardValue: Money
+  savings: Money
+  savingsPercent: Decimal
+  awards: [Award!]
+  createdAt: DateTime!
+  approvedAt: DateTime
+  approvedBy: User
+}
+
+type Award {
+  id: ID!
+  supplier: Supplier!
+  lot: Lot
+  lineItems: [LineItem!]
+  awardValue: Money
+  rationale: String
+}
+
+type SourcingEventConnection {
+  edges: [SourcingEventEdge!]!
+  pageInfo: PageInfo!
+}
+
+type SourcingEventEdge {
+  cursor: String!
+  node: SourcingEvent!
+}
+
+# ─── Contract Types ──────────────────────────────────────────────────────────
+
+type Contract {
+  id: ID!
+  contractNumber: String!
+  title: String!
+  description: String
+  status: ContractStatus!
+  type: String
+  supplier: Supplier!
+  owner: User!
+  category: Category
+  startDate: Date
+  endDate: Date
+  totalValue: Money
+  currency: Currency!
+  paymentTerms: String
+  lineItems: [ContractLineItem!]
+  attachments: [Attachment!]
+  approvalWorkflow: ApprovalWorkflow
+  renewalNotificationDays: Int
+  autoRenew: Boolean
+  parentContract: Contract
+  amendments: [ContractAmendment!]
+  milestones: [ContractMilestone!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  customFields: [CustomField!]
+}
+
+type ContractLineItem {
+  id: ID!
+  description: String!
+  quantity: Decimal
+  unitPrice: Money
+  totalValue: Money
+  category: Category
+}
+
+type ContractAmendment {
+  id: ID!
+  amendmentNumber: String!
+  description: String!
+  effectiveDate: Date!
+  changes: String
+  approvedAt: DateTime
+  approvedBy: User
+}
+
+type ContractMilestone {
+  id: ID!
+  title: String!
+  dueDate: Date!
+  completedDate: Date
+  status: String!
+  description: String
+}
+
+type ContractConnection {
+  edges: [ContractEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ContractEdge {
+  cursor: String!
+  node: Contract!
+}
+
+# ─── Purchase Order Types ────────────────────────────────────────────────────
+
+type PurchaseOrder {
+  id: ID!
+  poNumber: String!
+  title: String
+  status: PurchaseOrderStatus!
+  supplier: Supplier!
+  requester: User!
+  approver: User
+  contract: Contract
+  lineItems: [LineItem!]
+  deliveryAddress: Address
+  billingAddress: Address
+  currency: Currency!
+  subtotal: Money
+  taxAmount: Money
+  totalAmount: Money!
+  paymentTerms: String
+  deliveryDate: Date
+  approvalWorkflow: ApprovalWorkflow
+  receipts: [Receipt!]
+  invoices: [Invoice!]
+  attachments: [Attachment!]
+  notes: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  sentAt: DateTime
+  acknowledgedAt: DateTime
+  customFields: [CustomField!]
+}
+
+type LineItem {
+  id: ID!
+  lineNumber: Int!
+  description: String!
+  type: LineItemType!
+  quantity: Decimal!
+  unitOfMeasure: String
+  unitPrice: Money
+  totalPrice: Money
+  category: Category
+  catalogItem: CatalogItem
+  deliveryDate: Date
+  notes: String
+}
+
+type Receipt {
+  id: ID!
+  receiptNumber: String!
+  receivedDate: Date!
+  receivedBy: User!
+  lineItems: [ReceiptLineItem!]
+  notes: String
+  attachments: [Attachment!]
+}
+
+type ReceiptLineItem {
+  lineItem: LineItem!
+  quantityReceived: Decimal!
+  condition: String
+  notes: String
+}
+
+type PurchaseOrderConnection {
+  edges: [PurchaseOrderEdge!]!
+  pageInfo: PageInfo!
+}
+
+type PurchaseOrderEdge {
+  cursor: String!
+  node: PurchaseOrder!
+}
+
+# ─── Invoice Types ───────────────────────────────────────────────────────────
+
+type Invoice {
+  id: ID!
+  invoiceNumber: String!
+  status: InvoiceStatus!
+  supplier: Supplier!
+  purchaseOrder: PurchaseOrder
+  contract: Contract
+  invoiceDate: Date!
+  dueDate: Date
+  lineItems: [InvoiceLineItem!]
+  subtotal: Money!
+  taxAmount: Money
+  totalAmount: Money!
+  currency: Currency!
+  paymentTerms: String
+  remittanceAddress: Address
+  approvalWorkflow: ApprovalWorkflow
+  payments: [Payment!]
+  attachments: [Attachment!]
+  notes: String
+  submittedAt: DateTime
+  approvedAt: DateTime
+  paidAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type InvoiceLineItem {
+  id: ID!
+  lineNumber: Int!
+  description: String!
+  quantity: Decimal!
+  unitPrice: Money!
+  totalPrice: Money!
+  taxCode: String
+  taxRate: Decimal
+  purchaseOrderLineItem: LineItem
+  glCode: String
+  costCenter: String
+}
+
+type Payment {
+  id: ID!
+  paymentDate: Date!
+  amount: Money!
+  paymentMethod: String
+  referenceNumber: String
+  processedBy: User
+}
+
+type InvoiceConnection {
+  edges: [InvoiceEdge!]!
+  pageInfo: PageInfo!
+}
+
+type InvoiceEdge {
+  cursor: String!
+  node: Invoice!
+}
+
+# ─── Catalog Types ───────────────────────────────────────────────────────────
+
+type Catalog {
+  id: ID!
+  name: String!
+  description: String
+  supplier: Supplier
+  active: Boolean!
+  items: [CatalogItem!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CatalogItem {
+  id: ID!
+  sku: String!
+  name: String!
+  description: String
+  status: CatalogItemStatus!
+  category: Category
+  catalog: Catalog
+  supplier: Supplier!
+  unitPrice: Money!
+  currency: Currency!
+  unitOfMeasure: String
+  minimumOrderQuantity: Decimal
+  leadTimeDays: Int
+  imageUrl: String
+  attachments: [Attachment!]
+  attributes: [CatalogItemAttribute!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CatalogItemAttribute {
+  name: String!
+  value: String!
+  unit: String
+}
+
+# ─── Optimization Types ──────────────────────────────────────────────────────
+
+type OptimizationJob {
+  id: ID!
+  name: String!
+  status: OptimizationJobStatus!
+  eventId: ID!
+  event: SourcingEvent
+  submittedAt: DateTime!
+  startedAt: DateTime
+  completedAt: DateTime
+  resultUrl: String
+  errorMessage: String
+  parameters: JSON
+  scenarios: [AwardScenario!]
+}
+
+# ─── Spend Analytics Types ───────────────────────────────────────────────────
+
+type SpendSummary {
+  period: String!
+  totalSpend: Money!
+  supplierCount: Int!
+  categoryCount: Int!
+  poCount: Int!
+  invoiceCount: Int!
+  savingsAchieved: Money
+  byCategory: [CategorySpend!]
+  bySupplier: [SupplierSpend!]
+}
+
+type CategorySpend {
+  category: Category!
+  spend: Money!
+  percentage: Decimal!
+  poCount: Int!
+}
+
+type SupplierSpend {
+  supplier: Supplier!
+  spend: Money!
+  percentage: Decimal!
+  poCount: Int!
+}
+
+# ─── Notification Types ──────────────────────────────────────────────────────
+
+type Notification {
+  id: ID!
+  recipient: User!
+  subject: String!
+  message: String!
+  channel: NotificationChannel!
+  read: Boolean!
+  entityType: String
+  entityId: ID
+  sentAt: DateTime!
+}
+
+# ─── Input Types ─────────────────────────────────────────────────────────────
+
+input CreateSourcingEventInput {
+  title: String!
+  description: String
+  type: EventType!
+  categoryId: ID
+  startDate: DateTime
+  endDate: DateTime
+  currency: Currency!
+  estimatedValue: Decimal
+  supplierIds: [ID!]
+  tags: [String!]
+  customFields: [CustomFieldInput!]
+}
+
+input UpdateSourcingEventInput {
+  title: String
+  description: String
+  startDate: DateTime
+  endDate: DateTime
+  estimatedValue: Decimal
+  tags: [String!]
+  customFields: [CustomFieldInput!]
+}
+
+input CreateBidInput {
+  eventId: ID!
+  supplierId: ID!
+  lineItems: [BidLineItemInput!]!
+  notes: String
+}
+
+input BidLineItemInput {
+  lineItemId: ID!
+  unitPrice: Decimal!
+  quantity: Decimal
+  leadTimeDays: Int
+  notes: String
+}
+
+input CreateSupplierInput {
+  code: String!
+  name: String!
+  legalName: String
+  email: String!
+  phone: String
+  address: AddressInput
+  taxId: String
+  duns: String
+  website: String
+  categoryIds: [ID!]
+  diversity: SupplierDiversityInput
+  customFields: [CustomFieldInput!]
+}
+
+input UpdateSupplierInput {
+  name: String
+  legalName: String
+  phone: String
+  address: AddressInput
+  website: String
+  categoryIds: [ID!]
+  diversity: SupplierDiversityInput
+  customFields: [CustomFieldInput!]
+}
+
+input SupplierDiversityInput {
+  isMinorityOwned: Boolean
+  isWomanOwned: Boolean
+  isVeteranOwned: Boolean
+  isDisabilityOwned: Boolean
+  isSmallBusiness: Boolean
+  certificationDetails: String
+}
+
+input CreateContractInput {
+  title: String!
+  description: String
+  type: String
+  supplierId: ID!
+  categoryId: ID
+  startDate: Date!
+  endDate: Date!
+  totalValue: Decimal
+  currency: Currency!
+  paymentTerms: String
+  autoRenew: Boolean
+  renewalNotificationDays: Int
+  customFields: [CustomFieldInput!]
+}
+
+input UpdateContractInput {
+  title: String
+  description: String
+  endDate: Date
+  totalValue: Decimal
+  paymentTerms: String
+  autoRenew: Boolean
+  renewalNotificationDays: Int
+  customFields: [CustomFieldInput!]
+}
+
+input CreatePurchaseOrderInput {
+  title: String
+  supplierId: ID!
+  contractId: ID
+  lineItems: [LineItemInput!]!
+  deliveryAddress: AddressInput
+  currency: Currency!
+  paymentTerms: String
+  deliveryDate: Date
+  notes: String
+  customFields: [CustomFieldInput!]
+}
+
+input LineItemInput {
+  description: String!
+  type: LineItemType!
+  quantity: Decimal!
+  unitOfMeasure: String
+  unitPrice: Decimal!
+  categoryId: ID
+  catalogItemId: ID
+  deliveryDate: Date
+  notes: String
+}
+
+input CreateInvoiceInput {
+  supplierId: ID!
+  purchaseOrderId: ID
+  contractId: ID
+  invoiceNumber: String!
+  invoiceDate: Date!
+  dueDate: Date
+  lineItems: [InvoiceLineItemInput!]!
+  currency: Currency!
+  paymentTerms: String
+  notes: String
+}
+
+input InvoiceLineItemInput {
+  description: String!
+  quantity: Decimal!
+  unitPrice: Decimal!
+  taxRate: Decimal
+  purchaseOrderLineItemId: ID
+  glCode: String
+  costCenter: String
+}
+
+input CreateCatalogItemInput {
+  sku: String!
+  name: String!
+  description: String
+  catalogId: ID!
+  categoryId: ID
+  unitPrice: Decimal!
+  currency: Currency!
+  unitOfMeasure: String
+  minimumOrderQuantity: Decimal
+  leadTimeDays: Int
+  attributes: [CatalogItemAttributeInput!]
+}
+
+input CatalogItemAttributeInput {
+  name: String!
+  value: String!
+  unit: String
+}
+
+input AddressInput {
+  street1: String
+  street2: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
+  countryCode: String
+}
+
+input CustomFieldInput {
+  id: ID
+  name: String!
+  value: String
+}
+
+input SupplierFilterInput {
+  status: SupplierStatus
+  categoryIds: [ID!]
+  searchTerm: String
+  preferredOnly: Boolean
+  diversityTypes: [String!]
+}
+
+input SourcingEventFilterInput {
+  status: EventStatus
+  type: EventType
+  categoryIds: [ID!]
+  ownerId: ID
+  startDateFrom: DateTime
+  startDateTo: DateTime
+  searchTerm: String
+}
+
+input PurchaseOrderFilterInput {
+  status: PurchaseOrderStatus
+  supplierId: ID
+  requesterId: ID
+  createdFrom: DateTime
+  createdTo: DateTime
+  searchTerm: String
+}
+
+input InvoiceFilterInput {
+  status: InvoiceStatus
+  supplierId: ID
+  purchaseOrderId: ID
+  invoiceDateFrom: Date
+  invoiceDateTo: Date
+  dueDateFrom: Date
+  dueDateTo: Date
+  searchTerm: String
+}
+
+# ─── Query Root ───────────────────────────────────────────────────────────────
+
+type Query {
+  # Suppliers
+  supplier(id: ID!): Supplier
+  supplierByCode(code: String!): Supplier
+  suppliers(filter: SupplierFilterInput, first: Int, after: String, last: Int, before: String): SupplierConnection!
+  supplierCategories: [Category!]!
+  supplierCertifications(supplierId: ID!): [SupplierCertification!]!
+  supplierScorecard(supplierId: ID!): SupplierScorecard
+
+  # Sourcing Events
+  sourcingEvent(id: ID!): SourcingEvent
+  sourcingEvents(filter: SourcingEventFilterInput, first: Int, after: String, last: Int, before: String): SourcingEventConnection!
+  bid(id: ID!): Bid
+  bidsForEvent(eventId: ID!): [Bid!]!
+  awardScenario(id: ID!): AwardScenario
+  awardScenariosForEvent(eventId: ID!): [AwardScenario!]!
+
+  # Contracts
+  contract(id: ID!): Contract
+  contractByNumber(contractNumber: String!): Contract
+  contracts(filter: ContractFilterInput, first: Int, after: String, last: Int, before: String): ContractConnection!
+  expiringContracts(daysAhead: Int!): [Contract!]!
+
+  # Purchase Orders
+  purchaseOrder(id: ID!): PurchaseOrder
+  purchaseOrderByNumber(poNumber: String!): PurchaseOrder
+  purchaseOrders(filter: PurchaseOrderFilterInput, first: Int, after: String, last: Int, before: String): PurchaseOrderConnection!
+
+  # Invoices
+  invoice(id: ID!): Invoice
+  invoiceByNumber(invoiceNumber: String!): Invoice
+  invoices(filter: InvoiceFilterInput, first: Int, after: String, last: Int, before: String): InvoiceConnection!
+  overdueInvoices: [Invoice!]!
+
+  # Catalog
+  catalog(id: ID!): Catalog
+  catalogs(supplierId: ID, active: Boolean): [Catalog!]!
+  catalogItem(id: ID!): CatalogItem
+  catalogItems(catalogId: ID, categoryId: ID, searchTerm: String, first: Int, after: String): CatalogItemConnection!
+
+  # Optimization
+  optimizationJob(id: ID!): OptimizationJob
+  optimizationJobsForEvent(eventId: ID!): [OptimizationJob!]!
+
+  # Analytics
+  spendSummary(period: String!, categoryId: ID, supplierId: ID): SpendSummary!
+
+  # Users & Org
+  currentUser: User!
+  user(id: ID!): User
+  users(role: UserRole, active: Boolean): [User!]!
+  organization(id: ID!): Organization
+
+  # Categories
+  categories(parentId: ID, level: Int): [Category!]!
+  category(id: ID!): Category
+
+  # Notifications
+  myNotifications(unreadOnly: Boolean, first: Int, after: String): NotificationConnection!
+
+  # Audit
+  auditLogs(entityType: String!, entityId: ID!, first: Int, after: String): AuditLogConnection!
+}
+
+# ─── Mutation Root ────────────────────────────────────────────────────────────
+
+type Mutation {
+  # Sourcing Events
+  createSourcingEvent(input: CreateSourcingEventInput!): SourcingEvent!
+  updateSourcingEvent(id: ID!, input: UpdateSourcingEventInput!): SourcingEvent!
+  deleteSourcingEvent(id: ID!): Boolean!
+  publishSourcingEvent(id: ID!): SourcingEvent!
+  closeSourcingEvent(id: ID!): SourcingEvent!
+  cancelSourcingEvent(id: ID!, reason: String): SourcingEvent!
+  inviteSupplierToEvent(eventId: ID!, supplierId: ID!): SourcingEvent!
+  removeSupplierFromEvent(eventId: ID!, supplierId: ID!): SourcingEvent!
+
+  # Bids
+  submitBid(input: CreateBidInput!): Bid!
+  updateBid(id: ID!, input: CreateBidInput!): Bid!
+  withdrawBid(id: ID!, reason: String): Bid!
+
+  # Award Scenarios
+  createAwardScenario(eventId: ID!, name: String!, description: String): AwardScenario!
+  approveAwardScenario(id: ID!, comments: String): AwardScenario!
+  implementAwardScenario(id: ID!): AwardScenario!
+
+  # Suppliers
+  createSupplier(input: CreateSupplierInput!): Supplier!
+  updateSupplier(id: ID!, input: UpdateSupplierInput!): Supplier!
+  activateSupplier(id: ID!): Supplier!
+  deactivateSupplier(id: ID!): Supplier!
+  addSupplierCertification(supplierId: ID!, certification: SupplierCertificationInput!): SupplierCertification!
+  evaluateSupplier(supplierId: ID!, evaluation: SupplierEvaluationInput!): SupplierEvaluation!
+
+  # Contracts
+  createContract(input: CreateContractInput!): Contract!
+  updateContract(id: ID!, input: UpdateContractInput!): Contract!
+  submitContractForApproval(id: ID!): Contract!
+  approveContract(id: ID!, comments: String): Contract!
+  rejectContract(id: ID!, comments: String!): Contract!
+  terminateContract(id: ID!, reason: String!, effectiveDate: Date!): Contract!
+  renewContract(id: ID!, newEndDate: Date!, newValue: Decimal): Contract!
+  addContractAmendment(contractId: ID!, amendment: ContractAmendmentInput!): ContractAmendment!
+
+  # Purchase Orders
+  createPurchaseOrder(input: CreatePurchaseOrderInput!): PurchaseOrder!
+  updatePurchaseOrder(id: ID!, input: CreatePurchaseOrderInput!): PurchaseOrder!
+  submitPurchaseOrderForApproval(id: ID!): PurchaseOrder!
+  approvePurchaseOrder(id: ID!, comments: String): PurchaseOrder!
+  rejectPurchaseOrder(id: ID!, comments: String!): PurchaseOrder!
+  sendPurchaseOrder(id: ID!): PurchaseOrder!
+  cancelPurchaseOrder(id: ID!, reason: String!): PurchaseOrder!
+  receiveItems(purchaseOrderId: ID!, receipt: ReceiptInput!): Receipt!
+
+  # Invoices
+  createInvoice(input: CreateInvoiceInput!): Invoice!
+  submitInvoice(id: ID!): Invoice!
+  approveInvoice(id: ID!, comments: String): Invoice!
+  rejectInvoice(id: ID!, comments: String!): Invoice!
+  recordPayment(invoiceId: ID!, payment: PaymentInput!): Payment!
+  holdInvoice(id: ID!, reason: String!): Invoice!
+  releaseInvoiceHold(id: ID!): Invoice!
+
+  # Catalog
+  createCatalog(name: String!, description: String, supplierId: ID): Catalog!
+  updateCatalog(id: ID!, name: String, description: String, active: Boolean): Catalog!
+  createCatalogItem(input: CreateCatalogItemInput!): CatalogItem!
+  updateCatalogItem(id: ID!, input: CreateCatalogItemInput!): CatalogItem!
+  deactivateCatalogItem(id: ID!): CatalogItem!
+
+  # Optimization
+  submitOptimizationJob(eventId: ID!, name: String!, parameters: JSON): OptimizationJob!
+  cancelOptimizationJob(id: ID!): OptimizationJob!
+
+  # Notifications
+  markNotificationRead(id: ID!): Notification!
+  markAllNotificationsRead: Boolean!
+}
+
+# ─── Additional Input Types ───────────────────────────────────────────────────
+
+input ContractFilterInput {
+  status: ContractStatus
+  supplierId: ID
+  categoryId: ID
+  ownerId: ID
+  startDateFrom: Date
+  endDateTo: Date
+  searchTerm: String
+}
+
+input SupplierCertificationInput {
+  type: String!
+  certificationNumber: String
+  issuingBody: String
+  issueDate: Date
+  expiryDate: Date
+}
+
+input SupplierEvaluationInput {
+  score: Decimal!
+  qualityScore: Decimal
+  deliveryScore: Decimal
+  serviceScore: Decimal
+  complianceScore: Decimal
+  comments: String
+  period: String
+}
+
+input ContractAmendmentInput {
+  amendmentNumber: String!
+  description: String!
+  effectiveDate: Date!
+  changes: String
+}
+
+input ReceiptInput {
+  receivedDate: Date!
+  lineItems: [ReceiptLineItemInput!]!
+  notes: String
+}
+
+input ReceiptLineItemInput {
+  lineItemId: ID!
+  quantityReceived: Decimal!
+  condition: String
+  notes: String
+}
+
+input PaymentInput {
+  paymentDate: Date!
+  amount: Decimal!
+  currency: Currency!
+  paymentMethod: String
+  referenceNumber: String
+}
+
+# ─── Additional Connection Types ─────────────────────────────────────────────
+
+type CatalogItemConnection {
+  edges: [CatalogItemEdge!]!
+  pageInfo: PageInfo!
+}
+
+type CatalogItemEdge {
+  cursor: String!
+  node: CatalogItem!
+}
+
+type NotificationConnection {
+  edges: [NotificationEdge!]!
+  pageInfo: PageInfo!
+}
+
+type NotificationEdge {
+  cursor: String!
+  node: Notification!
+}
+
+type AuditLogConnection {
+  edges: [AuditLogEdge!]!
+  pageInfo: PageInfo!
+}
+
+type AuditLogEdge {
+  cursor: String!
+  node: AuditLog!
+}
