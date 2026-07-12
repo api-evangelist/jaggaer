@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/jaggaer-aso-ches-openapi.yml, openapi/jaggaer-aso-ees-openapi.yml, openapi/jaggaer-aso-quay-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth 2.0 bearer token for authentication.
+  sources:
+  - openapi/jaggaer-aso-ches-openapi.yml
+  - openapi/jaggaer-aso-ees-openapi.yml
+- name: apiKeyHeader
+  type: apiKey
+  in: header
+  parameter: X-Api-Key
+  description: API key passed as a request header.
+  sources:
+  - openapi/jaggaer-aso-ches-openapi.yml
+  - openapi/jaggaer-aso-ees-openapi.yml
+  - openapi/jaggaer-aso-quay-openapi.yml
