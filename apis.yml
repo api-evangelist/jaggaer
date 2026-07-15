@@ -95,6 +95,8 @@ apis:
   - type: OpenAPI
     url: https://raw.githubusercontent.com/api-evangelist/jaggaer/refs/heads/main/openapi/jaggaer-aso-quay-openapi.yml
 common:
+- type: AgenticAccess
+  url: agentic-access/jaggaer-agentic-access.yml
 - type: DomainSecurity
   url: security/jaggaer-domain-security.yml
 - type: Authentication
