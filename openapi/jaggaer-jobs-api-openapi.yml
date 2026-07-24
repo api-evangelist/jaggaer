@@ -1,0 +1,462 @@
+openapi: 3.0.3
+info:
+  title: JAGGAER ASO Customer Host Entity Service Async Jobs API
+  description: 'The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.
+
+    '
+  version: v26.0.0.4
+  contact:
+    name: JAGGAER Support
+    url: https://www.jaggaer.com/support
+  x-api-id: jaggaer-aso-ches
+servers:
+- url: https://ches.aso-api.jaggaer.com
+  description: JAGGAER ASO CHES Production Server
+security:
+- bearerAuth: []
+  apiKeyHeader: []
+tags:
+- name: Jobs
+  description: Optimization job management operations
+paths:
+  /submitJob:
+    post:
+      operationId: submitJob
+      summary: Submit Job
+      description: 'Submits an optimization job to the Quay service for processing by the JAGGAER Advanced Sourcing Optimizer. The consumer, customer, and event identifiers are required, along with the location of the input file on the ASO filesystem. Customers have both daily and absolute rate limits enforced at this endpoint.
+
+        '
+      tags:
+      - Jobs
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+          default: application/vnd.sciquest.com.quay+json
+        description: 'Must be set to application/vnd.sciquest.com.quay+json.
+
+          '
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          default: application/vnd.sciquest.com.quay+json
+        description: 'Must be set to application/vnd.sciquest.com.quay+json.
+
+          '
+      requestBody:
+        required: true
+        content:
+          application/vnd.sciquest.com.quay+json:
+            schema:
+              $ref: '#/components/schemas/SubmitJobRequest'
+            example:
+              consumer: JCS
+              customerId: 999
+              customerName: QA
+              eventId: 999999
+              inputFilename: /dgsq/drm/JCS_Input/tester.txt.gz
+      responses:
+        '200':
+          description: 'Success; the optimization job was successfully submitted to the Quay service.
+
+            '
+          content:
+            application/vnd.sciquest.com.quay+json:
+              schema:
+                $ref: '#/components/schemas/SubmitJobResponse'
+              example:
+                statuses:
+                  SUCCESS:
+                  - jobId: 414
+        '422':
+          description: 'Unprocessable Entity; the job submission could not be validated. Reasons include invalid enum values, missing required fields, exceeded character limits, or input file not found on the ASO filesystem.
+
+            '
+          content:
+            application/vnd.sciquest.com.quay+json:
+              schema:
+                $ref: '#/components/schemas/QuayErrorResponse'
+        '429':
+          description: 'Too Many Requests; the customer has exceeded their configured daily or absolute optimization job limit.
+
+            '
+          content:
+            application/vnd.sciquest.com.quay+json:
+              schema:
+                $ref: '#/components/schemas/QuayRateLimitResponse'
+  /cancelJob/{job-id}:
+    post:
+      operationId: cancelJob
+      summary: Cancel Job
+      description: 'Cancels the specified optimization job. A 201 response indicates the job was successfully cancelled. If the job cannot be found or has already terminated, an appropriate error is returned.
+
+        '
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+          default: application/vnd.sciquest.com.quay+json
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          default: application/vnd.sciquest.com.quay+json
+      responses:
+        '201':
+          description: 'Success; the job was successfully cancelled.
+
+            '
+        '404':
+          description: No job found with the specified job ID.
+          content:
+            application/vnd.sciquest.com.quay+json:
+              schema:
+                $ref: '#/components/schemas/QuayErrorResponse'
+        '422':
+          description: 'Unprocessable Entity; the job could not be cancelled. It may have already terminated.
+
+            '
+          content:
+            application/vnd.sciquest.com.quay+json:
+              schema:
+                $ref: '#/components/schemas/QuayErrorResponse'
+  /jobStatus/{job-id}:
+    get:
+      operationId: getJobStatus
+      summary: Job Status
+      description: 'Retrieves the current status of the specified optimization job. Status values indicate the progression of the job through the Quay processing pipeline.
+
+        '
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          default: application/vnd.sciquest.com.quay+json
+      responses:
+        '200':
+          description: Success; returns the current status of the job.
+          content:
+            application/vnd.sciquest.com.quay+json:
+              schema:
+                $ref: '#/components/schemas/JobStatusResponse'
+              example:
+                status: Optimizing
+        '404':
+          description: No job found with the specified job ID.
+          content:
+            application/vnd.sciquest.com.quay+json:
+              schema:
+                $ref: '#/components/schemas/QuayErrorResponse'
+  /job/{job-id}:
+    get:
+      operationId: getJob
+      summary: Job
+      description: 'Retrieves full details for the specified optimization job, including submission metadata, processing times, CPU usage, and working directory information.
+
+        '
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          default: application/vnd.sciquest.com.quay+json
+      responses:
+        '200':
+          description: Success; returns full job details.
+          content:
+            application/vnd.sciquest.com.quay+json:
+              schema:
+                $ref: '#/components/schemas/JobResponse'
+              example:
+                jobId: 414
+                consumer: JCS
+                customerId: 999
+                customerName: QA
+                eventId: 999999
+                inputFilename: /dgsq/drm/JCS_Input/tester.txt.gz
+                status: Completed
+                jobType: Short
+                optSetType: Long
+                submitTime: 1584979461000
+                inprocAtSubmit: 0
+                runClient: clearbox-01.exp.dev.combinenet.com
+                workingDirectory: /dgsq/drm/QUAY_Service/2020/2/23/414
+                processStartTime: 1584979460846
+                processStopTime: 1584979462117
+                cpuTime: 1271
+        '404':
+          description: No job found with the specified job ID.
+          content:
+            application/vnd.sciquest.com.quay+json:
+              schema:
+                $ref: '#/components/schemas/QuayErrorResponse'
+components:
+  schemas:
+    QuayRateLimitResponse:
+      type: object
+      description: 'Rate limit error response returned when a customer exceeds their configured optimization job limits.
+
+        '
+      properties:
+        statuses:
+          type: object
+          description: 'Map of status codes to arrays of detail objects. Codes include EXCEEDED_DAILY_LIMIT and EXCEEDED_ABSOLUTE_LIMIT, each containing the customer-specific limit value.
+
+            '
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                limit:
+                  type: integer
+                  description: The customer-specific limit value that was exceeded.
+    JobResponse:
+      type: object
+      description: Full details for an optimization job.
+      required:
+      - jobId
+      - consumer
+      - customerId
+      - customerName
+      - eventId
+      - inputFilename
+      - status
+      - jobType
+      - optSetType
+      - submitTime
+      - inprocAtSubmit
+      - runClient
+      - workingDirectory
+      - processStartTime
+      - processStopTime
+      - cpuTime
+      properties:
+        jobId:
+          type: integer
+          description: Quay job identifier.
+          example: 414
+        consumer:
+          type: string
+          description: Consumer name.
+          enum:
+          - ASO
+          - JCS
+          - USDA
+          example: JCS
+        customerId:
+          type: integer
+          description: Customer identifier.
+          example: 999
+        customerName:
+          type: string
+          description: Customer name.
+          maxLength: 100
+          example: QA
+        eventId:
+          type: integer
+          description: Event identifier.
+          example: 999999
+        inputFilename:
+          type: string
+          description: Fully qualified input file location on ASO filesystem.
+          maxLength: 100
+          example: /dgsq/drm/JCS_Input/tester.txt.gz
+        status:
+          type: string
+          description: Current status of the job.
+          enum:
+          - Received
+          - Queued
+          - Requeued
+          - Optimizing
+          - Completed
+          - Failed
+          - Cancelled
+          - Cancelling
+          - Expired
+          - Limited
+          example: Completed
+        jobType:
+          type: string
+          description: Type of optimization job.
+          enum:
+          - Short
+          - Long
+          example: Short
+        optSetType:
+          type: string
+          description: Type of optimization set used.
+          enum:
+          - Short
+          - Long
+          example: Long
+        submitTime:
+          type: integer
+          description: Time the job was submitted as 13-digit Unix/epoch time.
+          example: 1584979461000
+        inprocAtSubmit:
+          type: integer
+          description: Number of jobs in process at the time this job was submitted.
+          example: 0
+        runClient:
+          type: string
+          description: Hostname of the Quay client that ran this job.
+          example: clearbox-01.exp.dev.combinenet.com
+        workingDirectory:
+          type: string
+          description: Quay working directory on the ASO filesystem.
+          example: /dgsq/drm/QUAY_Service/2020/2/23/414
+        processStartTime:
+          type: integer
+          description: Time the job started running as 13-digit Unix/epoch time.
+          example: 1584979460846
+        processStopTime:
+          type: integer
+          description: Time the job completed as 13-digit Unix/epoch time.
+          example: 1584979462117
+        cpuTime:
+          type: integer
+          description: Elapsed job runtime in milliseconds.
+          example: 1271
+    QuayErrorResponse:
+      type: object
+      description: Error response from the Quay service.
+      properties:
+        statuses:
+          type: object
+          description: 'Map of status codes to arrays of detail objects. Common codes include INVALID_ENUM_VALUE, MISSING_REQUIRED_FIELD, EXCEEDED_CHARACTER_LIMIT, FILE_NOT_FOUND, and COULD_NOT_BE_CANCELLED.
+
+            '
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+    SubmitJobResponse:
+      type: object
+      description: Response for a successful job submission.
+      properties:
+        statuses:
+          type: object
+          description: 'Map of status codes to arrays of status detail objects. On success, contains a SUCCESS key with the jobId.
+
+            '
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+    JobStatusResponse:
+      type: object
+      description: Current status of an optimization job.
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          description: Current processing status of the optimization job.
+          enum:
+          - Received
+          - Queued
+          - Requeued
+          - Optimizing
+          - Completed
+          - Failed
+          - Cancelled
+          - Cancelling
+          - Expired
+          - Limited
+          example: Optimizing
+    SubmitJobRequest:
+      type: object
+      required:
+      - consumer
+      - customerId
+      - customerName
+      - eventId
+      - inputFilename
+      description: Request body for submitting an optimization job to Quay.
+      properties:
+        consumer:
+          type: string
+          description: Consumer name identifying the system submitting the job.
+          enum:
+          - ASO
+          - JCS
+          - USDA
+          example: JCS
+        customerId:
+          type: integer
+          description: Customer identifier.
+          example: 999
+        customerName:
+          type: string
+          description: Customer name. (Max length 100)
+          maxLength: 100
+          example: QA
+        eventId:
+          type: integer
+          description: Event identifier linking the job to a sourcing event.
+          example: 999999
+        inputFilename:
+          type: string
+          description: 'Fully qualified location of the input file on the ASO filesystem. (Max length 100)
+
+            '
+          maxLength: 100
+          example: /dgsq/drm/JCS_Input/tester.txt.gz
+        notificationHostname:
+          type: string
+          description: 'ASO Clearsuite notification server hostname or VIP. Optional; used only within a dev environment to allow a developer to specify their locally configured clearsuite hostname. (Max length 250)
+
+            '
+          maxLength: 250
+          example: aso-csweb.jaggaer.com
+        notificationPort:
+          type: integer
+          description: 'ASO Clearsuite notification server port. Optional; used only within a dev environment.
+
+            '
+          example: 80
+  parameters:
+    jobId:
+      name: job-id
+      in: path
+      required: true
+      description: Identifier for the Quay optimization job.
+      schema:
+        type: integer
+      example: 414
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for authentication.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key passed as a request header.

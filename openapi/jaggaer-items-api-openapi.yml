@@ -1,0 +1,309 @@
+openapi: 3.0.3
+info:
+  title: JAGGAER ASO Customer Host Entity Service Async Items API
+  description: 'The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.
+
+    '
+  version: v26.0.0.4
+  contact:
+    name: JAGGAER Support
+    url: https://www.jaggaer.com/support
+  x-api-id: jaggaer-aso-ches
+servers:
+- url: https://ches.aso-api.jaggaer.com
+  description: JAGGAER ASO CHES Production Server
+security:
+- bearerAuth: []
+  apiKeyHeader: []
+tags:
+- name: Items
+  description: Event item management
+paths:
+  /event/{event-id}/apiItem/{item-id}:
+    get:
+      operationId: getItem
+      summary: Item
+      description: Retrieves a specific line item for the given sourcing event.
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/itemId'
+      responses:
+        '200':
+          description: Success; returns item details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteItem
+      summary: Delete Item
+      description: Deletes a specific line item from the given sourcing event.
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/itemId'
+      responses:
+        '204':
+          description: Success; item deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event/{event-id}/user/{user-id}/apiItem/{item-id}:
+    patch:
+      operationId: updateItemByUser
+      summary: Item by User
+      description: 'Updates a specific line item for the given event scoped to the specified user.
+
+        '
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/itemId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemUpdateRequest'
+      responses:
+        '200':
+          description: Success; item updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event/{event-id}/apiItems:
+    get:
+      operationId: getItems
+      summary: Items
+      description: Retrieves all line items for the given sourcing event.
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      responses:
+        '200':
+          description: Success; returns list of items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event/{event-id}/apiItems/async:
+    get:
+      operationId: getItemsAsync
+      summary: Items (Asynchronous)
+      description: 'Initiates an asynchronous retrieval of all line items for the given event. Returns a process ID for polling via /asyncStatus/{encoded-async-pid}.
+
+        '
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      responses:
+        '202':
+          description: Accepted; returns process ID for async polling.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncAcceptedResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event/{event-id}/user/{user-id}/apiItems:
+    post:
+      operationId: createItemsByUser
+      summary: Create Items by User
+      description: 'Creates new line items for the given event scoped to the specified user.
+
+        '
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/userId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemCreateRequest'
+      responses:
+        '200':
+          description: Success; item(s) created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    patch:
+      operationId: updateItemsByUser
+      summary: Update Items by User (Bulk)
+      description: 'Bulk updates line items for the given event scoped to the specified user.
+
+        '
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/userId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemBulkUpdateRequest'
+      responses:
+        '200':
+          description: Success; items updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+components:
+  schemas:
+    ItemListResponse:
+      type: object
+      description: List of event line items.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemResponse'
+    ItemUpdateRequest:
+      type: object
+      description: Request body for updating an event line item.
+      properties:
+        itemName:
+          type: string
+        quantity:
+          type: number
+        unitOfMeasure:
+          type: string
+    ErrorResponse:
+      type: object
+      description: Error response with validation details.
+      properties:
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+    ItemBulkUpdateRequest:
+      type: object
+      description: Request body for bulk updating event line items.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemUpdateRequest'
+    ItemCreateRequest:
+      type: object
+      description: Request body for creating event line items.
+      properties:
+        itemName:
+          type: string
+        quantity:
+          type: number
+        unitOfMeasure:
+          type: string
+    AsyncAcceptedResponse:
+      type: object
+      description: Response returned when an asynchronous operation is accepted.
+      properties:
+        encodedAsyncPid:
+          type: string
+          description: Base64-encoded process ID used to poll for status.
+    ItemResponse:
+      type: object
+      description: Sourcing event line item details.
+      properties:
+        itemId:
+          type: integer
+          description: Unique identifier for the line item.
+        itemName:
+          type: string
+          description: Name of the line item.
+        quantity:
+          type: number
+          description: Requested quantity.
+        unitOfMeasure:
+          type: string
+          description: Unit of measure for the item.
+  parameters:
+    itemId:
+      name: item-id
+      in: path
+      required: true
+      description: Identifier for the line item.
+      schema:
+        type: integer
+    eventId:
+      name: event-id
+      in: path
+      required: true
+      description: Identifier for the sourcing event.
+      schema:
+        type: integer
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: Identifier for the user.
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
+    NotFound:
+      description: The requested resource was not found.
+    UnprocessableEntity:
+      description: 'The request was syntactically valid but could not be processed due to validation errors.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for authentication.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key passed as a request header.

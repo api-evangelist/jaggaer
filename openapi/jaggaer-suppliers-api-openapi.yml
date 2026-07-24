@@ -1,0 +1,274 @@
+openapi: 3.0.3
+info:
+  title: JAGGAER ASO Customer Host Entity Service Async Suppliers API
+  description: 'The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.
+
+    '
+  version: v26.0.0.4
+  contact:
+    name: JAGGAER Support
+    url: https://www.jaggaer.com/support
+  x-api-id: jaggaer-aso-ches
+servers:
+- url: https://ches.aso-api.jaggaer.com
+  description: JAGGAER ASO CHES Production Server
+security:
+- bearerAuth: []
+  apiKeyHeader: []
+tags:
+- name: Suppliers
+  description: Event supplier management
+paths:
+  /event/{event-id}/apiSupplier/{supplier-id}:
+    get:
+      operationId: getSupplier
+      summary: Supplier
+      description: Retrieves a specific supplier for the given sourcing event.
+      tags:
+      - Suppliers
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/supplierId'
+      responses:
+        '200':
+          description: Success; returns supplier details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteSupplier
+      summary: Delete Supplier
+      description: Removes a specific supplier from the given sourcing event.
+      tags:
+      - Suppliers
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/supplierId'
+      responses:
+        '204':
+          description: Success; supplier removed from event.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event/{event-id}/user/{user-id}/apiSupplier/{supplier-id}:
+    patch:
+      operationId: updateSupplierByUser
+      summary: Supplier by User
+      description: 'Updates a specific supplier for the given event scoped to the specified user.
+
+        '
+      tags:
+      - Suppliers
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/supplierId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplierUpdateRequest'
+      responses:
+        '200':
+          description: Success; supplier updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event/{event-id}/apiSuppliers:
+    get:
+      operationId: getSuppliers
+      summary: Suppliers
+      description: Retrieves all suppliers for the given sourcing event.
+      tags:
+      - Suppliers
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      responses:
+        '200':
+          description: Success; returns list of suppliers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /event/{event-id}/user/{user-id}/apiSuppliers:
+    post:
+      operationId: createSuppliersByUser
+      summary: Create Suppliers by User
+      description: 'Adds suppliers to the given event scoped to the specified user.
+
+        '
+      tags:
+      - Suppliers
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/userId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplierCreateRequest'
+      responses:
+        '200':
+          description: Success; supplier(s) added to event.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    patch:
+      operationId: updateSuppliersByUser
+      summary: Update Suppliers by User (Bulk)
+      description: 'Bulk updates suppliers for the given event scoped to the specified user.
+
+        '
+      tags:
+      - Suppliers
+      parameters:
+      - $ref: '#/components/parameters/eventId'
+      - $ref: '#/components/parameters/userId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupplierBulkUpdateRequest'
+      responses:
+        '200':
+          description: Success; suppliers updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplierListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+components:
+  schemas:
+    SupplierBulkUpdateRequest:
+      type: object
+      description: Request body for bulk updating suppliers.
+      properties:
+        suppliers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplierUpdateRequest'
+    ErrorResponse:
+      type: object
+      description: Error response with validation details.
+      properties:
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+    SupplierListResponse:
+      type: object
+      description: List of event suppliers.
+      properties:
+        suppliers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplierResponse'
+    SupplierCreateRequest:
+      type: object
+      description: Request body for adding suppliers to an event.
+      properties:
+        suppliers:
+          type: array
+          items:
+            type: object
+            properties:
+              supplierId:
+                type: integer
+    SupplierUpdateRequest:
+      type: object
+      description: Request body for updating a supplier.
+      properties:
+        status:
+          type: string
+    SupplierResponse:
+      type: object
+      description: Sourcing event supplier details.
+      properties:
+        supplierId:
+          type: integer
+          description: Unique identifier for the supplier.
+        supplierName:
+          type: string
+          description: Name of the supplier.
+        status:
+          type: string
+          description: Participation status of the supplier in the event.
+  parameters:
+    eventId:
+      name: event-id
+      in: path
+      required: true
+      description: Identifier for the sourcing event.
+      schema:
+        type: integer
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: Identifier for the user.
+      schema:
+        type: integer
+    supplierId:
+      name: supplier-id
+      in: path
+      required: true
+      description: Identifier for the supplier.
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
+    NotFound:
+      description: The requested resource was not found.
+    UnprocessableEntity:
+      description: 'The request was syntactically valid but could not be processed due to validation errors.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token for authentication.
+    apiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key passed as a request header.
