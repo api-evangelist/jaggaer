@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Contacts API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiContact/:contact-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "contact-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the contact."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific contact for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Delete Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiContact/:contact-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "contact-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the contact."
+              }
+            ]
+          },
+          "docs": "Deletes a specific contact from the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Contact by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/apiContact/:contact-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              },
+              {
+                "name": "contact-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the contact."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific contact for the given sourcing event scoped to the specified user.\n"
+        },
+        {
+          "info": {
+            "name": "Contacts by User (Bulk Update)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/apiContacts",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk updates contacts for the given event scoped to the specified user.\n"
+        },
+        {
+          "info": {
+            "name": "Contacts by Supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/supplier/:supplier-id/apiContacts",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "supplier-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the supplier."
+              }
+            ]
+          },
+          "docs": "Retrieves all contacts associated with the specified supplier for the given sourcing event.\n"
+        },
+        {
+          "info": {
+            "name": "Contacts by User and Supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/supplier/:supplier-id/apiContacts",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              },
+              {
+                "name": "supplier-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the supplier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates contacts for the given event scoped to the specified user and supplier.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

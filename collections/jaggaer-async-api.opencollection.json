@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Async",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Async Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/asyncStatus/:encoded-async-pid",
+            "params": [
+              {
+                "name": "encoded-async-pid",
+                "value": "",
+                "type": "path",
+                "description": "Base64-encoded asynchronous process identifier."
+              }
+            ]
+          },
+          "docs": "Returns the status of the asynchronous process associated with the specified process ID. Used to poll for completion of asynchronous operations such as event creation.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

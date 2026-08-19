@@ -1,0 +1,1530 @@
+{
+  "item": [
+    {
+      "id": "aeb80083-dc5a-481b-bcef-35c75bb0b19c",
+      "name": "Suppliers",
+      "description": {
+        "content": "Event supplier management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c57000d0-55e7-428d-823a-a91736df45fc",
+          "name": "Supplier",
+          "request": {
+            "name": "Supplier",
+            "description": {
+              "content": "Retrieves a specific supplier for the given sourcing event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":event-id",
+                "apiSupplier",
+                ":supplier-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "event-id",
+                  "description": "(Required) Identifier for the sourcing event."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "supplier-id",
+                  "description": "(Required) Identifier for the supplier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0a5c20e-74e5-44de-bd69-28b519607fcb",
+              "name": "Success; returns supplier details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiSupplier",
+                    ":supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "supplier-id",
+                      "description": "(Required) Identifier for the supplier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supplierId\": 1633,\n  \"supplierName\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80a1f9cd-8294-4fc8-881f-b524d8f4ba61",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiSupplier",
+                    ":supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "supplier-id",
+                      "description": "(Required) Identifier for the supplier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ce6fa676-48ed-4b1e-801c-acb6fa20f3f6",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiSupplier",
+                    ":supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "supplier-id",
+                      "description": "(Required) Identifier for the supplier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a16182b-685b-44f4-b8b0-02041269932c",
+          "name": "Delete Supplier",
+          "request": {
+            "name": "Delete Supplier",
+            "description": {
+              "content": "Removes a specific supplier from the given sourcing event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":event-id",
+                "apiSupplier",
+                ":supplier-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "event-id",
+                  "description": "(Required) Identifier for the sourcing event."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "supplier-id",
+                  "description": "(Required) Identifier for the supplier."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f93b889-4b9f-4d5b-8a08-19308c4f6f10",
+              "name": "Success; supplier removed from event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiSupplier",
+                    ":supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "supplier-id",
+                      "description": "(Required) Identifier for the supplier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "31dad76a-b9a1-45ef-a6d1-ebf42e4de4c5",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiSupplier",
+                    ":supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "supplier-id",
+                      "description": "(Required) Identifier for the supplier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a82accc-8a73-4dad-9e53-106fb560ad02",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiSupplier",
+                    ":supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "supplier-id",
+                      "description": "(Required) Identifier for the supplier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7eee9419-36af-4414-a3c8-27997f730330",
+          "name": "Supplier by User",
+          "request": {
+            "name": "Supplier by User",
+            "description": {
+              "content": "Updates a specific supplier for the given event scoped to the specified user.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":event-id",
+                "user",
+                ":user-id",
+                "apiSupplier",
+                ":supplier-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "event-id",
+                  "description": "(Required) Identifier for the sourcing event."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user-id",
+                  "description": "(Required) Identifier for the user."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "supplier-id",
+                  "description": "(Required) Identifier for the supplier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e1e11ddf-232b-4fd0-a865-50fdac3dbeba",
+              "name": "Success; supplier updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "apiSupplier",
+                    ":supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "supplier-id",
+                      "description": "(Required) Identifier for the supplier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supplierId\": 1633,\n  \"supplierName\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa6232a9-a136-4357-bec3-0aafdba57d60",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "apiSupplier",
+                    ":supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "supplier-id",
+                      "description": "(Required) Identifier for the supplier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4b3f5b23-a017-4106-bfad-3745af245a9d",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "apiSupplier",
+                    ":supplier-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "supplier-id",
+                      "description": "(Required) Identifier for the supplier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f20672fb-98dc-4245-8423-d591f5bcb452",
+          "name": "Suppliers",
+          "request": {
+            "name": "Suppliers",
+            "description": {
+              "content": "Retrieves all suppliers for the given sourcing event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":event-id",
+                "apiSuppliers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "event-id",
+                  "description": "(Required) Identifier for the sourcing event."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c86e329-f9db-4a1d-a664-361d64a3396b",
+              "name": "Success; returns list of suppliers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"suppliers\": [\n    {\n      \"supplierId\": 1772,\n      \"supplierName\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"supplierId\": 7428,\n      \"supplierName\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39e9e177-f61b-42e6-a03b-bac0c4117a92",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd3c54bc-6c2b-45fb-bc1a-ff3fbf095f75",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "baab9d05-f5ee-449f-9a9d-80d970df62bd",
+          "name": "Create Suppliers by User",
+          "request": {
+            "name": "Create Suppliers by User",
+            "description": {
+              "content": "Adds suppliers to the given event scoped to the specified user.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":event-id",
+                "user",
+                ":user-id",
+                "apiSuppliers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "event-id",
+                  "description": "(Required) Identifier for the sourcing event."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user-id",
+                  "description": "(Required) Identifier for the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"suppliers\": [\n    {\n      \"supplierId\": \"<integer>\"\n    },\n    {\n      \"supplierId\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a341e412-d941-41c6-953b-9eb99935721e",
+              "name": "Success; supplier(s) added to event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "apiSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"suppliers\": [\n    {\n      \"supplierId\": \"<integer>\"\n    },\n    {\n      \"supplierId\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"suppliers\": [\n    {\n      \"supplierId\": 4026,\n      \"supplierName\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"supplierId\": 3843,\n      \"supplierName\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb35740a-7bcf-4774-9845-37db3ffba2e5",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "apiSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"suppliers\": [\n    {\n      \"supplierId\": \"<integer>\"\n    },\n    {\n      \"supplierId\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3aa96251-639b-4a01-92d2-6857f23caa8e",
+              "name": "The request was syntactically valid but could not be processed due to validation errors.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "apiSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"suppliers\": [\n    {\n      \"supplierId\": \"<integer>\"\n    },\n    {\n      \"supplierId\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statuses\": {\n    \"key_0\": [\n      {\n        \"key_0\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d97d6488-8cce-460e-bd74-3fa91e352dbc",
+          "name": "Update Suppliers by User (Bulk)",
+          "request": {
+            "name": "Update Suppliers by User (Bulk)",
+            "description": {
+              "content": "Bulk updates suppliers for the given event scoped to the specified user.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":event-id",
+                "user",
+                ":user-id",
+                "apiSuppliers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "event-id",
+                  "description": "(Required) Identifier for the sourcing event."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user-id",
+                  "description": "(Required) Identifier for the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"suppliers\": [\n    {\n      \"status\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85c449a8-3f7b-42aa-b926-1ca599e5e25c",
+              "name": "Success; suppliers updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "apiSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"suppliers\": [\n    {\n      \"status\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"suppliers\": [\n    {\n      \"supplierId\": 4026,\n      \"supplierName\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"supplierId\": 3843,\n      \"supplierName\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e63133d-c0bd-41d5-88ce-8865ecacef8a",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "apiSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"suppliers\": [\n    {\n      \"status\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "02d0e1c5-54d2-40eb-a100-ddd10c51be9b",
+              "name": "The request was syntactically valid but could not be processed due to validation errors.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "apiSuppliers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"suppliers\": [\n    {\n      \"status\": \"<string>\"\n    },\n    {\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statuses\": {\n    \"key_0\": [\n      {\n        \"key_0\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ches.aso-api.jaggaer.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "18069b2d-0a27-43ad-a92b-a41001dc87b3",
+    "name": "JAGGAER ASO Customer Host Entity Service Async Suppliers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.\n\n\nContact Support:\n Name: JAGGAER Support",
+      "type": "text/plain"
+    }
+  }
+}

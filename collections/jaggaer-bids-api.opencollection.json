@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Bids API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bids",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bids (Asynchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiBids/async",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              }
+            ]
+          },
+          "docs": "Initiates an asynchronous retrieval of all bids for the given event. Returns a process ID for polling via /asyncStatus/{encoded-async-pid}.\n"
+        },
+        {
+          "info": {
+            "name": "Bids by Bid Round (Asynchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/bidRound/:bid-round/apiBids/async",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "bid-round",
+                "value": "",
+                "type": "path",
+                "description": "The bid round number."
+              }
+            ]
+          },
+          "docs": "Initiates an asynchronous retrieval of bids for the specified bid round of the given event. Returns a process ID for polling via /asyncStatus/{encoded-async-pid}.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Rates API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiRate/:rate-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "rate-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the rate."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific rate for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Rates (Asynchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiRates/async",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              }
+            ]
+          },
+          "docs": "Initiates an asynchronous retrieval of all rates for the given event. Returns a process ID for polling via /asyncStatus/{encoded-async-pid}.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

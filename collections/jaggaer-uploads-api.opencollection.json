@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Uploads API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Uploads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload Entity URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/entity/:entity/uploadUrl",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              },
+              {
+                "name": "entity",
+                "value": "",
+                "type": "path",
+                "description": "The entity type for which an upload URL is requested."
+              }
+            ]
+          },
+          "docs": "Retrieves a pre-signed upload URL for the specified entity type, enabling upload of data files to the ASO platform for the given event and user.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

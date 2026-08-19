@@ -1,0 +1,701 @@
+{
+  "item": [
+    {
+      "id": "968c1514-0135-4867-b631-2416ba28efb4",
+      "name": "Templates",
+      "description": {
+        "content": "Template management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "388763ae-d443-455c-a51a-f9547fd23771",
+          "name": "Subcategories by Template Type",
+          "request": {
+            "name": "Subcategories by Template Type",
+            "description": {
+              "content": "Retrieves available subcategories associated with the specified template type under the given customer host.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chost",
+                ":customer-host-id",
+                "templateType",
+                ":template-type-id",
+                "apiSubcategories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customer-host-id",
+                  "description": "(Required) Identifier for the customer host in the ASO platform."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "template-type-id",
+                  "description": "(Required) Identifier for the template type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa9039f3-47aa-4408-af35-9f94e0c36b3a",
+              "name": "Success; returns subcategories for the template type.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chost",
+                    ":customer-host-id",
+                    "templateType",
+                    ":template-type-id",
+                    "apiSubcategories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer-host-id",
+                      "description": "(Required) Identifier for the customer host in the ASO platform."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "template-type-id",
+                      "description": "(Required) Identifier for the template type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subcategories\": [\n    {\n      \"subcategoryId\": 114,\n      \"subcategoryName\": \"string\"\n    },\n    {\n      \"subcategoryId\": 2195,\n      \"subcategoryName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80a6e75b-ce3f-4bff-a37f-094d1ab96d73",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chost",
+                    ":customer-host-id",
+                    "templateType",
+                    ":template-type-id",
+                    "apiSubcategories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer-host-id",
+                      "description": "(Required) Identifier for the customer host in the ASO platform."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "template-type-id",
+                      "description": "(Required) Identifier for the template type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db0790c2-1817-49a2-9bfb-34ee3ee83ed6",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chost",
+                    ":customer-host-id",
+                    "templateType",
+                    ":template-type-id",
+                    "apiSubcategories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer-host-id",
+                      "description": "(Required) Identifier for the customer host in the ASO platform."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "template-type-id",
+                      "description": "(Required) Identifier for the template type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b10a178-cb9b-4498-9a66-475904db2fef",
+          "name": "Templates by User",
+          "request": {
+            "name": "Templates by User",
+            "description": {
+              "content": "Retrieves all templates accessible to the specified user under the given customer host.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chost",
+                ":customer-host-id",
+                "user",
+                ":user-id",
+                "apiTemplates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customer-host-id",
+                  "description": "(Required) Identifier for the customer host in the ASO platform."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user-id",
+                  "description": "(Required) Identifier for the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "436fe3f4-6ac0-470a-8566-c9b304f9a695",
+              "name": "Success; returns a list of templates for the user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chost",
+                    ":customer-host-id",
+                    "user",
+                    ":user-id",
+                    "apiTemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer-host-id",
+                      "description": "(Required) Identifier for the customer host in the ASO platform."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"templates\": [\n    {\n      \"templateId\": 7850,\n      \"templateName\": \"string\",\n      \"templateTypeId\": 9844\n    },\n    {\n      \"templateId\": 9642,\n      \"templateName\": \"string\",\n      \"templateTypeId\": 3519\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d15fc5b9-b77d-4ec0-ba24-d6bf9eb60d9e",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chost",
+                    ":customer-host-id",
+                    "user",
+                    ":user-id",
+                    "apiTemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer-host-id",
+                      "description": "(Required) Identifier for the customer host in the ASO platform."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4c73c60b-8d28-4d3d-845f-f4c5fddcf20f",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chost",
+                    ":customer-host-id",
+                    "user",
+                    ":user-id",
+                    "apiTemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer-host-id",
+                      "description": "(Required) Identifier for the customer host in the ASO platform."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb65b702-d7c5-4208-84d1-9658f330cb25",
+          "name": "Template Types",
+          "request": {
+            "name": "Template Types",
+            "description": {
+              "content": "Retrieves all available template types for the specified customer host.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chost",
+                ":customer-host-id",
+                "apiTemplateTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "customer-host-id",
+                  "description": "(Required) Identifier for the customer host in the ASO platform."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4dedeb5d-e5dd-47e4-8e19-e982b638f762",
+              "name": "Success; returns a list of template types.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chost",
+                    ":customer-host-id",
+                    "apiTemplateTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer-host-id",
+                      "description": "(Required) Identifier for the customer host in the ASO platform."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"templateTypes\": [\n    {\n      \"templateTypeId\": 7423,\n      \"templateTypeName\": \"string\"\n    },\n    {\n      \"templateTypeId\": 3349,\n      \"templateTypeName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "306f5d1a-0e8b-4440-959a-3d9791783f2d",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chost",
+                    ":customer-host-id",
+                    "apiTemplateTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer-host-id",
+                      "description": "(Required) Identifier for the customer host in the ASO platform."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1769cb2e-67c4-4042-975f-b44368d1077a",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chost",
+                    ":customer-host-id",
+                    "apiTemplateTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "customer-host-id",
+                      "description": "(Required) Identifier for the customer host in the ASO platform."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ches.aso-api.jaggaer.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fad27940-1c66-44fd-b3fa-74befe0944f8",
+    "name": "JAGGAER ASO Customer Host Entity Service Async Templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.\n\n\nContact Support:\n Name: JAGGAER Support",
+      "type": "text/plain"
+    }
+  }
+}

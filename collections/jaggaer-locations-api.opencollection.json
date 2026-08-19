@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Locations API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Rate Location Names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/apiLocationNames",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              }
+            ]
+          },
+          "docs": "Retrieves location names used in rate structures for the specified customer host.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

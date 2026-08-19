@@ -1,0 +1,309 @@
+{
+  "item": [
+    {
+      "id": "276de0b6-8de1-44a5-839b-f82bec2108c5",
+      "name": "Uploads",
+      "description": {
+        "content": "Entity upload URL generation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "469ca367-a412-428f-8847-26e33ccdddba",
+          "name": "Upload Entity URL",
+          "request": {
+            "name": "Upload Entity URL",
+            "description": {
+              "content": "Retrieves a pre-signed upload URL for the specified entity type, enabling upload of data files to the ASO platform for the given event and user.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":event-id",
+                "user",
+                ":user-id",
+                "entity",
+                ":entity",
+                "uploadUrl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "event-id",
+                  "description": "(Required) Identifier for the sourcing event."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user-id",
+                  "description": "(Required) Identifier for the user."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity",
+                  "description": "(Required) The entity type for which an upload URL is requested."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8498a300-b7ac-4641-8f20-2cc73bfd8755",
+              "name": "Success; returns a pre-signed upload URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "entity",
+                    ":entity",
+                    "uploadUrl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity",
+                      "description": "(Required) The entity type for which an upload URL is requested."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uploadUrl\": \"https://GEhXMkjHXQUThOMnmTrQfacWLjLfBeG.zaC.XxJwDzYA6sNshAq42fb+rXRMNb-5AbpgU7lUqW3+.y\",\n  \"expiresAt\": \"1961-07-28T03:18:36.060Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99a62d04-a3b1-423a-b46e-36a44a52507d",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "entity",
+                    ":entity",
+                    "uploadUrl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity",
+                      "description": "(Required) The entity type for which an upload URL is requested."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c20ecdeb-9b5c-4747-b780-423be025a8c4",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "user",
+                    ":user-id",
+                    "entity",
+                    ":entity",
+                    "uploadUrl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user-id",
+                      "description": "(Required) Identifier for the user."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity",
+                      "description": "(Required) The entity type for which an upload URL is requested."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ches.aso-api.jaggaer.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7f253cf9-9d5c-4554-9d9c-e23d25499bc9",
+    "name": "JAGGAER ASO Customer Host Entity Service Async Uploads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.\n\n\nContact Support:\n Name: JAGGAER Support",
+      "type": "text/plain"
+    }
+  }
+}

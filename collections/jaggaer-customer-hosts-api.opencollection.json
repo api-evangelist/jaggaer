@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Customer Hosts API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer Hosts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Customer Host FQDN",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/fqdn",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              }
+            ]
+          },
+          "docs": "Retrieves the fully qualified domain name (FQDN) associated with the specified customer host.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

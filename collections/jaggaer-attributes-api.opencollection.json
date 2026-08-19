@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Attributes API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiAttribute/:attribute-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "attribute-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the event attribute."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific attribute for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Update Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiAttribute/:attribute-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "attribute-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the event attribute."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific attribute for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Delete Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiAttribute/:attribute-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "attribute-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the event attribute."
+              }
+            ]
+          },
+          "docs": "Deletes a specific attribute from the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiAttributes",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              }
+            ]
+          },
+          "docs": "Retrieves all attributes for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Create Attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiAttributes",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new attribute for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Update Attributes (Bulk)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiAttributes",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk updates multiple attributes for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Attributes by Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/attributeType/:attribute-type/apiAttributes",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "attribute-type",
+                "value": "",
+                "type": "path",
+                "description": "The attribute type filter."
+              }
+            ]
+          },
+          "docs": "Retrieves all attributes of the specified type for the given sourcing event.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Templates API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subcategories by Template Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/templateType/:template-type-id/apiSubcategories",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              },
+              {
+                "name": "template-type-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the template type."
+              }
+            ]
+          },
+          "docs": "Retrieves available subcategories associated with the specified template type under the given customer host.\n"
+        },
+        {
+          "info": {
+            "name": "Templates by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/user/:user-id/apiTemplates",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              }
+            ]
+          },
+          "docs": "Retrieves all templates accessible to the specified user under the given customer host.\n"
+        },
+        {
+          "info": {
+            "name": "Template Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/apiTemplateTypes",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              }
+            ]
+          },
+          "docs": "Retrieves all available template types for the specified customer host.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

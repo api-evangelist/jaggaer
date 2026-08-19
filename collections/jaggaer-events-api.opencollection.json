@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Events API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Event from Template by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/user/:user-id/template/:template-id/apiEvent",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              },
+              {
+                "name": "template-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event template."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new sourcing event synchronously from the specified template for the given user under the customer host. Returns the created event details upon success.\n"
+        },
+        {
+          "info": {
+            "name": "Event from Template by User (Asynchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/user/:user-id/template/:template-id/apiEvent/async",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              },
+              {
+                "name": "template-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event template."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an asynchronous creation of a sourcing event from the specified template for the given user. Returns a process ID that can be used to poll /asyncStatus/{encoded-async-pid} for completion.\n"
+        },
+        {
+          "info": {
+            "name": "Events by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/user/:user-id/apiEvents",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              }
+            ]
+          },
+          "docs": "Retrieves all sourcing events accessible to the specified user under the given customer host.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

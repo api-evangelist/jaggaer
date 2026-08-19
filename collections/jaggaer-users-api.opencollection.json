@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Users API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/apiUser/:user-id",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              }
+            ]
+          },
+          "docs": "Retrieves details of the specified user under the given customer host.\n"
+        },
+        {
+          "info": {
+            "name": "Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/chost/:customer-host-id/apiUsers",
+            "params": [
+              {
+                "name": "customer-host-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the customer host in the ASO platform."
+              }
+            ]
+          },
+          "docs": "Retrieves all users associated with the specified customer host.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

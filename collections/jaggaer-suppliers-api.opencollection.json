@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Suppliers API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Suppliers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiSupplier/:supplier-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "supplier-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the supplier."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific supplier for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Delete Supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiSupplier/:supplier-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "supplier-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the supplier."
+              }
+            ]
+          },
+          "docs": "Removes a specific supplier from the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Supplier by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/apiSupplier/:supplier-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              },
+              {
+                "name": "supplier-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the supplier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific supplier for the given event scoped to the specified user.\n"
+        },
+        {
+          "info": {
+            "name": "Suppliers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiSuppliers",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              }
+            ]
+          },
+          "docs": "Retrieves all suppliers for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Create Suppliers by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/apiSuppliers",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds suppliers to the given event scoped to the specified user.\n"
+        },
+        {
+          "info": {
+            "name": "Update Suppliers by User (Bulk)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/apiSuppliers",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk updates suppliers for the given event scoped to the specified user.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

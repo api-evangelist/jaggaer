@@ -1,0 +1,237 @@
+{
+  "item": [
+    {
+      "id": "bd2c7333-68bb-4927-a8aa-d239c035d177",
+      "name": "Scenarios",
+      "description": {
+        "content": "Event scenario retrieval",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "28b35f7f-7015-4f68-b552-57554dc28ffb",
+          "name": "Scenarios",
+          "request": {
+            "name": "Scenarios",
+            "description": {
+              "content": "Retrieves all award scenarios for the given sourcing event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":event-id",
+                "apiScenarios"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "event-id",
+                  "description": "(Required) Identifier for the sourcing event."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "027f1180-ed7e-4d5b-9e11-530958e4da0c",
+              "name": "Success; returns list of scenarios.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiScenarios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scenarios\": [\n    {\n      \"scenarioId\": 5367,\n      \"scenarioName\": \"string\",\n      \"isPreferred\": false\n    },\n    {\n      \"scenarioId\": 7683,\n      \"scenarioName\": \"string\",\n      \"isPreferred\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95ef4ab2-96a3-41ce-906e-2e645790b21e",
+              "name": "Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiScenarios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd555532-1682-4873-9808-379016030124",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":event-id",
+                    "apiScenarios"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "event-id",
+                      "description": "(Required) Identifier for the sourcing event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ches.aso-api.jaggaer.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2c3b455e-e513-4aef-aeb7-a158b3ccd3a4",
+    "name": "JAGGAER ASO Customer Host Entity Service Async Scenarios API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.\n\n\nContact Support:\n Name: JAGGAER Support",
+      "type": "text/plain"
+    }
+  }
+}

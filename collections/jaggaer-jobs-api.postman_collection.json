@@ -1,0 +1,830 @@
+{
+  "item": [
+    {
+      "id": "93173cba-addb-4a89-854a-74c22a77f884",
+      "name": "Jobs",
+      "description": {
+        "content": "Optimization job management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "884359bc-7274-430f-ac24-eedbbbdab4d9",
+          "name": "Submit Job",
+          "request": {
+            "name": "Submit Job",
+            "description": {
+              "content": "Submits an optimization job to the Quay service for processing by the JAGGAER Advanced Sourcing Optimizer. The consumer, customer, and event identifiers are required, along with the location of the input file on the ASO filesystem. Customers have both daily and absolute rate limits enforced at this endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submitJob"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.sciquest.com.quay+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.sciquest.com.quay+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"consumer\": \"<string>\",\n  \"customerId\": \"<integer>\",\n  \"customerName\": \"<string>\",\n  \"eventId\": \"<integer>\",\n  \"inputFilename\": \"<string>\",\n  \"notificationHostname\": \"<string>\",\n  \"notificationPort\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3aa99056-63ad-4b34-bc2c-a1bb10e5edc7",
+              "name": "Success; the optimization job was successfully submitted to the Quay service.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitJob"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be set to application/vnd.sciquest.com.quay+json.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be set to application/vnd.sciquest.com.quay+json.\n",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumer\": \"JCS\",\n  \"customerId\": 999,\n  \"customerName\": \"QA\",\n  \"eventId\": 999999,\n  \"inputFilename\": \"/dgsq/drm/JCS_Input/tester.txt.gz\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.sciquest.com.quay+json"
+                }
+              ],
+              "body": "{\n  \"statuses\": {\n    \"SUCCESS\": [\n      {\n        \"jobId\": 414\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1885d120-7fa3-4312-99b7-cfb01fc73b28",
+              "name": "Unprocessable Entity; the job submission could not be validated. Reasons include invalid enum values, missing required fields, exceeded character limits, or input file not found on the ASO filesystem.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitJob"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be set to application/vnd.sciquest.com.quay+json.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be set to application/vnd.sciquest.com.quay+json.\n",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumer\": \"JCS\",\n  \"customerId\": 999,\n  \"customerName\": \"QA\",\n  \"eventId\": 999999,\n  \"inputFilename\": \"/dgsq/drm/JCS_Input/tester.txt.gz\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.sciquest.com.quay+json"
+                }
+              ],
+              "body": "{\n  \"statuses\": {\n    \"key_0\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\",\n        \"key_4\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"key_0\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    ],\n    \"key_2\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    ],\n    \"key_3\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e52bd906-ed6a-48c0-b05b-1daf431520c8",
+              "name": "Too Many Requests; the customer has exceeded their configured daily or absolute optimization job limit.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitJob"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be set to application/vnd.sciquest.com.quay+json.\n",
+                    "key": "Content-Type",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be set to application/vnd.sciquest.com.quay+json.\n",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"consumer\": \"JCS\",\n  \"customerId\": 999,\n  \"customerName\": \"QA\",\n  \"eventId\": 999999,\n  \"inputFilename\": \"/dgsq/drm/JCS_Input/tester.txt.gz\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.sciquest.com.quay+json"
+                }
+              ],
+              "body": "{\n  \"statuses\": {\n    \"key_0\": [\n      {\n        \"limit\": 1798\n      },\n      {\n        \"limit\": 797\n      }\n    ],\n    \"key_1\": [\n      {\n        \"limit\": 9133\n      },\n      {\n        \"limit\": 5632\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "107a5735-f6bc-4aa4-baca-f74a93f4d2d8",
+          "name": "Cancel Job",
+          "request": {
+            "name": "Cancel Job",
+            "description": {
+              "content": "Cancels the specified optimization job. A 201 response indicates the job was successfully cancelled. If the job cannot be found or has already terminated, an appropriate error is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cancelJob",
+                ":job-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "job-id",
+                  "description": "(Required) Identifier for the Quay optimization job."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.sciquest.com.quay+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ef1719e-8e89-4099-8718-ca733de51d4d",
+              "name": "Success; the job was successfully cancelled.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelJob",
+                    ":job-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job-id",
+                      "description": "(Required) Identifier for the Quay optimization job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1885a378-ec00-4751-b004-3173caea8eec",
+              "name": "No job found with the specified job ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelJob",
+                    ":job-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job-id",
+                      "description": "(Required) Identifier for the Quay optimization job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.sciquest.com.quay+json"
+                }
+              ],
+              "body": "{\n  \"statuses\": {\n    \"key_0\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"key_0\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aafa5483-c271-421f-85ba-fda1d2099d22",
+              "name": "Unprocessable Entity; the job could not be cancelled. It may have already terminated.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelJob",
+                    ":job-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job-id",
+                      "description": "(Required) Identifier for the Quay optimization job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.sciquest.com.quay+json"
+                }
+              ],
+              "body": "{\n  \"statuses\": {\n    \"key_0\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"key_0\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f40d340b-7814-4fcb-96f4-6c7d523ab5f3",
+          "name": "Job Status",
+          "request": {
+            "name": "Job Status",
+            "description": {
+              "content": "Retrieves the current status of the specified optimization job. Status values indicate the progression of the job through the Quay processing pipeline.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobStatus",
+                ":job-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "job-id",
+                  "description": "(Required) Identifier for the Quay optimization job."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.sciquest.com.quay+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9b0a05c-c357-48e5-a72a-c0a0039863f6",
+              "name": "Success; returns the current status of the job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobStatus",
+                    ":job-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job-id",
+                      "description": "(Required) Identifier for the Quay optimization job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.sciquest.com.quay+json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Optimizing\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a739502-38e7-4e9e-8f19-281a6f9e883a",
+              "name": "No job found with the specified job ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobStatus",
+                    ":job-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job-id",
+                      "description": "(Required) Identifier for the Quay optimization job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.sciquest.com.quay+json"
+                }
+              ],
+              "body": "{\n  \"statuses\": {\n    \"key_0\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"key_0\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6aa84fcd-5eca-42ba-920b-d2079d054d5b",
+          "name": "Job",
+          "request": {
+            "name": "Job",
+            "description": {
+              "content": "Retrieves full details for the specified optimization job, including submission metadata, processing times, CPU usage, and working directory information.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "job",
+                ":job-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "job-id",
+                  "description": "(Required) Identifier for the Quay optimization job."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.sciquest.com.quay+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96b74ec2-3291-4a5a-a2f6-52bf55f283f8",
+              "name": "Success; returns full job details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job",
+                    ":job-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job-id",
+                      "description": "(Required) Identifier for the Quay optimization job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.sciquest.com.quay+json"
+                }
+              ],
+              "body": "{\n  \"jobId\": 414,\n  \"consumer\": \"JCS\",\n  \"customerId\": 999,\n  \"customerName\": \"QA\",\n  \"eventId\": 999999,\n  \"inputFilename\": \"/dgsq/drm/JCS_Input/tester.txt.gz\",\n  \"status\": \"Completed\",\n  \"jobType\": \"Short\",\n  \"optSetType\": \"Long\",\n  \"submitTime\": 1584979461000,\n  \"inprocAtSubmit\": 0,\n  \"runClient\": \"clearbox-01.exp.dev.combinenet.com\",\n  \"workingDirectory\": \"/dgsq/drm/QUAY_Service/2020/2/23/414\",\n  \"processStartTime\": 1584979460846,\n  \"processStopTime\": 1584979462117,\n  \"cpuTime\": 1271\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3014a188-cd40-4721-85ca-cd3612c0a687",
+              "name": "No job found with the specified job ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "job",
+                    ":job-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "job-id",
+                      "description": "(Required) Identifier for the Quay optimization job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.sciquest.com.quay+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.sciquest.com.quay+json"
+                }
+              ],
+              "body": "{\n  \"statuses\": {\n    \"key_0\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"key_0\": \"string\"\n      },\n      {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ches.aso-api.jaggaer.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "253cf610-e0ce-4ab2-ab7f-74fe394f853e",
+    "name": "JAGGAER ASO Customer Host Entity Service Async Jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.\n\n\nContact Support:\n Name: JAGGAER Support",
+      "type": "text/plain"
+    }
+  }
+}

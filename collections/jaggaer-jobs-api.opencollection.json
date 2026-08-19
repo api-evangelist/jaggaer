@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Jobs API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ches.aso-api.jaggaer.com/submitJob",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits an optimization job to the Quay service for processing by the JAGGAER Advanced Sourcing Optimizer. The consumer, customer, and event identifiers are required, along with the location of the input file on the ASO filesystem. Customers have both daily and absolute rate limits enforced at this endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "Cancel Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ches.aso-api.jaggaer.com/cancelJob/:job-id",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "job-id",
+                "value": "414",
+                "type": "path",
+                "description": "Identifier for the Quay optimization job."
+              }
+            ]
+          },
+          "docs": "Cancels the specified optimization job. A 201 response indicates the job was successfully cancelled. If the job cannot be found or has already terminated, an appropriate error is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/jobStatus/:job-id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "job-id",
+                "value": "414",
+                "type": "path",
+                "description": "Identifier for the Quay optimization job."
+              }
+            ]
+          },
+          "docs": "Retrieves the current status of the specified optimization job. Status values indicate the progression of the job through the Quay processing pipeline.\n"
+        },
+        {
+          "info": {
+            "name": "Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/job/:job-id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "job-id",
+                "value": "414",
+                "type": "path",
+                "description": "Identifier for the Quay optimization job."
+              }
+            ]
+          },
+          "docs": "Retrieves full details for the specified optimization job, including submission metadata, processing times, CPU usage, and working directory information.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

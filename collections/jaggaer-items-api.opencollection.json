@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "JAGGAER ASO Customer Host Entity Service Async Items API",
+    "version": "v26.0.0.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiItem/:item-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "item-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the line item."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific line item for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Delete Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiItem/:item-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "item-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the line item."
+              }
+            ]
+          },
+          "docs": "Deletes a specific line item from the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Item by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/apiItem/:item-id",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              },
+              {
+                "name": "item-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the line item."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific line item for the given event scoped to the specified user.\n"
+        },
+        {
+          "info": {
+            "name": "Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiItems",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              }
+            ]
+          },
+          "docs": "Retrieves all line items for the given sourcing event."
+        },
+        {
+          "info": {
+            "name": "Items (Asynchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/apiItems/async",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              }
+            ]
+          },
+          "docs": "Initiates an asynchronous retrieval of all line items for the given event. Returns a process ID for polling via /asyncStatus/{encoded-async-pid}.\n"
+        },
+        {
+          "info": {
+            "name": "Create Items by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/apiItems",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates new line items for the given event scoped to the specified user.\n"
+        },
+        {
+          "info": {
+            "name": "Update Items by User (Bulk)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ches.aso-api.jaggaer.com/event/:event-id/user/:user-id/apiItems",
+            "params": [
+              {
+                "name": "event-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the sourcing event."
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier for the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk updates line items for the given event scoped to the specified user.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
