@@ -349,6 +349,9 @@ apis:
   - type: Documentation
     url: https://asodocs.jaggaer.com/quay.html
 common:
+- type: CapabilityMap
+  url: capabilities/jaggaer-capability-edges.yml
+  name: JAGGAER Business Capability Map
 - type: AgenticAccess
   url: agentic-access/jaggaer-agentic-access.yml
 - type: DomainSecurity
