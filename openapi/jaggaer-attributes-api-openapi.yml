@@ -1,17 +1,17 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: JAGGAER ASO Customer Host Entity Service Async Attributes API
-  description: 'The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.
+  title: JAGGAER ASO Event Entity Service Attributes API
+  description: 'The Event Entity Service (EES) API provides REST endpoints for managing sourcing events within the JAGGAER Advanced Sourcing Optimizer, including event attributes, bids, contacts, items, rates, scenarios, and suppliers. It supports asynchronous operations for retrieving large datasets such as bid submissions and award results, with pre-signed download URLs for completed asynchronous processes. Authentication requires both OAuth 2.0 bearer tokens and API key headers.
 
     '
-  version: v26.0.0.4
+  version: v26.1.0.9
   contact:
     name: JAGGAER Support
     url: https://www.jaggaer.com/support
-  x-api-id: jaggaer-aso-ches
+  x-api-id: jaggaer-aso-ees
 servers:
-- url: https://ches.aso-api.jaggaer.com
-  description: JAGGAER ASO CHES Production Server
+- url: https://ees.aso-api.jaggaer.com
+  description: JAGGAER ASO EES Production Server
 security:
 - bearerAuth: []
   apiKeyHeader: []
@@ -183,20 +183,22 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
+    UnprocessableEntity:
+      description: 'The request was syntactically valid but could not be processed due to validation errors.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    AttributeCreateRequest:
-      type: object
-      description: Request body for creating an event attribute.
-      required:
-      - attributeName
-      - attributeType
-      properties:
-        attributeName:
-          type: string
-        attributeType:
-          type: string
-        value:
-          type: string
     ErrorResponse:
       type: object
       description: Error response with validation details.
@@ -210,14 +212,12 @@ components:
               type: object
               additionalProperties:
                 type: string
-    AttributeBulkUpdateRequest:
+    AttributeUpdateRequest:
       type: object
-      description: Request body for bulk updating event attributes.
+      description: Request body for updating an event attribute.
       properties:
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AttributeUpdateRequest'
+        value:
+          type: string
     AttributeResponse:
       type: object
       description: Sourcing event attribute details.
@@ -234,10 +234,25 @@ components:
         value:
           type: string
           description: Current value of the attribute.
-    AttributeUpdateRequest:
+    AttributeBulkUpdateRequest:
       type: object
-      description: Request body for updating an event attribute.
+      description: Request body for bulk updating event attributes.
       properties:
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeUpdateRequest'
+    AttributeCreateRequest:
+      type: object
+      description: Request body for creating an event attribute.
+      required:
+      - attributeName
+      - attributeType
+      properties:
+        attributeName:
+          type: string
+        attributeType:
+          type: string
         value:
           type: string
     AttributeListResponse:
@@ -249,13 +264,6 @@ components:
           items:
             $ref: '#/components/schemas/AttributeResponse'
   parameters:
-    attributeId:
-      name: attribute-id
-      in: path
-      required: true
-      description: Identifier for the event attribute.
-      schema:
-        type: integer
     eventId:
       name: event-id
       in: path
@@ -263,21 +271,13 @@ components:
       description: Identifier for the sourcing event.
       schema:
         type: integer
-  responses:
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
-    NotFound:
-      description: The requested resource was not found.
-    UnprocessableEntity:
-      description: 'The request was syntactically valid but could not be processed due to validation errors.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    attributeId:
+      name: attribute-id
+      in: path
+      required: true
+      description: Identifier for the event attribute.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

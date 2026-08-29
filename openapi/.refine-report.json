@@ -1,44 +1,54 @@
 {
   "provider": "jaggaer",
   "sources": [
-    "jaggaer-async-api-openapi.yml",
-    "jaggaer-attributes-api-openapi.yml",
-    "jaggaer-awards-api-openapi.yml",
-    "jaggaer-bids-api-openapi.yml",
-    "jaggaer-contacts-api-openapi.yml",
-    "jaggaer-customer-hosts-api-openapi.yml",
-    "jaggaer-events-api-openapi.yml",
-    "jaggaer-items-api-openapi.yml",
-    "jaggaer-jobs-api-openapi.yml",
-    "jaggaer-locations-api-openapi.yml",
-    "jaggaer-rates-api-openapi.yml",
-    "jaggaer-scenarios-api-openapi.yml",
-    "jaggaer-suppliers-api-openapi.yml",
-    "jaggaer-templates-api-openapi.yml",
-    "jaggaer-uploads-api-openapi.yml",
-    "jaggaer-users-api-openapi.yml"
+    "_original/jaggaer-aso-ches-openapi.yml",
+    "_original/jaggaer-aso-ees-openapi.yml",
+    "_original/jaggaer-aso-quay-openapi.yml"
   ],
   "outputs": [
     "jaggaer-async-api-openapi.yml",
+    "jaggaer-customer-hosts-api-openapi.yml",
+    "jaggaer-events-api-openapi.yml",
+    "jaggaer-locations-api-openapi.yml",
+    "jaggaer-templates-api-openapi.yml",
+    "jaggaer-users-api-openapi.yml",
     "jaggaer-attributes-api-openapi.yml",
     "jaggaer-awards-api-openapi.yml",
     "jaggaer-bids-api-openapi.yml",
     "jaggaer-contacts-api-openapi.yml",
-    "jaggaer-customer-hosts-api-openapi.yml",
-    "jaggaer-events-api-openapi.yml",
     "jaggaer-items-api-openapi.yml",
-    "jaggaer-jobs-api-openapi.yml",
-    "jaggaer-locations-api-openapi.yml",
     "jaggaer-rates-api-openapi.yml",
     "jaggaer-scenarios-api-openapi.yml",
     "jaggaer-suppliers-api-openapi.yml",
-    "jaggaer-templates-api-openapi.yml",
     "jaggaer-uploads-api-openapi.yml",
-    "jaggaer-users-api-openapi.yml"
+    "jaggaer-jobs-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "jaggaer-aso-ches-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "jaggaer-aso-ees-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "jaggaer-aso-quay-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Async' spans 2 source specs (jaggaer-aso-ches-openapi.yml, jaggaer-aso-ees-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "jaggaer-async-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-attributes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-awards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-bids-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-customer-hosts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-rates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-scenarios-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-suppliers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-uploads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaggaer-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

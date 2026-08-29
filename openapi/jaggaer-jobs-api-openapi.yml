@@ -1,20 +1,19 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: JAGGAER ASO Customer Host Entity Service Async Jobs API
-  description: 'The Customer Host Entity Service (CHES) API provides system-to-system REST endpoints for managing customer hosts, users, events, and templates within the JAGGAER Advanced Sourcing Optimizer (ASO) platform. It enables creation and retrieval of sourcing events, template management, user administration, and location-based rate structure queries using OAuth 2.0 bearer tokens combined with API key authentication.
+  title: JAGGAER ASO Quay Optimization Jobs API
+  description: 'The Quay API provides REST endpoints for submitting, managing, and tracking optimization jobs within the JAGGAER Advanced Sourcing Optimizer platform. It supports job submission for sourcing optimization scenarios, job cancellation, and status monitoring. Customer-specific daily and absolute rate limits are enforced via HTTP 429 responses. Authentication is performed using API key headers for all operations.
 
     '
-  version: v26.0.0.4
+  version: '1.0'
   contact:
     name: JAGGAER Support
     url: https://www.jaggaer.com/support
-  x-api-id: jaggaer-aso-ches
+  x-api-id: jaggaer-aso-quay
 servers:
-- url: https://ches.aso-api.jaggaer.com
-  description: JAGGAER ASO CHES Production Server
+- url: https://quay.aso-api.jaggaer.com
+  description: JAGGAER ASO Quay Production Server
 security:
-- bearerAuth: []
-  apiKeyHeader: []
+- apiKeyHeader: []
 tags:
 - name: Jobs
   description: Optimization job management operations
@@ -211,25 +210,6 @@ paths:
                 $ref: '#/components/schemas/QuayErrorResponse'
 components:
   schemas:
-    QuayRateLimitResponse:
-      type: object
-      description: 'Rate limit error response returned when a customer exceeds their configured optimization job limits.
-
-        '
-      properties:
-        statuses:
-          type: object
-          description: 'Map of status codes to arrays of detail objects. Codes include EXCEEDED_DAILY_LIMIT and EXCEEDED_ABSOLUTE_LIMIT, each containing the customer-specific limit value.
-
-            '
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              properties:
-                limit:
-                  type: integer
-                  description: The customer-specific limit value that was exceeded.
     JobResponse:
       type: object
       description: Full details for an optimization job.
@@ -353,21 +333,25 @@ components:
               type: object
               additionalProperties:
                 type: string
-    SubmitJobResponse:
+    QuayRateLimitResponse:
       type: object
-      description: Response for a successful job submission.
+      description: 'Rate limit error response returned when a customer exceeds their configured optimization job limits.
+
+        '
       properties:
         statuses:
           type: object
-          description: 'Map of status codes to arrays of status detail objects. On success, contains a SUCCESS key with the jobId.
+          description: 'Map of status codes to arrays of detail objects. Codes include EXCEEDED_DAILY_LIMIT and EXCEEDED_ABSOLUTE_LIMIT, each containing the customer-specific limit value.
 
             '
           additionalProperties:
             type: array
             items:
               type: object
-              additionalProperties:
-                type: string
+              properties:
+                limit:
+                  type: integer
+                  description: The customer-specific limit value that was exceeded.
     JobStatusResponse:
       type: object
       description: Current status of an optimization job.
@@ -389,6 +373,21 @@ components:
           - Expired
           - Limited
           example: Optimizing
+    SubmitJobResponse:
+      type: object
+      description: Response for a successful job submission.
+      properties:
+        statuses:
+          type: object
+          description: 'Map of status codes to arrays of status detail objects. On success, contains a SUCCESS key with the jobId.
+
+            '
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
     SubmitJobRequest:
       type: object
       required:
@@ -450,13 +449,8 @@ components:
         type: integer
       example: 414
   securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: OAuth 2.0 bearer token for authentication.
     apiKeyHeader:
       type: apiKey
       in: header
       name: X-Api-Key
-      description: API key passed as a request header.
+      description: API key for authenticating requests to the Quay service.
