@@ -226,6 +226,8 @@ apis:
   humanURL: https://asodocs.jaggaer.com/ches.html
   baseURL: https://ches.aso-api.jaggaer.com/
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
