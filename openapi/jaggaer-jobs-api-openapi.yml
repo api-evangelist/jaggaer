@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: JAGGAER ASO Quay Optimization Jobs API
-  description: 'The Quay API provides REST endpoints for submitting, managing, and tracking optimization jobs within the JAGGAER Advanced Sourcing Optimizer platform. It supports job submission for sourcing optimization scenarios, job cancellation, and status monitoring. Customer-specific daily and absolute rate limits are enforced via HTTP 429 responses. Authentication is performed using API key headers for all operations.
-
-    '
+  description: The Quay API provides REST endpoints for submitting, managing, and tracking optimization jobs within the JAGGAER Advanced Sourcing Optimizer platform. It supports job submission for sourcing optimization scenarios, job cancellation, and status monitoring. Customer-specific daily and absolute rate limits are enforced via HTTP 429 responses. Authentication is performed using API key headers for all operations.
   version: '1.0'
   contact:
     name: JAGGAER Support
@@ -22,9 +20,7 @@ paths:
     post:
       operationId: submitJob
       summary: Submit Job
-      description: 'Submits an optimization job to the Quay service for processing by the JAGGAER Advanced Sourcing Optimizer. The consumer, customer, and event identifiers are required, along with the location of the input file on the ASO filesystem. Customers have both daily and absolute rate limits enforced at this endpoint.
-
-        '
+      description: Submits an optimization job to the Quay service for processing by the JAGGAER Advanced Sourcing Optimizer. The consumer, customer, and event identifiers are required, along with the location of the input file on the ASO filesystem. Customers have both daily and absolute rate limits enforced at this endpoint.
       tags:
       - Jobs
       parameters:
@@ -91,9 +87,7 @@ paths:
     post:
       operationId: cancelJob
       summary: Cancel Job
-      description: 'Cancels the specified optimization job. A 201 response indicates the job was successfully cancelled. If the job cannot be found or has already terminated, an appropriate error is returned.
-
-        '
+      description: Cancels the specified optimization job. A 201 response indicates the job was successfully cancelled. If the job cannot be found or has already terminated, an appropriate error is returned.
       tags:
       - Jobs
       parameters:
@@ -133,9 +127,7 @@ paths:
     get:
       operationId: getJobStatus
       summary: Job Status
-      description: 'Retrieves the current status of the specified optimization job. Status values indicate the progression of the job through the Quay processing pipeline.
-
-        '
+      description: Retrieves the current status of the specified optimization job. Status values indicate the progression of the job through the Quay processing pipeline.
       tags:
       - Jobs
       parameters:
@@ -165,9 +157,7 @@ paths:
     get:
       operationId: getJob
       summary: Job
-      description: 'Retrieves full details for the specified optimization job, including submission metadata, processing times, CPU usage, and working directory information.
-
-        '
+      description: Retrieves full details for the specified optimization job, including submission metadata, processing times, CPU usage, and working directory information.
       tags:
       - Jobs
       parameters:
@@ -210,6 +200,112 @@ paths:
                 $ref: '#/components/schemas/QuayErrorResponse'
 components:
   schemas:
+    SubmitJobRequest:
+      type: object
+      required:
+      - consumer
+      - customerId
+      - customerName
+      - eventId
+      - inputFilename
+      description: Request body for submitting an optimization job to Quay.
+      properties:
+        consumer:
+          type: string
+          description: Consumer name identifying the system submitting the job.
+          enum:
+          - ASO
+          - JCS
+          - USDA
+          example: JCS
+        customerId:
+          type: integer
+          description: Customer identifier.
+          example: 999
+        customerName:
+          type: string
+          description: Customer name. (Max length 100)
+          maxLength: 100
+          example: QA
+        eventId:
+          type: integer
+          description: Event identifier linking the job to a sourcing event.
+          example: 999999
+        inputFilename:
+          type: string
+          description: 'Fully qualified location of the input file on the ASO filesystem. (Max length 100)
+
+            '
+          maxLength: 100
+          example: /dgsq/drm/JCS_Input/tester.txt.gz
+        notificationHostname:
+          type: string
+          description: 'ASO Clearsuite notification server hostname or VIP. Optional; used only within a dev environment to allow a developer to specify their locally configured clearsuite hostname. (Max length 250)
+
+            '
+          maxLength: 250
+          example: aso-csweb.jaggaer.com
+        notificationPort:
+          type: integer
+          description: 'ASO Clearsuite notification server port. Optional; used only within a dev environment.
+
+            '
+          example: 80
+    JobStatusResponse:
+      type: object
+      description: Current status of an optimization job.
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          description: Current processing status of the optimization job.
+          enum:
+          - Received
+          - Queued
+          - Requeued
+          - Optimizing
+          - Completed
+          - Failed
+          - Cancelled
+          - Cancelling
+          - Expired
+          - Limited
+          example: Optimizing
+    QuayErrorResponse:
+      type: object
+      description: Error response from the Quay service.
+      properties:
+        statuses:
+          type: object
+          description: 'Map of status codes to arrays of detail objects. Common codes include INVALID_ENUM_VALUE, MISSING_REQUIRED_FIELD, EXCEEDED_CHARACTER_LIMIT, FILE_NOT_FOUND, and COULD_NOT_BE_CANCELLED.
+
+            '
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+    QuayRateLimitResponse:
+      type: object
+      description: 'Rate limit error response returned when a customer exceeds their configured optimization job limits.
+
+        '
+      properties:
+        statuses:
+          type: object
+          description: 'Map of status codes to arrays of detail objects. Codes include EXCEEDED_DAILY_LIMIT and EXCEEDED_ABSOLUTE_LIMIT, each containing the customer-specific limit value.
+
+            '
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                limit:
+                  type: integer
+                  description: The customer-specific limit value that was exceeded.
     JobResponse:
       type: object
       description: Full details for an optimization job.
@@ -318,61 +414,6 @@ components:
           type: integer
           description: Elapsed job runtime in milliseconds.
           example: 1271
-    QuayErrorResponse:
-      type: object
-      description: Error response from the Quay service.
-      properties:
-        statuses:
-          type: object
-          description: 'Map of status codes to arrays of detail objects. Common codes include INVALID_ENUM_VALUE, MISSING_REQUIRED_FIELD, EXCEEDED_CHARACTER_LIMIT, FILE_NOT_FOUND, and COULD_NOT_BE_CANCELLED.
-
-            '
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
-    QuayRateLimitResponse:
-      type: object
-      description: 'Rate limit error response returned when a customer exceeds their configured optimization job limits.
-
-        '
-      properties:
-        statuses:
-          type: object
-          description: 'Map of status codes to arrays of detail objects. Codes include EXCEEDED_DAILY_LIMIT and EXCEEDED_ABSOLUTE_LIMIT, each containing the customer-specific limit value.
-
-            '
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              properties:
-                limit:
-                  type: integer
-                  description: The customer-specific limit value that was exceeded.
-    JobStatusResponse:
-      type: object
-      description: Current status of an optimization job.
-      required:
-      - status
-      properties:
-        status:
-          type: string
-          description: Current processing status of the optimization job.
-          enum:
-          - Received
-          - Queued
-          - Requeued
-          - Optimizing
-          - Completed
-          - Failed
-          - Cancelled
-          - Cancelling
-          - Expired
-          - Limited
-          example: Optimizing
     SubmitJobResponse:
       type: object
       description: Response for a successful job submission.
@@ -388,57 +429,6 @@ components:
               type: object
               additionalProperties:
                 type: string
-    SubmitJobRequest:
-      type: object
-      required:
-      - consumer
-      - customerId
-      - customerName
-      - eventId
-      - inputFilename
-      description: Request body for submitting an optimization job to Quay.
-      properties:
-        consumer:
-          type: string
-          description: Consumer name identifying the system submitting the job.
-          enum:
-          - ASO
-          - JCS
-          - USDA
-          example: JCS
-        customerId:
-          type: integer
-          description: Customer identifier.
-          example: 999
-        customerName:
-          type: string
-          description: Customer name. (Max length 100)
-          maxLength: 100
-          example: QA
-        eventId:
-          type: integer
-          description: Event identifier linking the job to a sourcing event.
-          example: 999999
-        inputFilename:
-          type: string
-          description: 'Fully qualified location of the input file on the ASO filesystem. (Max length 100)
-
-            '
-          maxLength: 100
-          example: /dgsq/drm/JCS_Input/tester.txt.gz
-        notificationHostname:
-          type: string
-          description: 'ASO Clearsuite notification server hostname or VIP. Optional; used only within a dev environment to allow a developer to specify their locally configured clearsuite hostname. (Max length 250)
-
-            '
-          maxLength: 250
-          example: aso-csweb.jaggaer.com
-        notificationPort:
-          type: integer
-          description: 'ASO Clearsuite notification server port. Optional; used only within a dev environment.
-
-            '
-          example: 80
   parameters:
     jobId:
       name: job-id

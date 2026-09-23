@@ -24,9 +24,7 @@ paths:
     get:
       operationId: getAsyncStatus
       summary: Async Status
-      description: 'Returns the status of the asynchronous process associated with the specified process ID. Used to poll for completion of asynchronous operations such as event creation.
-
-        '
+      description: Returns the status of the asynchronous process associated with the specified process ID. Used to poll for completion of asynchronous operations such as event creation.
       tags:
       - Async
       parameters:

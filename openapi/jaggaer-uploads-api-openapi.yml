@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: JAGGAER ASO Event Entity Service Uploads API
-  description: 'The Event Entity Service (EES) API provides REST endpoints for managing sourcing events within the JAGGAER Advanced Sourcing Optimizer, including event attributes, bids, contacts, items, rates, scenarios, and suppliers. It supports asynchronous operations for retrieving large datasets such as bid submissions and award results, with pre-signed download URLs for completed asynchronous processes. Authentication requires both OAuth 2.0 bearer tokens and API key headers.
-
-    '
+  description: The Event Entity Service (EES) API provides REST endpoints for managing sourcing events within the JAGGAER Advanced Sourcing Optimizer, including event attributes, bids, contacts, items, rates, scenarios, and suppliers. It supports asynchronous operations for retrieving large datasets such as bid submissions and award results, with pre-signed download URLs for completed asynchronous processes. Authentication requires both OAuth 2.0 bearer tokens and API key headers.
   version: v26.1.0.9
   contact:
     name: JAGGAER Support
@@ -23,9 +21,7 @@ paths:
     get:
       operationId: getUploadUrl
       summary: Upload Entity URL
-      description: 'Retrieves a pre-signed upload URL for the specified entity type, enabling upload of data files to the ASO platform for the given event and user.
-
-        '
+      description: Retrieves a pre-signed upload URL for the specified entity type, enabling upload of data files to the ASO platform for the given event and user.
       tags:
       - Uploads
       parameters:
