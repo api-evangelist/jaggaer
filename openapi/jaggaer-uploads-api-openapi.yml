@@ -45,13 +45,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
   schemas:
     UploadUrlResponse:
       type: object
@@ -65,6 +58,13 @@ components:
           type: string
           format: date-time
           description: Expiration time for the pre-signed URL.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
   parameters:
     eventId:
       name: event-id

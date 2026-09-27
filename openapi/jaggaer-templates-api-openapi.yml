@@ -86,19 +86,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    SubcategoriesResponse:
-      type: object
-      description: List of subcategories for a template type.
-      properties:
-        subcategories:
-          type: array
-          items:
-            type: object
-            properties:
-              subcategoryId:
-                type: integer
-              subcategoryName:
-                type: string
     TemplateListResponse:
       type: object
       description: List of templates available to a user.
@@ -114,6 +101,19 @@ components:
                 type: string
               templateTypeId:
                 type: integer
+    SubcategoriesResponse:
+      type: object
+      description: List of subcategories for a template type.
+      properties:
+        subcategories:
+          type: array
+          items:
+            type: object
+            properties:
+              subcategoryId:
+                type: integer
+              subcategoryName:
+                type: string
     TemplateTypeListResponse:
       type: object
       description: List of template types.

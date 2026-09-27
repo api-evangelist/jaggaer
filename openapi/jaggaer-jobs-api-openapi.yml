@@ -200,6 +200,21 @@ paths:
                 $ref: '#/components/schemas/QuayErrorResponse'
 components:
   schemas:
+    SubmitJobResponse:
+      type: object
+      description: Response for a successful job submission.
+      properties:
+        statuses:
+          type: object
+          description: 'Map of status codes to arrays of status detail objects. On success, contains a SUCCESS key with the jobId.
+
+            '
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
     SubmitJobRequest:
       type: object
       required:
@@ -251,42 +266,6 @@ components:
 
             '
           example: 80
-    JobStatusResponse:
-      type: object
-      description: Current status of an optimization job.
-      required:
-      - status
-      properties:
-        status:
-          type: string
-          description: Current processing status of the optimization job.
-          enum:
-          - Received
-          - Queued
-          - Requeued
-          - Optimizing
-          - Completed
-          - Failed
-          - Cancelled
-          - Cancelling
-          - Expired
-          - Limited
-          example: Optimizing
-    QuayErrorResponse:
-      type: object
-      description: Error response from the Quay service.
-      properties:
-        statuses:
-          type: object
-          description: 'Map of status codes to arrays of detail objects. Common codes include INVALID_ENUM_VALUE, MISSING_REQUIRED_FIELD, EXCEEDED_CHARACTER_LIMIT, FILE_NOT_FOUND, and COULD_NOT_BE_CANCELLED.
-
-            '
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
     QuayRateLimitResponse:
       type: object
       description: 'Rate limit error response returned when a customer exceeds their configured optimization job limits.
@@ -414,13 +393,13 @@ components:
           type: integer
           description: Elapsed job runtime in milliseconds.
           example: 1271
-    SubmitJobResponse:
+    QuayErrorResponse:
       type: object
-      description: Response for a successful job submission.
+      description: Error response from the Quay service.
       properties:
         statuses:
           type: object
-          description: 'Map of status codes to arrays of status detail objects. On success, contains a SUCCESS key with the jobId.
+          description: 'Map of status codes to arrays of detail objects. Common codes include INVALID_ENUM_VALUE, MISSING_REQUIRED_FIELD, EXCEEDED_CHARACTER_LIMIT, FILE_NOT_FOUND, and COULD_NOT_BE_CANCELLED.
 
             '
           additionalProperties:
@@ -429,6 +408,27 @@ components:
               type: object
               additionalProperties:
                 type: string
+    JobStatusResponse:
+      type: object
+      description: Current status of an optimization job.
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          description: Current processing status of the optimization job.
+          enum:
+          - Received
+          - Queued
+          - Requeued
+          - Optimizing
+          - Completed
+          - Failed
+          - Cancelled
+          - Cancelling
+          - Expired
+          - Limited
+          example: Optimizing
   parameters:
     jobId:
       name: job-id

@@ -157,6 +157,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
+    SupplierCreateRequest:
+      type: object
+      description: Request body for adding suppliers to an event.
+      properties:
+        suppliers:
+          type: array
+          items:
+            type: object
+            properties:
+              supplierId:
+                type: integer
     SupplierBulkUpdateRequest:
       type: object
       description: Request body for bulk updating suppliers.
@@ -165,12 +176,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SupplierUpdateRequest'
-    SupplierUpdateRequest:
-      type: object
-      description: Request body for updating a supplier.
-      properties:
-        status:
-          type: string
     SupplierResponse:
       type: object
       description: Sourcing event supplier details.
@@ -184,6 +189,12 @@ components:
         status:
           type: string
           description: Participation status of the supplier in the event.
+    SupplierUpdateRequest:
+      type: object
+      description: Request body for updating a supplier.
+      properties:
+        status:
+          type: string
     ErrorResponse:
       type: object
       description: Error response with validation details.
@@ -197,17 +208,6 @@ components:
               type: object
               additionalProperties:
                 type: string
-    SupplierCreateRequest:
-      type: object
-      description: Request body for adding suppliers to an event.
-      properties:
-        suppliers:
-          type: array
-          items:
-            type: object
-            properties:
-              supplierId:
-                type: integer
     SupplierListResponse:
       type: object
       description: List of event suppliers.
@@ -216,6 +216,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SupplierResponse'
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
+    UnprocessableEntity:
+      description: 'The request was syntactically valid but could not be processed due to validation errors.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     supplierId:
       name: supplier-id
@@ -238,21 +253,6 @@ components:
       description: Identifier for the user.
       schema:
         type: integer
-  responses:
-    UnprocessableEntity:
-      description: 'The request was syntactically valid but could not be processed due to validation errors.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
   securitySchemes:
     bearerAuth:
       type: http

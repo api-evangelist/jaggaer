@@ -180,14 +180,12 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    AttributeBulkUpdateRequest:
+    AttributeUpdateRequest:
       type: object
-      description: Request body for bulk updating event attributes.
+      description: Request body for updating an event attribute.
       properties:
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AttributeUpdateRequest'
+        value:
+          type: string
     AttributeListResponse:
       type: object
       description: List of sourcing event attributes.
@@ -196,6 +194,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AttributeResponse'
+    AttributeResponse:
+      type: object
+      description: Sourcing event attribute details.
+      properties:
+        attributeId:
+          type: integer
+          description: Unique identifier for the attribute.
+        attributeName:
+          type: string
+          description: Name of the attribute.
+        attributeType:
+          type: string
+          description: Type classification of the attribute.
+        value:
+          type: string
+          description: Current value of the attribute.
+    AttributeBulkUpdateRequest:
+      type: object
+      description: Request body for bulk updating event attributes.
+      properties:
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeUpdateRequest'
     ErrorResponse:
       type: object
       description: Error response with validation details.
@@ -222,29 +244,13 @@ components:
           type: string
         value:
           type: string
-    AttributeResponse:
-      type: object
-      description: Sourcing event attribute details.
-      properties:
-        attributeId:
-          type: integer
-          description: Unique identifier for the attribute.
-        attributeName:
-          type: string
-          description: Name of the attribute.
-        attributeType:
-          type: string
-          description: Type classification of the attribute.
-        value:
-          type: string
-          description: Current value of the attribute.
-    AttributeUpdateRequest:
-      type: object
-      description: Request body for updating an event attribute.
-      properties:
-        value:
-          type: string
   responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
     UnprocessableEntity:
       description: 'The request was syntactically valid but could not be processed due to validation errors.
 
@@ -253,25 +259,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
   parameters:
-    eventId:
-      name: event-id
-      in: path
-      required: true
-      description: Identifier for the sourcing event.
-      schema:
-        type: integer
     attributeId:
       name: attribute-id
       in: path
       required: true
       description: Identifier for the event attribute.
+      schema:
+        type: integer
+    eventId:
+      name: event-id
+      in: path
+      required: true
+      description: Identifier for the sourcing event.
       schema:
         type: integer
   securitySchemes:

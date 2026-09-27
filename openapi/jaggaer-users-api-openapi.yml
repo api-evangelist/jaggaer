@@ -59,29 +59,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    UserResponse:
-      type: object
-      description: User details.
-      properties:
-        userId:
-          type: integer
-          description: Unique identifier for the user.
-        username:
-          type: string
-          description: Username for the user.
-        email:
-          type: string
-          format: email
-          description: Email address of the user.
-    UserListResponse:
-      type: object
-      description: List of users for a customer host.
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserResponse'
   parameters:
     customerHostId:
       name: customer-host-id
@@ -104,6 +81,29 @@ components:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
         '
+  schemas:
+    UserListResponse:
+      type: object
+      description: List of users for a customer host.
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponse'
+    UserResponse:
+      type: object
+      description: User details.
+      properties:
+        userId:
+          type: integer
+          description: Unique identifier for the user.
+        username:
+          type: string
+          description: Username for the user.
+        email:
+          type: string
+          format: email
+          description: Email address of the user.
   securitySchemes:
     bearerAuth:
       type: http

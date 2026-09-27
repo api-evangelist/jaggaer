@@ -177,51 +177,6 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    ItemResponse:
-      type: object
-      description: Sourcing event line item details.
-      properties:
-        itemId:
-          type: integer
-          description: Unique identifier for the line item.
-        itemName:
-          type: string
-          description: Name of the line item.
-        quantity:
-          type: number
-          description: Requested quantity.
-        unitOfMeasure:
-          type: string
-          description: Unit of measure for the item.
-    ItemListResponse:
-      type: object
-      description: List of event line items.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemResponse'
-    ItemBulkUpdateRequest:
-      type: object
-      description: Request body for bulk updating event line items.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemUpdateRequest'
-    ErrorResponse:
-      type: object
-      description: Error response with validation details.
-      properties:
-        statuses:
-          type: object
-          description: Map of status codes to arrays of status detail objects.
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
     ItemCreateRequest:
       type: object
       description: Request body for creating event line items.
@@ -239,6 +194,51 @@ components:
         encodedAsyncPid:
           type: string
           description: Base64-encoded process ID used to poll for status.
+    ItemBulkUpdateRequest:
+      type: object
+      description: Request body for bulk updating event line items.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemUpdateRequest'
+    ItemListResponse:
+      type: object
+      description: List of event line items.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemResponse'
+    ItemResponse:
+      type: object
+      description: Sourcing event line item details.
+      properties:
+        itemId:
+          type: integer
+          description: Unique identifier for the line item.
+        itemName:
+          type: string
+          description: Name of the line item.
+        quantity:
+          type: number
+          description: Requested quantity.
+        unitOfMeasure:
+          type: string
+          description: Unit of measure for the item.
+    ErrorResponse:
+      type: object
+      description: Error response with validation details.
+      properties:
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
     ItemUpdateRequest:
       type: object
       description: Request body for updating an event line item.
@@ -272,6 +272,12 @@ components:
       schema:
         type: integer
   responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
     UnprocessableEntity:
       description: 'The request was syntactically valid but could not be processed due to validation errors.
 
@@ -280,12 +286,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
   securitySchemes:
     bearerAuth:
       type: http
