@@ -215,57 +215,21 @@ components:
               type: object
               additionalProperties:
                 type: string
-    SubmitJobRequest:
+    QuayErrorResponse:
       type: object
-      required:
-      - consumer
-      - customerId
-      - customerName
-      - eventId
-      - inputFilename
-      description: Request body for submitting an optimization job to Quay.
+      description: Error response from the Quay service.
       properties:
-        consumer:
-          type: string
-          description: Consumer name identifying the system submitting the job.
-          enum:
-          - ASO
-          - JCS
-          - USDA
-          example: JCS
-        customerId:
-          type: integer
-          description: Customer identifier.
-          example: 999
-        customerName:
-          type: string
-          description: Customer name. (Max length 100)
-          maxLength: 100
-          example: QA
-        eventId:
-          type: integer
-          description: Event identifier linking the job to a sourcing event.
-          example: 999999
-        inputFilename:
-          type: string
-          description: 'Fully qualified location of the input file on the ASO filesystem. (Max length 100)
+        statuses:
+          type: object
+          description: 'Map of status codes to arrays of detail objects. Common codes include INVALID_ENUM_VALUE, MISSING_REQUIRED_FIELD, EXCEEDED_CHARACTER_LIMIT, FILE_NOT_FOUND, and COULD_NOT_BE_CANCELLED.
 
             '
-          maxLength: 100
-          example: /dgsq/drm/JCS_Input/tester.txt.gz
-        notificationHostname:
-          type: string
-          description: 'ASO Clearsuite notification server hostname or VIP. Optional; used only within a dev environment to allow a developer to specify their locally configured clearsuite hostname. (Max length 250)
-
-            '
-          maxLength: 250
-          example: aso-csweb.jaggaer.com
-        notificationPort:
-          type: integer
-          description: 'ASO Clearsuite notification server port. Optional; used only within a dev environment.
-
-            '
-          example: 80
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
     QuayRateLimitResponse:
       type: object
       description: 'Rate limit error response returned when a customer exceeds their configured optimization job limits.
@@ -285,6 +249,27 @@ components:
                 limit:
                   type: integer
                   description: The customer-specific limit value that was exceeded.
+    JobStatusResponse:
+      type: object
+      description: Current status of an optimization job.
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          description: Current processing status of the optimization job.
+          enum:
+          - Received
+          - Queued
+          - Requeued
+          - Optimizing
+          - Completed
+          - Failed
+          - Cancelled
+          - Cancelling
+          - Expired
+          - Limited
+          example: Optimizing
     JobResponse:
       type: object
       description: Full details for an optimization job.
@@ -393,42 +378,57 @@ components:
           type: integer
           description: Elapsed job runtime in milliseconds.
           example: 1271
-    QuayErrorResponse:
+    SubmitJobRequest:
       type: object
-      description: Error response from the Quay service.
+      required:
+      - consumer
+      - customerId
+      - customerName
+      - eventId
+      - inputFilename
+      description: Request body for submitting an optimization job to Quay.
       properties:
-        statuses:
-          type: object
-          description: 'Map of status codes to arrays of detail objects. Common codes include INVALID_ENUM_VALUE, MISSING_REQUIRED_FIELD, EXCEEDED_CHARACTER_LIMIT, FILE_NOT_FOUND, and COULD_NOT_BE_CANCELLED.
+        consumer:
+          type: string
+          description: Consumer name identifying the system submitting the job.
+          enum:
+          - ASO
+          - JCS
+          - USDA
+          example: JCS
+        customerId:
+          type: integer
+          description: Customer identifier.
+          example: 999
+        customerName:
+          type: string
+          description: Customer name. (Max length 100)
+          maxLength: 100
+          example: QA
+        eventId:
+          type: integer
+          description: Event identifier linking the job to a sourcing event.
+          example: 999999
+        inputFilename:
+          type: string
+          description: 'Fully qualified location of the input file on the ASO filesystem. (Max length 100)
 
             '
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
-    JobStatusResponse:
-      type: object
-      description: Current status of an optimization job.
-      required:
-      - status
-      properties:
-        status:
+          maxLength: 100
+          example: /dgsq/drm/JCS_Input/tester.txt.gz
+        notificationHostname:
           type: string
-          description: Current processing status of the optimization job.
-          enum:
-          - Received
-          - Queued
-          - Requeued
-          - Optimizing
-          - Completed
-          - Failed
-          - Cancelled
-          - Cancelling
-          - Expired
-          - Limited
-          example: Optimizing
+          description: 'ASO Clearsuite notification server hostname or VIP. Optional; used only within a dev environment to allow a developer to specify their locally configured clearsuite hostname. (Max length 250)
+
+            '
+          maxLength: 250
+          example: aso-csweb.jaggaer.com
+        notificationPort:
+          type: integer
+          description: 'ASO Clearsuite notification server port. Optional; used only within a dev environment.
+
+            '
+          example: 80
   parameters:
     jobId:
       name: job-id

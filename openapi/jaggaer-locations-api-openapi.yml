@@ -38,15 +38,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    LocationNamesResponse:
-      type: object
-      description: List of rate location names.
-      properties:
-        locationNames:
-          type: array
-          items:
-            type: string
   parameters:
     customerHostId:
       name: customer-host-id
@@ -62,6 +53,15 @@ components:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
         '
+  schemas:
+    LocationNamesResponse:
+      type: object
+      description: List of rate location names.
+      properties:
+        locationNames:
+          type: array
+          items:
+            type: string
   securitySchemes:
     bearerAuth:
       type: http

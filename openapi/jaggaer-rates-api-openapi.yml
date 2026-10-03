@@ -88,13 +88,6 @@ components:
         value:
           type: number
           description: Rate value.
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
   parameters:
     eventId:
       name: event-id
@@ -103,6 +96,13 @@ components:
       description: Identifier for the sourcing event.
       schema:
         type: integer
+  responses:
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

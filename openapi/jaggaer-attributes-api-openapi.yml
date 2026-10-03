@@ -180,12 +180,19 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    AttributeUpdateRequest:
+    ErrorResponse:
       type: object
-      description: Request body for updating an event attribute.
+      description: Error response with validation details.
       properties:
-        value:
-          type: string
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
     AttributeListResponse:
       type: object
       description: List of sourcing event attributes.
@@ -218,19 +225,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AttributeUpdateRequest'
-    ErrorResponse:
+    AttributeUpdateRequest:
       type: object
-      description: Error response with validation details.
+      description: Request body for updating an event attribute.
       properties:
-        statuses:
-          type: object
-          description: Map of status codes to arrays of status detail objects.
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
+        value:
+          type: string
     AttributeCreateRequest:
       type: object
       description: Request body for creating an event attribute.
@@ -244,9 +244,22 @@ components:
           type: string
         value:
           type: string
+  parameters:
+    eventId:
+      name: event-id
+      in: path
+      required: true
+      description: Identifier for the sourcing event.
+      schema:
+        type: integer
+    attributeId:
+      name: attribute-id
+      in: path
+      required: true
+      description: Identifier for the event attribute.
+      schema:
+        type: integer
   responses:
-    NotFound:
-      description: The requested resource was not found.
     Unauthorized:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
@@ -259,21 +272,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    attributeId:
-      name: attribute-id
-      in: path
-      required: true
-      description: Identifier for the event attribute.
-      schema:
-        type: integer
-    eventId:
-      name: event-id
-      in: path
-      required: true
-      description: Identifier for the sourcing event.
-      schema:
-        type: integer
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

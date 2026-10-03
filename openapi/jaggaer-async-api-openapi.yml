@@ -51,6 +51,13 @@ paths:
     - url: https://ches.aso-api.jaggaer.com
       description: JAGGAER ASO CHES Production Server
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
   schemas:
     AsyncStatusResponse:
       type: object
@@ -73,13 +80,6 @@ components:
         errorMessage:
           type: string
           description: Error message if the process failed.
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
   securitySchemes:
     bearerAuth:
       type: http

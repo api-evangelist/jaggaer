@@ -159,74 +159,7 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
-  parameters:
-    contactId:
-      name: contact-id
-      in: path
-      required: true
-      description: Identifier for the contact.
-      schema:
-        type: integer
-    supplierId:
-      name: supplier-id
-      in: path
-      required: true
-      description: Identifier for the supplier.
-      schema:
-        type: integer
-    eventId:
-      name: event-id
-      in: path
-      required: true
-      description: Identifier for the sourcing event.
-      schema:
-        type: integer
-    userId:
-      name: user-id
-      in: path
-      required: true
-      description: Identifier for the user.
-      schema:
-        type: integer
   schemas:
-    ContactCreateRequest:
-      type: object
-      description: Request body for creating an event contact.
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-    ContactUpdateRequest:
-      type: object
-      description: Request body for updating an event contact.
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-    ContactListResponse:
-      type: object
-      description: List of event contacts.
-      properties:
-        contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactResponse'
-    ContactBulkUpdateRequest:
-      type: object
-      description: Request body for bulk updating event contacts.
-      properties:
-        contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactUpdateRequest'
     ErrorResponse:
       type: object
       description: Error response with validation details.
@@ -240,6 +173,25 @@ components:
               type: object
               additionalProperties:
                 type: string
+    ContactListResponse:
+      type: object
+      description: List of event contacts.
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactResponse'
+    ContactCreateRequest:
+      type: object
+      description: Request body for creating an event contact.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
     ContactResponse:
       type: object
       description: Event contact details.
@@ -255,9 +207,55 @@ components:
           format: email
         supplierId:
           type: integer
+    ContactUpdateRequest:
+      type: object
+      description: Request body for updating an event contact.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+    ContactBulkUpdateRequest:
+      type: object
+      description: Request body for bulk updating event contacts.
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactUpdateRequest'
+  parameters:
+    eventId:
+      name: event-id
+      in: path
+      required: true
+      description: Identifier for the sourcing event.
+      schema:
+        type: integer
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: Identifier for the user.
+      schema:
+        type: integer
+    supplierId:
+      name: supplier-id
+      in: path
+      required: true
+      description: Identifier for the supplier.
+      schema:
+        type: integer
+    contactId:
+      name: contact-id
+      in: path
+      required: true
+      description: Identifier for the contact.
+      schema:
+        type: integer
   responses:
-    NotFound:
-      description: The requested resource was not found.
     Unauthorized:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
@@ -270,6 +268,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

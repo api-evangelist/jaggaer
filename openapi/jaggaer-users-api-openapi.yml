@@ -60,13 +60,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    customerHostId:
-      name: customer-host-id
-      in: path
-      required: true
-      description: Identifier for the customer host in the ASO platform.
-      schema:
-        type: integer
     userId:
       name: user-id
       in: path
@@ -74,22 +67,21 @@ components:
       description: Identifier for the user.
       schema:
         type: integer
+    customerHostId:
+      name: customer-host-id
+      in: path
+      required: true
+      description: Identifier for the customer host in the ASO platform.
+      schema:
+        type: integer
   responses:
-    NotFound:
-      description: The requested resource was not found.
     Unauthorized:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
         '
+    NotFound:
+      description: The requested resource was not found.
   schemas:
-    UserListResponse:
-      type: object
-      description: List of users for a customer host.
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserResponse'
     UserResponse:
       type: object
       description: User details.
@@ -104,6 +96,14 @@ components:
           type: string
           format: email
           description: Email address of the user.
+    UserListResponse:
+      type: object
+      description: List of users for a customer host.
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserResponse'
   securitySchemes:
     bearerAuth:
       type: http

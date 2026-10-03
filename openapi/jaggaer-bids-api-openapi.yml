@@ -64,14 +64,13 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    eventId:
-      name: event-id
-      in: path
-      required: true
-      description: Identifier for the sourcing event.
-      schema:
-        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
   schemas:
     AsyncAcceptedResponse:
       type: object
@@ -80,13 +79,14 @@ components:
         encodedAsyncPid:
           type: string
           description: Base64-encoded process ID used to poll for status.
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
+  parameters:
+    eventId:
+      name: event-id
+      in: path
+      required: true
+      description: Identifier for the sourcing event.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

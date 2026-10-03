@@ -54,6 +54,13 @@ components:
                 type: string
               isPreferred:
                 type: boolean
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
   parameters:
     eventId:
       name: event-id
@@ -62,13 +69,6 @@ components:
       description: Identifier for the sourcing event.
       schema:
         type: integer
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
   securitySchemes:
     bearerAuth:
       type: http
