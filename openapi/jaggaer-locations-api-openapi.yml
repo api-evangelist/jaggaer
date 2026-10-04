@@ -38,21 +38,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    customerHostId:
-      name: customer-host-id
-      in: path
-      required: true
-      description: Identifier for the customer host in the ASO platform.
-      schema:
-        type: integer
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
   schemas:
     LocationNamesResponse:
       type: object
@@ -62,6 +47,21 @@ components:
           type: array
           items:
             type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
+  parameters:
+    customerHostId:
+      name: customer-host-id
+      in: path
+      required: true
+      description: Identifier for the customer host in the ASO platform.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

@@ -177,6 +177,31 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
+    ItemListResponse:
+      type: object
+      description: List of event line items.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemResponse'
+    AsyncAcceptedResponse:
+      type: object
+      description: Response returned when an asynchronous operation is accepted.
+      properties:
+        encodedAsyncPid:
+          type: string
+          description: Base64-encoded process ID used to poll for status.
+    ItemCreateRequest:
+      type: object
+      description: Request body for creating event line items.
+      properties:
+        itemName:
+          type: string
+        quantity:
+          type: number
+        unitOfMeasure:
+          type: string
     ErrorResponse:
       type: object
       description: Error response with validation details.
@@ -190,49 +215,6 @@ components:
               type: object
               additionalProperties:
                 type: string
-    AsyncAcceptedResponse:
-      type: object
-      description: Response returned when an asynchronous operation is accepted.
-      properties:
-        encodedAsyncPid:
-          type: string
-          description: Base64-encoded process ID used to poll for status.
-    ItemListResponse:
-      type: object
-      description: List of event line items.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemResponse'
-    ItemCreateRequest:
-      type: object
-      description: Request body for creating event line items.
-      properties:
-        itemName:
-          type: string
-        quantity:
-          type: number
-        unitOfMeasure:
-          type: string
-    ItemUpdateRequest:
-      type: object
-      description: Request body for updating an event line item.
-      properties:
-        itemName:
-          type: string
-        quantity:
-          type: number
-        unitOfMeasure:
-          type: string
-    ItemBulkUpdateRequest:
-      type: object
-      description: Request body for bulk updating event line items.
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemUpdateRequest'
     ItemResponse:
       type: object
       description: Sourcing event line item details.
@@ -249,7 +231,32 @@ components:
         unitOfMeasure:
           type: string
           description: Unit of measure for the item.
+    ItemBulkUpdateRequest:
+      type: object
+      description: Request body for bulk updating event line items.
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemUpdateRequest'
+    ItemUpdateRequest:
+      type: object
+      description: Request body for updating an event line item.
+      properties:
+        itemName:
+          type: string
+        quantity:
+          type: number
+        unitOfMeasure:
+          type: string
   parameters:
+    itemId:
+      name: item-id
+      in: path
+      required: true
+      description: Identifier for the line item.
+      schema:
+        type: integer
     eventId:
       name: event-id
       in: path
@@ -264,18 +271,7 @@ components:
       description: Identifier for the user.
       schema:
         type: integer
-    itemId:
-      name: item-id
-      in: path
-      required: true
-      description: Identifier for the line item.
-      schema:
-        type: integer
   responses:
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
     UnprocessableEntity:
       description: 'The request was syntactically valid but could not be processed due to validation errors.
 
@@ -286,6 +282,10 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
   securitySchemes:
     bearerAuth:
       type: http

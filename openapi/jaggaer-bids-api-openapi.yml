@@ -71,14 +71,6 @@ components:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
         '
-  schemas:
-    AsyncAcceptedResponse:
-      type: object
-      description: Response returned when an asynchronous operation is accepted.
-      properties:
-        encodedAsyncPid:
-          type: string
-          description: Base64-encoded process ID used to poll for status.
   parameters:
     eventId:
       name: event-id
@@ -87,6 +79,14 @@ components:
       description: Identifier for the sourcing event.
       schema:
         type: integer
+  schemas:
+    AsyncAcceptedResponse:
+      type: object
+      description: Response returned when an asynchronous operation is accepted.
+      properties:
+        encodedAsyncPid:
+          type: string
+          description: Base64-encoded process ID used to poll for status.
   securitySchemes:
     bearerAuth:
       type: http

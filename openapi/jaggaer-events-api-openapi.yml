@@ -100,27 +100,17 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ErrorResponse:
+    EventCreateRequest:
       type: object
-      description: Error response with validation details.
+      description: Request body for creating a sourcing event from a template.
       properties:
-        statuses:
-          type: object
-          description: Map of status codes to arrays of status detail objects.
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
-    EventListResponse:
-      type: object
-      description: List of sourcing events.
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/EventResponse'
+        eventName:
+          type: string
+          description: Name for the new sourcing event. (Max length 100)
+          maxLength: 100
+        eventDescription:
+          type: string
+          description: Optional description for the event.
     AsyncAcceptedResponse:
       type: object
       description: Response returned when an asynchronous operation is accepted.
@@ -141,25 +131,28 @@ components:
         status:
           type: string
           description: Current status of the event.
-    EventCreateRequest:
+    EventListResponse:
       type: object
-      description: Request body for creating a sourcing event from a template.
+      description: List of sourcing events.
       properties:
-        eventName:
-          type: string
-          description: Name for the new sourcing event. (Max length 100)
-          maxLength: 100
-        eventDescription:
-          type: string
-          description: Optional description for the event.
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventResponse'
+    ErrorResponse:
+      type: object
+      description: Error response with validation details.
+      properties:
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
   parameters:
-    userId:
-      name: user-id
-      in: path
-      required: true
-      description: Identifier for the user.
-      schema:
-        type: integer
     customerHostId:
       name: customer-host-id
       in: path
@@ -174,11 +167,16 @@ components:
       description: Identifier for the sourcing event template.
       schema:
         type: integer
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: Identifier for the user.
+      schema:
+        type: integer
   responses:
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
+    NotFound:
+      description: The requested resource was not found.
     UnprocessableEntity:
       description: 'The request was syntactically valid but could not be processed due to validation errors.
 
@@ -187,8 +185,10 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
   securitySchemes:
     bearerAuth:
       type: http

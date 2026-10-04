@@ -85,48 +85,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    SubcategoriesResponse:
-      type: object
-      description: List of subcategories for a template type.
-      properties:
-        subcategories:
-          type: array
-          items:
-            type: object
-            properties:
-              subcategoryId:
-                type: integer
-              subcategoryName:
-                type: string
-    TemplateListResponse:
-      type: object
-      description: List of templates available to a user.
-      properties:
-        templates:
-          type: array
-          items:
-            type: object
-            properties:
-              templateId:
-                type: integer
-              templateName:
-                type: string
-              templateTypeId:
-                type: integer
-    TemplateTypeListResponse:
-      type: object
-      description: List of template types.
-      properties:
-        templateTypes:
-          type: array
-          items:
-            type: object
-            properties:
-              templateTypeId:
-                type: integer
-              templateTypeName:
-                type: string
   parameters:
     customerHostId:
       name: customer-host-id
@@ -143,12 +101,54 @@ components:
       schema:
         type: integer
   responses:
+    NotFound:
+      description: The requested resource was not found.
     Unauthorized:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
         '
-    NotFound:
-      description: The requested resource was not found.
+  schemas:
+    TemplateListResponse:
+      type: object
+      description: List of templates available to a user.
+      properties:
+        templates:
+          type: array
+          items:
+            type: object
+            properties:
+              templateId:
+                type: integer
+              templateName:
+                type: string
+              templateTypeId:
+                type: integer
+    SubcategoriesResponse:
+      type: object
+      description: List of subcategories for a template type.
+      properties:
+        subcategories:
+          type: array
+          items:
+            type: object
+            properties:
+              subcategoryId:
+                type: integer
+              subcategoryName:
+                type: string
+    TemplateTypeListResponse:
+      type: object
+      description: List of template types.
+      properties:
+        templateTypes:
+          type: array
+          items:
+            type: object
+            properties:
+              templateTypeId:
+                type: integer
+              templateTypeName:
+                type: string
   securitySchemes:
     bearerAuth:
       type: http

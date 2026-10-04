@@ -45,6 +45,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  schemas:
+    UploadUrlResponse:
+      type: object
+      description: Pre-signed upload URL response.
+      properties:
+        uploadUrl:
+          type: string
+          format: uri
+          description: Pre-signed URL for uploading entity data.
+        expiresAt:
+          type: string
+          format: date-time
+          description: Expiration time for the pre-signed URL.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
   parameters:
     eventId:
       name: event-id
@@ -60,26 +80,6 @@ components:
       description: Identifier for the user.
       schema:
         type: integer
-  schemas:
-    UploadUrlResponse:
-      type: object
-      description: Pre-signed upload URL response.
-      properties:
-        uploadUrl:
-          type: string
-          format: uri
-          description: Pre-signed URL for uploading entity data.
-        expiresAt:
-          type: string
-          format: date-time
-          description: Expiration time for the pre-signed URL.
-  responses:
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
-    NotFound:
-      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

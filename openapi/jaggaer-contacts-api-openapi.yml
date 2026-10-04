@@ -160,27 +160,6 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response with validation details.
-      properties:
-        statuses:
-          type: object
-          description: Map of status codes to arrays of status detail objects.
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
-    ContactListResponse:
-      type: object
-      description: List of event contacts.
-      properties:
-        contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactResponse'
     ContactCreateRequest:
       type: object
       description: Request body for creating an event contact.
@@ -192,6 +171,14 @@ components:
         email:
           type: string
           format: email
+    ContactBulkUpdateRequest:
+      type: object
+      description: Request body for bulk updating event contacts.
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactUpdateRequest'
     ContactResponse:
       type: object
       description: Event contact details.
@@ -218,27 +205,48 @@ components:
         email:
           type: string
           format: email
-    ContactBulkUpdateRequest:
+    ContactListResponse:
       type: object
-      description: Request body for bulk updating event contacts.
+      description: List of event contacts.
       properties:
         contacts:
           type: array
           items:
-            $ref: '#/components/schemas/ContactUpdateRequest'
+            $ref: '#/components/schemas/ContactResponse'
+    ErrorResponse:
+      type: object
+      description: Error response with validation details.
+      properties:
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    UnprocessableEntity:
+      description: 'The request was syntactically valid but could not be processed due to validation errors.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
   parameters:
     eventId:
       name: event-id
       in: path
       required: true
       description: Identifier for the sourcing event.
-      schema:
-        type: integer
-    userId:
-      name: user-id
-      in: path
-      required: true
-      description: Identifier for the user.
       schema:
         type: integer
     supplierId:
@@ -255,21 +263,13 @@ components:
       description: Identifier for the contact.
       schema:
         type: integer
-  responses:
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
-    UnprocessableEntity:
-      description: 'The request was syntactically valid but could not be processed due to validation errors.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: Identifier for the user.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

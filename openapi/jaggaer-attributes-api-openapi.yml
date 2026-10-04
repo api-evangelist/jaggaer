@@ -180,6 +180,49 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    AttributeCreateRequest:
+      type: object
+      description: Request body for creating an event attribute.
+      required:
+      - attributeName
+      - attributeType
+      properties:
+        attributeName:
+          type: string
+        attributeType:
+          type: string
+        value:
+          type: string
+    AttributeUpdateRequest:
+      type: object
+      description: Request body for updating an event attribute.
+      properties:
+        value:
+          type: string
+    AttributeBulkUpdateRequest:
+      type: object
+      description: Request body for bulk updating event attributes.
+      properties:
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeUpdateRequest'
+    AttributeResponse:
+      type: object
+      description: Sourcing event attribute details.
+      properties:
+        attributeId:
+          type: integer
+          description: Unique identifier for the attribute.
+        attributeName:
+          type: string
+          description: Name of the attribute.
+        attributeType:
+          type: string
+          description: Type classification of the attribute.
+        value:
+          type: string
+          description: Current value of the attribute.
     ErrorResponse:
       type: object
       description: Error response with validation details.
@@ -201,49 +244,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AttributeResponse'
-    AttributeResponse:
-      type: object
-      description: Sourcing event attribute details.
-      properties:
-        attributeId:
-          type: integer
-          description: Unique identifier for the attribute.
-        attributeName:
-          type: string
-          description: Name of the attribute.
-        attributeType:
-          type: string
-          description: Type classification of the attribute.
-        value:
-          type: string
-          description: Current value of the attribute.
-    AttributeBulkUpdateRequest:
-      type: object
-      description: Request body for bulk updating event attributes.
-      properties:
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AttributeUpdateRequest'
-    AttributeUpdateRequest:
-      type: object
-      description: Request body for updating an event attribute.
-      properties:
-        value:
-          type: string
-    AttributeCreateRequest:
-      type: object
-      description: Request body for creating an event attribute.
-      required:
-      - attributeName
-      - attributeType
-      properties:
-        attributeName:
-          type: string
-        attributeType:
-          type: string
-        value:
-          type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    UnprocessableEntity:
+      description: 'The request was syntactically valid but could not be processed due to validation errors.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
   parameters:
     eventId:
       name: event-id
@@ -259,21 +274,6 @@ components:
       description: Identifier for the event attribute.
       schema:
         type: integer
-  responses:
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
-    UnprocessableEntity:
-      description: 'The request was syntactically valid but could not be processed due to validation errors.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http
