@@ -60,18 +60,18 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    customerHostId:
-      name: customer-host-id
-      in: path
-      required: true
-      description: Identifier for the customer host in the ASO platform.
-      schema:
-        type: integer
     userId:
       name: user-id
       in: path
       required: true
       description: Identifier for the user.
+      schema:
+        type: integer
+    customerHostId:
+      name: customer-host-id
+      in: path
+      required: true
+      description: Identifier for the customer host in the ASO platform.
       schema:
         type: integer
   schemas:

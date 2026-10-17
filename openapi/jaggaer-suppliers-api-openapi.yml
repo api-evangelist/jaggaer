@@ -156,82 +156,14 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
-  schemas:
-    SupplierCreateRequest:
-      type: object
-      description: Request body for adding suppliers to an event.
-      properties:
-        suppliers:
-          type: array
-          items:
-            type: object
-            properties:
-              supplierId:
-                type: integer
-    SupplierListResponse:
-      type: object
-      description: List of event suppliers.
-      properties:
-        suppliers:
-          type: array
-          items:
-            $ref: '#/components/schemas/SupplierResponse'
-    SupplierUpdateRequest:
-      type: object
-      description: Request body for updating a supplier.
-      properties:
-        status:
-          type: string
-    SupplierResponse:
-      type: object
-      description: Sourcing event supplier details.
-      properties:
-        supplierId:
-          type: integer
-          description: Unique identifier for the supplier.
-        supplierName:
-          type: string
-          description: Name of the supplier.
-        status:
-          type: string
-          description: Participation status of the supplier in the event.
-    SupplierBulkUpdateRequest:
-      type: object
-      description: Request body for bulk updating suppliers.
-      properties:
-        suppliers:
-          type: array
-          items:
-            $ref: '#/components/schemas/SupplierUpdateRequest'
-    ErrorResponse:
-      type: object
-      description: Error response with validation details.
-      properties:
-        statuses:
-          type: object
-          description: Map of status codes to arrays of status detail objects.
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    UnprocessableEntity:
-      description: 'The request was syntactically valid but could not be processed due to validation errors.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
-
-        '
   parameters:
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: Identifier for the user.
+      schema:
+        type: integer
     supplierId:
       name: supplier-id
       in: path
@@ -246,13 +178,81 @@ components:
       description: Identifier for the sourcing event.
       schema:
         type: integer
-    userId:
-      name: user-id
-      in: path
-      required: true
-      description: Identifier for the user.
-      schema:
-        type: integer
+  schemas:
+    SupplierBulkUpdateRequest:
+      type: object
+      description: Request body for bulk updating suppliers.
+      properties:
+        suppliers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplierUpdateRequest'
+    SupplierUpdateRequest:
+      type: object
+      description: Request body for updating a supplier.
+      properties:
+        status:
+          type: string
+    ErrorResponse:
+      type: object
+      description: Error response with validation details.
+      properties:
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+    SupplierResponse:
+      type: object
+      description: Sourcing event supplier details.
+      properties:
+        supplierId:
+          type: integer
+          description: Unique identifier for the supplier.
+        supplierName:
+          type: string
+          description: Name of the supplier.
+        status:
+          type: string
+          description: Participation status of the supplier in the event.
+    SupplierListResponse:
+      type: object
+      description: List of event suppliers.
+      properties:
+        suppliers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupplierResponse'
+    SupplierCreateRequest:
+      type: object
+      description: Request body for adding suppliers to an event.
+      properties:
+        suppliers:
+          type: array
+          items:
+            type: object
+            properties:
+              supplierId:
+                type: integer
+  responses:
+    UnprocessableEntity:
+      description: 'The request was syntactically valid but could not be processed due to validation errors.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
+
+        '
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

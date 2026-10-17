@@ -159,10 +159,63 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
+  parameters:
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: Identifier for the user.
+      schema:
+        type: integer
+    eventId:
+      name: event-id
+      in: path
+      required: true
+      description: Identifier for the sourcing event.
+      schema:
+        type: integer
+    supplierId:
+      name: supplier-id
+      in: path
+      required: true
+      description: Identifier for the supplier.
+      schema:
+        type: integer
+    contactId:
+      name: contact-id
+      in: path
+      required: true
+      description: Identifier for the contact.
+      schema:
+        type: integer
   schemas:
     ContactCreateRequest:
       type: object
       description: Request body for creating an event contact.
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+    ErrorResponse:
+      type: object
+      description: Error response with validation details.
+      properties:
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+    ContactUpdateRequest:
+      type: object
+      description: Request body for updating an event contact.
       properties:
         firstName:
           type: string
@@ -194,17 +247,6 @@ components:
           format: email
         supplierId:
           type: integer
-    ContactUpdateRequest:
-      type: object
-      description: Request body for updating an event contact.
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
     ContactListResponse:
       type: object
       description: List of event contacts.
@@ -213,22 +255,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContactResponse'
-    ErrorResponse:
-      type: object
-      description: Error response with validation details.
-      properties:
-        statuses:
-          type: object
-          description: Map of status codes to arrays of status detail objects.
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
     UnprocessableEntity:
       description: 'The request was syntactically valid but could not be processed due to validation errors.
 
@@ -241,35 +268,8 @@ components:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
         '
-  parameters:
-    eventId:
-      name: event-id
-      in: path
-      required: true
-      description: Identifier for the sourcing event.
-      schema:
-        type: integer
-    supplierId:
-      name: supplier-id
-      in: path
-      required: true
-      description: Identifier for the supplier.
-      schema:
-        type: integer
-    contactId:
-      name: contact-id
-      in: path
-      required: true
-      description: Identifier for the contact.
-      schema:
-        type: integer
-    userId:
-      name: user-id
-      in: path
-      required: true
-      description: Identifier for the user.
-      schema:
-        type: integer
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

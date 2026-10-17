@@ -99,60 +99,14 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    EventCreateRequest:
-      type: object
-      description: Request body for creating a sourcing event from a template.
-      properties:
-        eventName:
-          type: string
-          description: Name for the new sourcing event. (Max length 100)
-          maxLength: 100
-        eventDescription:
-          type: string
-          description: Optional description for the event.
-    AsyncAcceptedResponse:
-      type: object
-      description: Response returned when an asynchronous operation is accepted.
-      properties:
-        encodedAsyncPid:
-          type: string
-          description: Base64-encoded process ID used to poll for status.
-    EventResponse:
-      type: object
-      description: Sourcing event details.
-      properties:
-        eventId:
-          type: integer
-          description: Unique identifier for the sourcing event.
-        eventName:
-          type: string
-          description: Name of the sourcing event.
-        status:
-          type: string
-          description: Current status of the event.
-    EventListResponse:
-      type: object
-      description: List of sourcing events.
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/EventResponse'
-    ErrorResponse:
-      type: object
-      description: Error response with validation details.
-      properties:
-        statuses:
-          type: object
-          description: Map of status codes to arrays of status detail objects.
-          additionalProperties:
-            type: array
-            items:
-              type: object
-              additionalProperties:
-                type: string
   parameters:
+    userId:
+      name: user-id
+      in: path
+      required: true
+      description: Identifier for the user.
+      schema:
+        type: integer
     customerHostId:
       name: customer-host-id
       in: path
@@ -167,16 +121,7 @@ components:
       description: Identifier for the sourcing event template.
       schema:
         type: integer
-    userId:
-      name: user-id
-      in: path
-      required: true
-      description: Identifier for the user.
-      schema:
-        type: integer
   responses:
-    NotFound:
-      description: The requested resource was not found.
     UnprocessableEntity:
       description: 'The request was syntactically valid but could not be processed due to validation errors.
 
@@ -189,6 +134,61 @@ components:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
         '
+    NotFound:
+      description: The requested resource was not found.
+  schemas:
+    EventResponse:
+      type: object
+      description: Sourcing event details.
+      properties:
+        eventId:
+          type: integer
+          description: Unique identifier for the sourcing event.
+        eventName:
+          type: string
+          description: Name of the sourcing event.
+        status:
+          type: string
+          description: Current status of the event.
+    EventCreateRequest:
+      type: object
+      description: Request body for creating a sourcing event from a template.
+      properties:
+        eventName:
+          type: string
+          description: Name for the new sourcing event. (Max length 100)
+          maxLength: 100
+        eventDescription:
+          type: string
+          description: Optional description for the event.
+    ErrorResponse:
+      type: object
+      description: Error response with validation details.
+      properties:
+        statuses:
+          type: object
+          description: Map of status codes to arrays of status detail objects.
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                type: string
+    AsyncAcceptedResponse:
+      type: object
+      description: Response returned when an asynchronous operation is accepted.
+      properties:
+        encodedAsyncPid:
+          type: string
+          description: Base64-encoded process ID used to poll for status.
+    EventListResponse:
+      type: object
+      description: List of sourcing events.
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventResponse'
   securitySchemes:
     bearerAuth:
       type: http

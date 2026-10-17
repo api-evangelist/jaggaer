@@ -65,13 +65,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    AsyncAcceptedResponse:
-      type: object
-      description: Response returned when an asynchronous operation is accepted.
-      properties:
-        encodedAsyncPid:
-          type: string
-          description: Base64-encoded process ID used to poll for status.
     RateResponse:
       type: object
       description: Sourcing event rate details.
@@ -88,13 +81,20 @@ components:
         value:
           type: number
           description: Rate value.
+    AsyncAcceptedResponse:
+      type: object
+      description: Response returned when an asynchronous operation is accepted.
+      properties:
+        encodedAsyncPid:
+          type: string
+          description: Base64-encoded process ID used to poll for status.
   responses:
-    NotFound:
-      description: The requested resource was not found.
     Unauthorized:
       description: 'Authentication failed. Ensure a valid OAuth 2.0 bearer token and API key are provided.
 
         '
+    NotFound:
+      description: The requested resource was not found.
   parameters:
     eventId:
       name: event-id
