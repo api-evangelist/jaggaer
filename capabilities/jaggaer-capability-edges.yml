@@ -12,7 +12,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 6
+edge_count: 7
 edges:
 - tag: Bids
   spec_file: jaggaer-bids-api-openapi.yml
@@ -44,6 +44,17 @@ edges:
     — 'enables creation and retrieval of sourcing events'
   reason: '''Events'' here are sourcing events (RFx) created from templates; creation and listing of sourcing
     events is strategic sourcing execution.'
+- tag: Bids
+  spec_file: jaggaer-bids-api-openapi.yml
+  capability_id: BC-3270.30
+  capability_id_l1: BC-3270
+  capability_name: Source Selection & Evaluation
+  confidence: 0.7
+  evidence: GET /event/{event-id}/bidRound/{bid-round}/apiBids/async  getBidsByBidRoundAsync  Bids by
+    Bid Round
+  reason: Operations expose bid submissions per bid round for a sourcing event, i.e. receipt and evaluation
+    of bids/proposals. Mapped to Source Selection & Evaluation with moderate confidence since the surface
+    is retrieval-only.
 - tag: Items
   spec_file: jaggaer-items-api-openapi.yml
   capability_id: BC-500.10
