@@ -3,6 +3,7 @@ provider: JAGGAER
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
+- Public Sector & Government
 - Transportation & Logistics
 min_confidence: 0.7
 capability_model:
@@ -38,11 +39,11 @@ edges:
   capability_id: BC-500.10
   capability_id_l1: BC-500
   capability_name: Sourcing Management
-  confidence: 0.78
-  evidence: POST /chost/{customer-host-id}/user/{user-id}/template/{template-id}/apiEvent  createEventFromTemplate;
-    'It enables creation and retrieval of sourcing events, template management...'
-  reason: '''Events'' here means sourcing events (RFx) created from templates in the Advanced Sourcing
-    Optimizer, i.e. strategic sourcing execution — not system/telemetry events.'
+  confidence: 0.8
+  evidence: POST /chost/{customer-host-id}/user/{user-id}/template/{template-id}/apiEvent createEventFromTemplate
+    — 'enables creation and retrieval of sourcing events'
+  reason: '''Events'' here are sourcing events (RFx) created from templates; creation and listing of sourcing
+    events is strategic sourcing execution.'
 - tag: Items
   spec_file: jaggaer-items-api-openapi.yml
   capability_id: BC-500.10
