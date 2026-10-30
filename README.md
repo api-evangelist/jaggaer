@@ -64,31 +64,196 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-JAGGAER is an AI-powered procurement and supplier management platform serving 1,400+ enterprises worldwide, managing $2.9 trillion in annual spend and connecting 13 million suppliers globally. The platform provides REST APIs for sourcing optimization, contract management, supplier information management, purchasing, and spend analytics.
+JAGGAER is an AI-powered procurement and supplier management platform serving 1,400+ enterprises worldwide, managing $2.9 trillion in annual spend and connecting 13 million suppliers globally. The platform provides REST APIs for sourcing optimization, contract management, supplier information management, purchasing, and spend analytics. JAGGAER's Advanced Sourcing Optimizer (ASO) APIs enable system-to-system integration using OAuth 2.0 bearer tokens and API keys to automate procurement workflows across source-to-pay and procure-to-pay use cases. The platform integrates with 40+ ERP systems including SAP, Oracle, Workday, and Microsoft Dynamics, supporting bidirectional communications for enterprise procurement automation.
 
-## APIs
+**Areas:** Procurement · Sourcing · Supplier Management · Contracts · Spend Analytics · eProcurement · Source-to-Pay · Procure-to-Pay
 
-- **ASO Customer Host Entity Service (CHES) API** — Manage customer hosts, users, events, and sourcing templates
-- **ASO Event Entity Service (EES) API** — Manage sourcing events, attributes, bids, and award scenarios
-- **ASO Quay Optimization API** — Submit and track sourcing optimization jobs
+## JAGGAER on APIs.io
 
-## Authentication
+Everything profiled for JAGGAER is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/jaggaer/](https://apis.io/providers/jaggaer/)** — or go straight to one of the APIs or properties below.
 
-All JAGGAER ASO APIs require dual authentication:
-- OAuth 2.0 Client Credentials bearer token (`Authorization: Bearer {token}`)
-- API Key header (`X-API-Key: {key}`)
+### APIs (17)
 
-## Resources
+- [JAGGAER Async API](https://apis.io/apis/jaggaer/jaggaer-async-api/) — Asynchronous process status operations
+- [JAGGAER Attributes API](https://apis.io/apis/jaggaer/jaggaer-attributes-api/) — Event attribute management
+- [JAGGAER Awards API](https://apis.io/apis/jaggaer/jaggaer-awards-api/) — Award scenario retrieval
+- [JAGGAER Bids API](https://apis.io/apis/jaggaer/jaggaer-bids-api/) — Bid submission retrieval
+- [JAGGAER Contacts API](https://apis.io/apis/jaggaer/jaggaer-contacts-api/) — Event contact management
+- [JAGGAER Customer Hosts API](https://apis.io/apis/jaggaer/jaggaer-customer-hosts-api/) — Customer host management operations
+- [JAGGAER Events API](https://apis.io/apis/jaggaer/jaggaer-events-api/) — Sourcing event operations
+- [JAGGAER Items API](https://apis.io/apis/jaggaer/jaggaer-items-api/) — Event item management
+- [JAGGAER Jobs API](https://apis.io/apis/jaggaer/jaggaer-jobs-api/) — Optimization job management operations
+- [JAGGAER Locations API](https://apis.io/apis/jaggaer/jaggaer-locations-api/) — Location and rate structure operations
+- [JAGGAER Rates API](https://apis.io/apis/jaggaer/jaggaer-rates-api/) — Event rate retrieval
+- [JAGGAER Scenarios API](https://apis.io/apis/jaggaer/jaggaer-scenarios-api/) — Event scenario retrieval
+- [JAGGAER Suppliers API](https://apis.io/apis/jaggaer/jaggaer-suppliers-api/) — Event supplier management
+- [JAGGAER Templates API](https://apis.io/apis/jaggaer/jaggaer-templates-api/) — Template management operations
+- [JAGGAER Uploads API](https://apis.io/apis/jaggaer/jaggaer-uploads-api/) — Entity upload URL generation
+- [JAGGAER Users API](https://apis.io/apis/jaggaer/jaggaer-users-api/) — User administration operations
+- [JAGGAER Advanced Sourcing Optimizer (ASO) API](https://apis.io/apis/jaggaer/jaggaer-advanced-sourcing-optimizer-aso-api/) — REST/JSON API surface for the JAGGAER (formerly SciQuest) Advanced Sourcing Optimizer, secured with OAuth 2.0 client-credentials. Grouped into the Customer…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Sciquest Webhooks](https://apis.io/asyncapis/jaggaer/sciquest-webhooks/)
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/jaggaer/](https://apis.io/graphqls/jaggaer/jaggaer-graphql/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Jaggaer Agentic Access](https://apis.io/agentic-access/jaggaer/jaggaer-agentic-access/)
+
+#### JSON Schema (2)
+
+The data models the API reads and writes.
+
+- [JAGGAER Quay Optimization Job](https://apis.io/schemas/jaggaer/jaggaer-optimization-job/)
+- [JAGGAER Sourcing Event](https://apis.io/schemas/jaggaer/jaggaer-sourcing-event/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Jaggaer Context](https://apis.io/jsonld/jaggaer/jaggaer-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [JAGGAER ASO API Vocabulary](https://apis.io/vocabularies/jaggaer/jaggaer-vocabulary/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Jaggaer Async Status Response](https://apis.io/examples/jaggaer/jaggaer-async-status-response/)
+- [Jaggaer Create Event Request](https://apis.io/examples/jaggaer/jaggaer-create-event-request/)
+- [Jaggaer Job Response](https://apis.io/examples/jaggaer/jaggaer-job-response/)
+- [Jaggaer Submit Job Request](https://apis.io/examples/jaggaer/jaggaer-submit-job-request/)
+- [Jaggaer Submit Job Response](https://apis.io/examples/jaggaer/jaggaer-submit-job-response/)
+
+#### Collections (16)
+
+Postman and Open Collection request collections.
+
+- [JAGGAER ASO Customer Host Entity Service Async API](https://apis.io/collections/jaggaer/open-jaggaer-async-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Attributes API](https://apis.io/collections/jaggaer/open-jaggaer-attributes-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Awards API](https://apis.io/collections/jaggaer/open-jaggaer-awards-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Bids API](https://apis.io/collections/jaggaer/open-jaggaer-bids-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Contacts API](https://apis.io/collections/jaggaer/open-jaggaer-contacts-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Customer Hosts API](https://apis.io/collections/jaggaer/open-jaggaer-customer-hosts-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Events API](https://apis.io/collections/jaggaer/open-jaggaer-events-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Items API](https://apis.io/collections/jaggaer/open-jaggaer-items-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Jobs API](https://apis.io/collections/jaggaer/open-jaggaer-jobs-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Locations API](https://apis.io/collections/jaggaer/open-jaggaer-locations-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Rates API](https://apis.io/collections/jaggaer/open-jaggaer-rates-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Scenarios API](https://apis.io/collections/jaggaer/open-jaggaer-scenarios-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Suppliers API](https://apis.io/collections/jaggaer/open-jaggaer-suppliers-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Templates API](https://apis.io/collections/jaggaer/open-jaggaer-templates-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Uploads API](https://apis.io/collections/jaggaer/open-jaggaer-uploads-api/)
+- [JAGGAER ASO Customer Host Entity Service Async Users API](https://apis.io/collections/jaggaer/open-jaggaer-users-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [JAGGAER — jsonschema rules](https://apis.io/rules/jaggaer/jaggaer-jsonschema-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Jaggaer Authentication](https://apis.io/security/jaggaer/jaggaer-authentication/)
+- [Jaggaer Domain Security](https://apis.io/security/jaggaer/jaggaer-domain-security/)
+- [Sciquest Authentication](https://apis.io/security/jaggaer/sciquest-authentication/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Jaggaer Plans Pricing](https://apis.io/plans/jaggaer/jaggaer-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Jaggaer Rate Limits](https://apis.io/rate-limits/jaggaer/jaggaer-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Jaggaer Finops](https://apis.io/finops/jaggaer/jaggaer-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.jaggaer.com/)
-- [API Documentation](https://asodocs.jaggaer.com/)
-- [Integrations](https://www.jaggaer.com/solutions/integrations)
-- [Blog](https://www.jaggaer.com/blog)
-- [LinkedIn](https://www.linkedin.com/company/jaggaer/)
-- [X / Twitter](https://x.com/jaggaerpro)
+- [Documentation](https://asodocs.jaggaer.com/)
 - [Support](https://www.jaggaer.com/support)
-- [GitHub](https://github.com/Jaggaer-Direct)
+- [Blog](https://www.jaggaer.com/blog)
 
-## Maintainer
+## API Evangelist rating
 
-Kin Lane — kin@apievangelist.com
+**Kin Score 35.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 63.7 |
+| Contract governance | 28.0 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 7.9 |
+
+**Agent readiness 32.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/jaggaer/](https://apis.io/providers/jaggaer/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for JAGGAER: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/jaggaer/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
